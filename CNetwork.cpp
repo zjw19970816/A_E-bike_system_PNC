@@ -442,6 +442,25 @@ void CNetwork::UpdateRouteCost(double* RouteFlow)
 				m_Route[route]->PickupNode->PickupQueue[0] = 0;
 				m_Route[route]->PickupNode->PickupEffectiveRate[0] = 0;
 				//cout << "pick = 0" << endl;
+				//PickupArrivalRate = 0.001;
+				//PickupUseRate = PickupArrivalRate / PickupServiceRate;
+				//double OProbability = (1 - PickupUseRate) / (1 - pow(PickupUseRate, Capacity + 1));
+				////cout << "PickupOProbability: " << OProbability << endl;
+				//double PickupLossRate = pow(PickupUseRate, Capacity) * OProbability;
+				////cout << "PickupLossRate: " << PickupLossRate << endl;
+				//double LengthPickupQueue = PickupUseRate / (1 - PickupUseRate) - (PickupUseRate * (1 + Capacity * pow(PickupUseRate, Capacity))) / (1 - pow(PickupUseRate, (Capacity + 1)));
+				////cout << "LengthPickupQueue: " << LengthPickupQueue << endl;
+				//double EffectiveArrivalRate = PickupArrivalRate * (1 - PickupLossRate);
+				////cout << "PickupEffectiveArrivalRate: " << EffectiveArrivalRate << endl;
+				//double Waitingtime = LengthPickupQueue / EffectiveArrivalRate;
+				////cout << "PickupWaitingtime: " << Waitingtime << endl;
+				//double WaitingtimeCost = ValueOfWaitingTime * Waitingtime;
+				//m_Route[route]->PickupNode->PickupNoSharedEbike[0] = OProbability;
+				//m_Route[route]->PickupNode->PickupLossRate[0] = PickupLossRate;
+				//m_Route[route]->PickupNode->PickupQueue[0] = LengthPickupQueue;
+				//m_Route[route]->PickupNode->PickupEffectiveRate[0] = EffectiveArrivalRate;
+				//m_Route[route]->PickupNode->Waiting_time_cost_pickup[0] = WaitingtimeCost;
+				////cout << "Waiting_time_cost_pickup: " << WaitingtimeCost << endl;
 			}
 			else
 			{
@@ -503,6 +522,26 @@ void CNetwork::UpdateRouteCost(double* RouteFlow)
 				m_Route[route]->PickupNode->PickupQueue[1] = 0;
 				m_Route[route]->PickupNode->PickupEffectiveRate[1] = 0;
 				//cout << "pick = 0" << endl;
+
+				//PickupArrivalRate = 0.001;
+				//PickupUseRate = PickupArrivalRate / PickupServiceRate;
+				//double OProbability = (1 - PickupUseRate) / (1 - pow(PickupUseRate, Capacity + 1));
+				////cout << "PickupOProbability: " << OProbability << endl;
+				//double PickupLossRate = pow(PickupUseRate, Capacity) * OProbability;
+				////cout << "PickupLossRate: " << PickupLossRate << endl;
+				//double LengthPickupQueue = PickupUseRate / (1 - PickupUseRate) - (PickupUseRate * (1 + Capacity * pow(PickupUseRate, Capacity))) / (1 - pow(PickupUseRate, (Capacity + 1)));
+				////cout << "LengthPickupQueue: " << LengthPickupQueue << endl;
+				//double EffectiveArrivalRate = PickupArrivalRate * (1 - PickupLossRate);
+				////cout << "PickupEffectiveArrivalRate: " << EffectiveArrivalRate << endl;
+				//double Waitingtime = LengthPickupQueue / EffectiveArrivalRate;
+				////cout << "PickupWaitingtime: " << Waitingtime << endl;
+				//double WaitingtimeCost = ValueOfWaitingTime * Waitingtime;
+				//m_Route[route]->PickupNode->PickupNoSharedEbike[0] = OProbability;
+				//m_Route[route]->PickupNode->PickupLossRate[0] = PickupLossRate;
+				//m_Route[route]->PickupNode->PickupQueue[0] = LengthPickupQueue;
+				//m_Route[route]->PickupNode->PickupEffectiveRate[0] = EffectiveArrivalRate;
+				//m_Route[route]->PickupNode->Waiting_time_cost_pickup[0] = WaitingtimeCost;
+				////cout << "Waiting_time_cost_pickup: " << WaitingtimeCost << endl;
 			}
 			else
 			{
@@ -564,6 +603,25 @@ void CNetwork::UpdateRouteCost(double* RouteFlow)
 				m_Route[route]->DropoffNode->DropoffQueue[0] = 0;
 				m_Route[route]->DropoffNode->DropoffEffectiveRate[0] = 0;
 				//cout << "drop = 0" << endl;
+
+				//DropoffArrivalRate = 0.001;
+				//DropoffUseRate = DropoffArrivalRate / DropoffServiceRate;
+				//double OProbability = (1 - DropoffUseRate) / (1 - pow(DropoffUseRate, Capacity + 1)); //出错是因为 non-parking node capacity设置为INF，太大了
+				////cout << "DropoffOProbability: " << OProbability << endl;
+				//double DropoffLossRate = pow(DropoffUseRate, Capacity) * OProbability;
+				////cout << "DropoffLossRate: " << DropoffLossRate << endl;
+				//double LengthDropoffQueue = DropoffUseRate / (1 - DropoffUseRate) - (DropoffUseRate * (1 + Capacity * pow(DropoffUseRate, Capacity))) / (1 - pow(DropoffUseRate, (Capacity + 1)));
+				////cout << "LengthDropoffQueue: " << LengthDropoffQueue << endl;
+				//double EffectiveArrivalRate = DropoffArrivalRate * (1 - DropoffLossRate);
+				////cout << "DropoffEffectiveArrivalRate: " << EffectiveArrivalRate << endl;
+				//double Waitingtime = LengthDropoffQueue / EffectiveArrivalRate;
+				////cout << "DropoffWaitingtime: " << Waitingtime << endl;
+				//double WaitingtimeCost = ValueOfWaitingTime * Waitingtime;
+				//m_Route[route]->DropoffNode->DropofffNoParkingSpace[0] = OProbability;
+				//m_Route[route]->DropoffNode->DropoffLossRate[0] = DropoffLossRate;
+				//m_Route[route]->DropoffNode->DropoffQueue[0] = LengthDropoffQueue;
+				//m_Route[route]->DropoffNode->DropoffEffectiveRate[0] = EffectiveArrivalRate;
+				//m_Route[route]->DropoffNode->Waiting_time_cost_dropoff[0] = WaitingtimeCost;
 			}
 			else
 			{
@@ -625,6 +683,25 @@ void CNetwork::UpdateRouteCost(double* RouteFlow)
 				m_Route[route]->DropoffNode->DropoffQueue[1] = 0;
 				m_Route[route]->DropoffNode->DropoffEffectiveRate[1] = 0;
 				//cout << "drop = 0" << endl;
+
+				//DropoffArrivalRate = 0.001;
+				//DropoffUseRate = DropoffArrivalRate / DropoffServiceRate;
+				//double OProbability = (1 - DropoffUseRate) / (1 - pow(DropoffUseRate, Capacity + 1)); //出错是因为 non-parking node capacity设置为INF，太大了
+				////cout << "DropoffOProbability: " << OProbability << endl;
+				//double DropoffLossRate = pow(DropoffUseRate, Capacity) * OProbability;
+				////cout << "DropoffLossRate: " << DropoffLossRate << endl;
+				//double LengthDropoffQueue = DropoffUseRate / (1 - DropoffUseRate) - (DropoffUseRate * (1 + Capacity * pow(DropoffUseRate, Capacity))) / (1 - pow(DropoffUseRate, (Capacity + 1)));
+				////cout << "LengthDropoffQueue: " << LengthDropoffQueue << endl;
+				//double EffectiveArrivalRate = DropoffArrivalRate * (1 - DropoffLossRate);
+				////cout << "DropoffEffectiveArrivalRate: " << EffectiveArrivalRate << endl;
+				//double Waitingtime = LengthDropoffQueue / EffectiveArrivalRate;
+				////cout << "DropoffWaitingtime: " << Waitingtime << endl;
+				//double WaitingtimeCost = ValueOfWaitingTime * Waitingtime;
+				//m_Route[route]->DropoffNode->DropofffNoParkingSpace[0] = OProbability;
+				//m_Route[route]->DropoffNode->DropoffLossRate[0] = DropoffLossRate;
+				//m_Route[route]->DropoffNode->DropoffQueue[0] = LengthDropoffQueue;
+				//m_Route[route]->DropoffNode->DropoffEffectiveRate[0] = EffectiveArrivalRate;
+				//m_Route[route]->DropoffNode->Waiting_time_cost_dropoff[0] = WaitingtimeCost;
 			}
 			else
 			{
@@ -975,241 +1052,6 @@ void CNetwork::GenerateRoute()
 	}
 }
 
-////生成route
-//void CNetwork::GenerateRoute_back()
-//{
-//	m_Route.clear();
-//	m_nRoute = 0;
-//	CRoute* pRoute;
-//	COrigin* pOrigin;
-//	CNode* PickupNode_temp;
-//	CNode* DropoffNode_temp;
-//	CNode* DropoffNode_temp2;
-//
-//	for (int origin = 0; origin < m_nOrigin; origin++) //取一个起点
-//	{
-//		pOrigin = new COrigin();
-//		pOrigin = m_Origin[origin]; //起点（包含终点）
-//		for (int destination = 0; destination < m_Origin[origin]->DestinationNode.size(); destination++) //取一个终点
-//		{
-//
-//			int m_nRoute_temp = m_nRoute;
-//			//生成一条虚拟route, 保证每一对OD可以出行
-//			PickupNode_temp = new CNode;
-//			PickupNode_temp = m_Node[origin]; //取车点为起点
-//			DropoffNode_temp = new CNode;
-//			//cout << m_Origin[origin]->DestinationNode[destination] + 1 << endl;
-//			DropoffNode_temp = m_Node[m_Origin[origin]->DestinationNode[destination]]; //还车点为终点
-//			pRoute = new CRoute();//对 每一对ODpair，创建一个route class
-//			pRoute->ODID = pOrigin->ODpairNumber[destination];//OD pair number
-//			pRoute->PickupNode = PickupNode_temp;
-//			pRoute->DropoffNode = DropoffNode_temp;
-//			//cout << PickupNode_temp->ID + 1 << " " << DropoffNode_temp->ID + 1 << endl;
-//			pRoute->PickupType = -1;
-//			pRoute->DropoffType = -1;
-//			//cout << pRoute->PickupNode->ID << pRoute->DropoffNode->ID << endl;
-//			double PickupWalkingDistance = NodeDistance[pOrigin->pOriginNode->ID][PickupNode_temp->ID];
-//			double RidingDistance = NodeDistance[PickupNode_temp->ID][DropoffNode_temp->ID];
-//			//cout << PickupNode_temp->ID << " " << DropoffNode_temp->ID << " " << RidingDistance << endl;
-//			double DropoffWalkingDistance = NodeDistance[DropoffNode_temp->ID][pOrigin->DestinationNode[destination]];
-//			pRoute->Pickupdistance = PickupWalkingDistance;
-//			pRoute->Ridingdistance = RidingDistance;
-//			pRoute->EnergyConsumption = 0;
-//			pRoute->Dropoffdistance = DropoffWalkingDistance;
-//			pRoute->RouteID = m_nRoute; //Route number
-//			m_nRoute++;
-//			m_Route.push_back(pRoute);
-//
-//			for (int picknode = 0; picknode < m_nNode; picknode++) //取网络中的任一个点作为pick_up点
-//			{
-//				PickupNode_temp = new CNode;
-//				PickupNode_temp = m_Node[picknode]; //取车点
-//				for (int type1 = 0; type1 < 3; type1++) //取车点可以多种类型
-//				{
-//					if (PickupNode_temp->NodeType[type1] == 1) //在parking node取车
-//					{
-//						for (int dropnode = 0; dropnode < m_nNode; dropnode++) //取网络中的任一个点作为drop_off点
-//						{
-//							DropoffNode_temp = new CNode;
-//							DropoffNode_temp = m_Node[dropnode]; //还车点
-//							if (DropoffNode_temp->ID != PickupNode_temp->ID) //取车和还车点不同
-//							{
-//								for (int type2 = 0; type2 < 3; type2++)
-//								{
-//									if (DropoffNode_temp->NodeType[type2] == 1) //在parking node还车
-//									{
-//										pRoute = new CRoute();//对 每一对ODpair，创建一个route class
-//										pRoute->ODID = pOrigin->ODpairNumber[destination];//OD pair number
-//										pRoute->PickupNode = PickupNode_temp;
-//										pRoute->DropoffNode = DropoffNode_temp;
-//										pRoute->PickupType = PickupNode_temp->NodeType[type1];
-//										pRoute->DropoffType = DropoffNode_temp->NodeType[type2];
-//										//cout << pRoute->PickupNode->ID << pRoute->DropoffNode->ID << endl;
-//										double PickupWalkingDistance = NodeDistance[pOrigin->pOriginNode->ID][PickupNode_temp->ID];
-//										double RidingDistance = NodeDistance[PickupNode_temp->ID][DropoffNode_temp->ID];
-//										//cout << PickupNode_temp->ID << " " << DropoffNode_temp->ID << " " << RidingDistance << endl;
-//										double DropoffWalkingDistance = NodeDistance[DropoffNode_temp->ID][pOrigin->DestinationNode[destination]];
-//										pRoute->Pickupdistance = PickupWalkingDistance;
-//										pRoute->Ridingdistance = RidingDistance;
-//										pRoute->EnergyConsumption = arfa3 * RidingDistance;
-//										pRoute->Dropoffdistance = DropoffWalkingDistance;
-//										if (PickupWalkingDistance < INF && RidingDistance < INF && DropoffWalkingDistance < INF)
-//										{
-//											pRoute->RouteID = m_nRoute; //Route number
-//											m_nRoute++;
-//											m_Route.push_back(pRoute);
-//										}
-//									}
-//									if (DropoffNode_temp->NodeType[type2] == 2) //在plug-in charging station还车
-//									{
-//										pRoute = new CRoute();//对 每一对ODpair，创建一个route class
-//										pRoute->ODID = pOrigin->ODpairNumber[destination];//OD pair number
-//										pRoute->PickupNode = PickupNode_temp;
-//										pRoute->DropoffNode = DropoffNode_temp;
-//										pRoute->PickupType = PickupNode_temp->NodeType[type1];
-//										pRoute->DropoffType = DropoffNode_temp->NodeType[type2];
-//										//cout << pRoute->PickupNode->ID << pRoute->DropoffNode->ID << endl;
-//										double PickupWalkingDistance = NodeDistance[pOrigin->pOriginNode->ID][PickupNode_temp->ID];
-//										double RidingDistance = NodeDistance[PickupNode_temp->ID][DropoffNode_temp->ID];
-//										//cout << PickupNode_temp->ID << " " << DropoffNode_temp->ID << " " << RidingDistance << endl;
-//										double DropoffWalkingDistance = NodeDistance[DropoffNode_temp->ID][pOrigin->DestinationNode[destination]];
-//										pRoute->Pickupdistance = PickupWalkingDistance;
-//										pRoute->Ridingdistance = RidingDistance;
-//										pRoute->EnergyConsumption = arfa3 * RidingDistance;
-//										pRoute->Dropoffdistance = DropoffWalkingDistance;
-//										if (PickupWalkingDistance < INF && RidingDistance < INF && DropoffWalkingDistance < INF)
-//										{
-//											pRoute->RouteID = m_nRoute; //Route number
-//											m_nRoute++;
-//											m_Route.push_back(pRoute);
-//										}
-//									}
-//									if (DropoffNode_temp->NodeType[type2] == 3) //在non-parking node还车
-//									{
-//										pRoute = new CRoute();//对 每一对ODpair，创建一个route class
-//										pRoute->ODID = pOrigin->ODpairNumber[destination];//OD pair number
-//										pRoute->PickupNode = PickupNode_temp;
-//										pRoute->DropoffNode = DropoffNode_temp;
-//										pRoute->PickupType = PickupNode_temp->NodeType[type1];
-//										pRoute->DropoffType = DropoffNode_temp->NodeType[type2];
-//										//cout << pRoute->PickupNode->ID << pRoute->DropoffNode->ID << endl;
-//										double PickupWalkingDistance = NodeDistance[pOrigin->pOriginNode->ID][PickupNode_temp->ID];
-//										double RidingDistance = NodeDistance[PickupNode_temp->ID][DropoffNode_temp->ID];
-//										//cout << PickupNode_temp->ID << " " << DropoffNode_temp->ID << " " << RidingDistance << endl;
-//										double DropoffWalkingDistance = NodeDistance[DropoffNode_temp->ID][pOrigin->DestinationNode[destination]];
-//										pRoute->Pickupdistance = PickupWalkingDistance;
-//										pRoute->Ridingdistance = RidingDistance;
-//										pRoute->EnergyConsumption = arfa3 * RidingDistance;
-//										pRoute->Dropoffdistance = DropoffWalkingDistance;
-//										if (PickupWalkingDistance < INF && RidingDistance < INF && DropoffWalkingDistance < INF)
-//										{
-//											pRoute->RouteID = m_nRoute; //Route number
-//											m_nRoute++;
-//											m_Route.push_back(pRoute);
-//										}
-//									}
-//								}
-//							}
-//						}
-//					}
-//					if (PickupNode_temp->NodeType[type1] == 2) //在Charging node取车
-//					{
-//						for (int dropnode = 0; dropnode < m_nNode; dropnode++) //取网络中的任一个点作为drop_off点
-//						{
-//							DropoffNode_temp2 = new CNode;
-//							DropoffNode_temp2 = m_Node[dropnode]; //还车点
-//							{
-//								if (DropoffNode_temp2->ID != PickupNode_temp->ID) //取车和还车点不同
-//								{
-//									for (int type2 = 0; type2 < 3; type2++)
-//									{
-//										if (DropoffNode_temp2->NodeType[type2] == 1) //在parking node还车
-//										{
-//											pRoute = new CRoute();//对 每一对ODpair，创建一个route class
-//											pRoute->ODID = pOrigin->ODpairNumber[destination];//OD pair number
-//											pRoute->PickupNode = PickupNode_temp;
-//											pRoute->DropoffNode = DropoffNode_temp2;
-//											pRoute->PickupType = PickupNode_temp->NodeType[type1];
-//											pRoute->DropoffType = DropoffNode_temp2->NodeType[type2];
-//											//cout << pRoute->PickupNode->ID << pRoute->DropoffNode->ID << endl;
-//											double PickupWalkingDistance = NodeDistance[pOrigin->pOriginNode->ID][PickupNode_temp->ID];
-//											double RidingDistance = NodeDistance[PickupNode_temp->ID][DropoffNode_temp2->ID];
-//											//cout << PickupNode_temp->ID << " " << DropoffNode_temp2->ID << " " << RidingDistance << endl;
-//											double DropoffWalkingDistance = NodeDistance[DropoffNode_temp2->ID][pOrigin->DestinationNode[destination]];
-//											pRoute->Pickupdistance = PickupWalkingDistance;
-//											pRoute->Ridingdistance = RidingDistance;
-//											pRoute->EnergyConsumption = arfa3 * RidingDistance;
-//											pRoute->Dropoffdistance = DropoffWalkingDistance;
-//											if (PickupWalkingDistance < INF && RidingDistance < INF && DropoffWalkingDistance < INF)
-//											{
-//												pRoute->RouteID = m_nRoute; //Route number
-//												m_nRoute++;
-//												m_Route.push_back(pRoute);
-//											}
-//										}
-//										if (DropoffNode_temp2->NodeType[type2] == 2) //在plug-in charging station还车
-//										{
-//											pRoute = new CRoute();//对 每一对ODpair，创建一个route class
-//											pRoute->ODID = pOrigin->ODpairNumber[destination];//OD pair number
-//											pRoute->PickupNode = PickupNode_temp;
-//											pRoute->DropoffNode = DropoffNode_temp2;
-//											pRoute->PickupType = PickupNode_temp->NodeType[type1];
-//											pRoute->DropoffType = DropoffNode_temp2->NodeType[type2];
-//											//cout << pRoute->PickupNode->ID << pRoute->DropoffNode->ID << endl;
-//											double PickupWalkingDistance = NodeDistance[pOrigin->pOriginNode->ID][PickupNode_temp->ID];
-//											double RidingDistance = NodeDistance[PickupNode_temp->ID][DropoffNode_temp2->ID];
-//											//cout << PickupNode_temp->ID << " " << DropoffNode_temp2->ID << " " << RidingDistance << endl;
-//											double DropoffWalkingDistance = NodeDistance[DropoffNode_temp2->ID][pOrigin->DestinationNode[destination]];
-//											pRoute->Pickupdistance = PickupWalkingDistance;
-//											pRoute->Ridingdistance = RidingDistance;
-//											pRoute->EnergyConsumption = arfa3 * RidingDistance;
-//											pRoute->Dropoffdistance = DropoffWalkingDistance;
-//											if (PickupWalkingDistance < INF && RidingDistance < INF && DropoffWalkingDistance < INF)
-//											{
-//												pRoute->RouteID = m_nRoute; //Route number
-//												m_nRoute++;
-//												m_Route.push_back(pRoute);
-//											}
-//										}
-//										if (DropoffNode_temp2->NodeType[type2] == 3) //在non-parking node还车
-//										{
-//											pRoute = new CRoute();//对 每一对ODpair，创建一个route class
-//											pRoute->ODID = pOrigin->ODpairNumber[destination];//OD pair number
-//											pRoute->PickupNode = PickupNode_temp;
-//											pRoute->DropoffNode = DropoffNode_temp2;
-//											pRoute->PickupType = PickupNode_temp->NodeType[type1];
-//											pRoute->DropoffType = DropoffNode_temp2->NodeType[type2];
-//											//cout << pRoute->PickupNode->ID << pRoute->DropoffNode->ID << endl;
-//											double PickupWalkingDistance = NodeDistance[pOrigin->pOriginNode->ID][PickupNode_temp->ID];
-//											double RidingDistance = NodeDistance[PickupNode_temp->ID][DropoffNode_temp2->ID];
-//											//cout << PickupNode_temp->ID << " " << DropoffNode_temp2->ID << " " << RidingDistance << endl;
-//											double DropoffWalkingDistance = NodeDistance[DropoffNode_temp2->ID][pOrigin->DestinationNode[destination]];
-//											pRoute->Pickupdistance = PickupWalkingDistance;
-//											pRoute->Ridingdistance = RidingDistance;
-//											pRoute->EnergyConsumption = arfa3 * RidingDistance;
-//											pRoute->Dropoffdistance = DropoffWalkingDistance;
-//											if (PickupWalkingDistance < INF && RidingDistance < INF && DropoffWalkingDistance < INF)
-//											{
-//												pRoute->RouteID = m_nRoute; //Route number
-//												m_nRoute++;
-//												m_Route.push_back(pRoute);
-//											}
-//										}
-//									}
-//								}
-//							}
-//						}
-//					}
-//				}
-//			}
-//			if (m_nRoute_temp == m_nRoute)
-//			{
-//				temp_do = 0;
-//			}
-//		}
-//	}
-//}
-
 //assign all-or-nothing
 //返回一个指针，指向一个double[m_nRoute]的数组，包含了route的流量
 void CNetwork::AllorNothingAssignment(double* RouteFlow1, double* ANRouteFlow)
@@ -1222,6 +1064,7 @@ void CNetwork::AllorNothingAssignment(double* RouteFlow1, double* ANRouteFlow)
 	////计算zero flow情况下，每条route的route cost
 	//cout << "all or nothing " << endl;
 	UpdateRouteCost(RouteFlow);
+	//PrintUERouteCost();
 	//cout << "hello wordl" << endl;
 	//for (int route = 0; route < m_nRoute; route++)
 	//{
@@ -1335,25 +1178,6 @@ double CNetwork::GetUEGap(double* RouteFlow)
 			ANRouteFlow1[tem_ID] += Demand;
 		}
 	}
-	//cout << "UE平衡的辅助道路流量：" << endl;
-	//int ODOD = 0;
-	//int count = 0;
-	//for (int i = 0; i < m_nRoute; ++i)
-	//{
-	//	ODOD = m_Route[i]->ODID;
-	//	if (ODOD == count)
-	//	{
-	//		cout << ODOD << " " << ANRouteFlow[i] << ",";
-	//	}
-	//	cout << endl;
-	//	if (ODOD != count)
-	//	{
-	//		cout << ODOD << " " << ANRouteFlow[i] << ",";
-	//		cout << endl;
-	//		count++;
-	//	}
-	//}
-	//cout << endl;
 
 	for (int route = 0; route < m_nRoute; route++)
 	{
@@ -1365,6 +1189,78 @@ double CNetwork::GetUEGap(double* RouteFlow)
 	//cout << "num1: " << num1 << endl;
 	//cout << "num2: " << num2 << endl;
 	UEGap = 1 - num2 / num1;
+
+	//double temp = 0;
+	//// Calculate the auxiliary flow ANRouteFlow1
+	//auto ANRouteFlow1 = new double[m_nRoute]; // 辅助Route flow，要能储存下来
+	//for (int route = 0; route < m_nRoute; route++)
+	//{
+	//	ANRouteFlow1[route] = 0; //初始为0
+	//}
+	//for (int origin = 0; origin < m_nOrigin; origin++) // 遍历origin的循环
+	//{
+	//	//int OriginNode = m_Origin[origin]->pOriginNode->ID; // 任意一个origin的编号 （拿出一个origin）
+	//	for (int destination = 0; destination < m_Origin[origin]->DestinationNode.size(); destination++) //取出一个OD pair
+	//	{
+	//		int ODNumber = m_Origin[origin]->ODpairNumber[destination];
+	//		double tem_cost = INF;
+	//		int tem_ID = -1;
+	//		for (int route = 0; route < m_nRoute; route++)
+	//		{
+	//			if (ODNumber == m_Route[route]->ODID) //如果对于一个ODpair，找到了该ODpair对应的route
+	//			{
+	//				if (tem_cost > m_Route[route]->RouteCost)
+	//				{
+	//					tem_cost = m_Route[route]->RouteCost;
+	//					tem_ID = m_Route[route]->RouteID;
+	//				}
+	//			}
+	//		}
+	//		double Demand = m_Origin[origin]->ODDemand[destination];
+	//		ANRouteFlow1[tem_ID] += Demand;
+	//	}
+	//}
+
+	//// Calculate the gap
+	//for (int route = 0; route < m_nRoute; route++)
+	//{
+	//	temp += (RouteFlow[route] - ANRouteFlow1[route]) * (RouteFlow[route] - ANRouteFlow1[route]); //current route flow
+	//}
+	//UEGap = sqrt(temp);
+
+	//cout << "UEGap: " << UEGap << endl;
+	//cout << "UE平衡的辅助道路流量：" << endl;
+	//int ODO = 0;
+	//int coun = 0;
+	//for (int i = 0; i < m_nRoute; ++i)
+	//{
+	//	ODO = m_Route[i]->ODID;
+	//	if (ODO == coun)
+	//	{
+	//		if (ANRouteFlow1[i] > 0)
+	//		{
+	//			cout << ODO << " " << ANRouteFlow1[i] << " ";
+	//			cout << m_Route[i]->PickupNode->ID + 1 << "(" << m_Route[i]->PickupType << ") " << m_Route[i]->DropoffNode->ID + 1 << "(" << m_Route[i]->DropoffType << ")";
+	//			cout << endl;
+	//		}
+	//	}
+	//	//cout << endl;
+	//	if (ODO != coun)
+	//	{
+	//		if (ANRouteFlow1[i] > 0)
+	//		{
+	//			cout << ODO << " " << ANRouteFlow1[i] << ",";
+	//			cout << m_Route[i]->PickupNode->ID + 1 << "(" << m_Route[i]->PickupType << ") " << m_Route[i]->DropoffNode->ID + 1 << "(" << m_Route[i]->DropoffType << ")";
+	//			cout << endl;
+	//		}
+	//		coun++;
+	//	}
+	//}
+	//cout << endl;
+
+	//delete[] ANRouteFlow1;
+	//ANRouteFlow1 = NULL;
+
 	return UEGap;
 }
 
@@ -1618,12 +1514,14 @@ void CNetwork::PrintUERouteCost()
 	cout << "UE平衡的各条route的cost：" << endl;
 	for (int i = 0; i < m_nRoute; ++i)
 	{
-		if (RouteFlow[i] > 0)
-		{
-			cout << "m_Route[route]->RouteCost: " << m_Route[i]->ODID << " " << m_Route[i]->RouteCost << " [" << RouteFlow[i] << "] " <<
-				m_Route[i]->PickupNode->ID + 1 << "(" << m_Route[i]->PickupType << ") " << m_Route[i]->DropoffNode->ID + 1 << "(" << m_Route[i]->DropoffType << ") "
-				<< endl;
-		}
+		//if (RouteFlow[i] > 0)
+		//{
+		//	cout << "m_Route[route]->RouteCost: " << m_Route[i]->ODID << " " << m_Route[i]->RouteCost << " [" << RouteFlow[i] << "] " <<
+		//		m_Route[i]->PickupNode->ID + 1 << "(" << m_Route[i]->PickupType << ") " << m_Route[i]->DropoffNode->ID + 1 << "(" << m_Route[i]->DropoffType << ") "
+		//		<< endl;
+		//}
+		cout << "m_Route[route]->RouteCost: " << m_Route[i]->ODID << " " << m_Route[i]->RouteCost << " [" << RouteFlow[i] << "] " <<
+			m_Route[i]->PickupNode->ID + 1 << "(" << m_Route[i]->PickupType << ") " << m_Route[i]->DropoffNode->ID + 1 << "(" << m_Route[i]->DropoffType << ") " << m_Route[i]->PickupWaitingCost << " " << m_Route[i]->DropWaitingCost << endl;
 	}
 	cout << endl;
 }
@@ -1763,63 +1661,14 @@ void CNetwork::EnumerationProgram()
 	//m_Solution[0]->node_type_upper_level[2][1] = -1;
 	//m_Solution[0]->node_type_upper_level[2][2] = -1;
 
-	//m_Solution[0]->node_type_upper_level[3][0] = 1;
-	//m_Solution[0]->node_type_upper_level[3][1] = -1;
+	//m_Solution[0]->node_type_upper_level[3][0] = -1;
+	//m_Solution[0]->node_type_upper_level[3][1] = 2;
 	//m_Solution[0]->node_type_upper_level[3][2] = -1;
 
-	//m_Solution[1]->node_capacity_upper_level[0][1] = 0;
-	//m_Solution[1]->node_capacity_upper_level[1][0] = 0;
-	//m_Solution[1]->node_capacity_upper_level[2][0] = 5;
-	//m_Solution[1]->node_capacity_upper_level[3][0] = 5;
-
-	//m_Solution[1]->node_type_upper_level[0][0] = -1;
-	//m_Solution[1]->node_type_upper_level[0][1] = -1;
-	//m_Solution[1]->node_type_upper_level[0][2] = 3;
-
-	//m_Solution[1]->node_type_upper_level[1][0] = 1;
-	//m_Solution[1]->node_type_upper_level[1][1] = -1;
-	//m_Solution[1]->node_type_upper_level[1][2] = -1;
-
-	//m_Solution[1]->node_type_upper_level[2][0] = -1;
-	//m_Solution[1]->node_type_upper_level[2][1] = 2;
-	//m_Solution[1]->node_type_upper_level[2][2] = -1;
-
-	//m_Solution[1]->node_type_upper_level[3][0] = -1;
-	//m_Solution[1]->node_type_upper_level[3][1] = -1;
-	//m_Solution[1]->node_type_upper_level[3][2] = 3;
-
-	//m_Solution[1]->node_capacity_upper_level[0][1] = 0;
-	//m_Solution[1]->node_capacity_upper_level[1][0] = 5;
-	//m_Solution[1]->node_capacity_upper_level[2][1] = 5;
-	//m_Solution[1]->node_capacity_upper_level[3][0] = 0;
-
-	//RepairSolution(m_Solution);
-
-	//for (int sol = 0; sol < m_nSolution; sol++)
-	//{
-	//	m_Solution[sol]->node_type_upper_level[0][0] = -1;
-	//	m_Solution[sol]->node_type_upper_level[0][1] = -1;
-	//	m_Solution[sol]->node_type_upper_level[0][2] = 3;
-
-	//	m_Solution[sol]->node_type_upper_level[1][0] = 1;
-	//	m_Solution[sol]->node_type_upper_level[1][1] = -1;
-	//	m_Solution[sol]->node_type_upper_level[1][2] = -1;
-
-	//	m_Solution[sol]->node_type_upper_level[2][0] = -1;
-	//	m_Solution[sol]->node_type_upper_level[2][1] = 2;
-	//	m_Solution[sol]->node_type_upper_level[2][2] = -1;
-
-	//	m_Solution[sol]->node_type_upper_level[3][0] = -1;
-	//	m_Solution[sol]->node_type_upper_level[3][1] = 2;
-	//	m_Solution[sol]->node_type_upper_level[3][2] = -1;
-
-	//	m_Solution[sol]->node_capacity_upper_level[0][0] = 0;
-	//	m_Solution[sol]->node_capacity_upper_level[1][0] = 5;
-	//	m_Solution[sol]->node_capacity_upper_level[2][1] = 5;
-	//	m_Solution[sol]->node_capacity_upper_level[3][1] = 5;
-	//}
-
-	//RepairSolution(m_Solution);
+	//m_Solution[0]->node_capacity_upper_level[0][0] = 0;
+	//m_Solution[0]->node_capacity_upper_level[1][0] = 0;
+	//m_Solution[0]->node_capacity_upper_level[2][0] = 6;
+	//m_Solution[0]->node_capacity_upper_level[3][1] = 9;
 
 	//m_Solution[10]->node_type_upper_level[0][0] = -1;
 	//m_Solution[10]->node_type_upper_level[0][1] = -1;
@@ -1843,33 +1692,78 @@ void CNetwork::EnumerationProgram()
 	//m_Solution[10]->node_capacity_upper_level[3][1] = 0;
 	//RepairSolution(m_Solution);
 
+	//m_Solution[1]->node_type_upper_level[0][0] = -1;
+	//m_Solution[1]->node_type_upper_level[0][1] = -1;
+	//m_Solution[1]->node_type_upper_level[0][2] = 3;
+
+	//m_Solution[1]->node_type_upper_level[1][0] = 1;
+	//m_Solution[1]->node_type_upper_level[1][1] = -1;
+	//m_Solution[1]->node_type_upper_level[1][2] = -1;
+
+	//m_Solution[1]->node_type_upper_level[2][0] = -1;
+	//m_Solution[1]->node_type_upper_level[2][1] = 2;
+	//m_Solution[1]->node_type_upper_level[2][2] = -1;
+
+	//m_Solution[1]->node_type_upper_level[3][0] = -1;
+	//m_Solution[1]->node_type_upper_level[3][1] = -1;
+	//m_Solution[1]->node_type_upper_level[3][2] = 3;
+
+	//m_Solution[1]->node_capacity_upper_level[0][1] = 0;
+	//m_Solution[1]->node_capacity_upper_level[1][0] = 5;
+	//m_Solution[1]->node_capacity_upper_level[2][1] = 5;
+	//m_Solution[1]->node_capacity_upper_level[3][0] = 0;
+	//RepairSolution(m_Solution);
+
+	//m_Solution[10]->node_type_upper_level[0][0] = -1;
+	//m_Solution[10]->node_type_upper_level[0][1] = -1;
+	//m_Solution[10]->node_type_upper_level[0][2] = 3;
+
+	//m_Solution[10]->node_type_upper_level[1][0] = 1;
+	//m_Solution[10]->node_type_upper_level[1][1] = -1;
+	//m_Solution[10]->node_type_upper_level[1][2] = -1;
+
+	//m_Solution[10]->node_type_upper_level[2][0] = -1;
+	//m_Solution[10]->node_type_upper_level[2][1] = 2;
+	//m_Solution[10]->node_type_upper_level[2][2] = -1;
+
+	//m_Solution[10]->node_type_upper_level[3][0] = -1;
+	//m_Solution[10]->node_type_upper_level[3][1] = -1;
+	//m_Solution[10]->node_type_upper_level[3][2] = 3;
+
+	//m_Solution[10]->node_capacity_upper_level[0][0] = 0;
+	//m_Solution[10]->node_capacity_upper_level[1][0] = 5;
+	//m_Solution[10]->node_capacity_upper_level[2][1] = 5;
+	//m_Solution[10]->node_capacity_upper_level[3][1] = 0;
+	RepairSolution(m_Solution);
+
 	//cout << "Solution: " << m_nSolution << endl;
 	//Lower-level
 	for (int sol = 0; sol < m_nSolution; sol++)
-	//for (int sol = 0; sol < 2; sol++)
+	//for (int sol = 0; sol < 11; sol++)
 	{
 
 		NodeType(sol, m_Solution); //根据初始生成的solution, 为每个node赋值
 
-		//if (m_Solution[sol]->node_type_upper_level[0][0] == 1 &&
+		//if (m_Solution[sol]->node_type_upper_level[0][0] == -1 &&
 		//	m_Solution[sol]->node_type_upper_level[0][1] == -1 &&
-		//	m_Solution[sol]->node_type_upper_level[0][2] == -1 &&
+		//	m_Solution[sol]->node_type_upper_level[0][2] == 3 &&
 
 		//	m_Solution[sol]->node_type_upper_level[1][0] == -1 &&
-		//	m_Solution[0]->node_type_upper_level[1][1] == -1 &&
+		//	m_Solution[sol]->node_type_upper_level[1][1] == -1 &&
 		//	m_Solution[sol]->node_type_upper_level[1][2] == 3 &&
 
-		//	m_Solution[sol]->node_type_upper_level[2][0] == -1 &&
+		//	m_Solution[sol]->node_type_upper_level[2][0] == 1 &&
 		//	m_Solution[sol]->node_type_upper_level[2][1] == -1 &&
-		//	m_Solution[sol]->node_type_upper_level[2][2] == 3 &&
+		//	m_Solution[sol]->node_type_upper_level[2][2] == -1 &&
 
-		//	m_Solution[sol]->node_type_upper_level[3][0] == 1 &&
-		//	m_Solution[sol]->node_type_upper_level[3][1] == -1 &&
-		//	m_Solution[sol]->node_type_upper_level[3][2] == -1 &&
+		//	m_Solution[sol]->node_type_upper_level[3][0] == -1 &&
+		//	m_Solution[sol]->node_type_upper_level[3][1] == 2 &&
+		//	m_Solution[sol]->node_type_upper_level[3][2] == -1
 
-		//	m_Solution[sol]->node_type_upper_level[4][0] == 1 &&
-		//	m_Solution[sol]->node_type_upper_level[4][1] == -1 &&
-		//	m_Solution[sol]->node_type_upper_level[4][2] == -1)
+		//	//m_Solution[sol]->node_type_upper_level[4][0] == 1 &&
+		//	//m_Solution[sol]->node_type_upper_level[4][1] == -1 &&
+		//	//m_Solution[sol]->node_type_upper_level[4][2] == -1
+		//	)
 		//{
 		//	//看下当前的solution配置
 		//	for (int node = 0; node < m_nNode; node++)
@@ -1913,7 +1807,7 @@ void CNetwork::EnumerationProgram()
 		//	cout << endl;
 		//}
 		//cout << endl;
-		cout << "sol: " << sol << endl;
+		//cout << "sol: " << sol << endl;
 		temp_do = 1; //标识符, 如果每对OD至少都有一条Route, 那么为1, 如果有任何一条OD没有Route, 为0
 		//释放内存
 		for (auto it = m_Route.begin(); it != m_Route.end(); it++)
@@ -1954,25 +1848,27 @@ void CNetwork::EnumerationProgram()
 				}
 			}
 			AllorNothingAssignment(RouteFlow, ANRouteFlow); // 做全有全无分配，得到辅助路段流量 (zero-flow)
-			UEGap = GetUEGap(RouteFlow);// 计算初始gap (根据当前routeflow)
-			//cout << UEGap << " 第一次" << endl;
-			//PrintUERouteFlow(UEGap, RouteFlow);
-			//PrintUERouteCost();
-			while (UEGap > MaxUEGap)
+			// 生成辅助flow
+			double* newRouteFlow = new double[m_nRoute];
+			AllorNothingAssignment(newRouteFlow, ANRouteFlow); //生成了辅助flowk
+
+			//PrintUERouteFlow(UEGap, newRouteFlow);
+			//// 更新路段流量 (MSA)
+			//{
+			//	for (int route = 0; route < m_nRoute; route++)
+			//	{
+			//		//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
+			//		RouteFlow[route] = RouteFlow[route] + (1 / k) * (newRouteFlow[route] - RouteFlow[route]);
+			//	}
+			//	delete newRouteFlow;
+			//}
+
+			// 更新路段流量 (SRAM)
 			{
-				// 生成辅助flow
-				double* newRouteFlow = new double[m_nRoute];
-				AllorNothingAssignment(newRouteFlow, ANRouteFlow); //生成了辅助flowk
-
-				//// 更新路段流量 (MSA)
-				//for (int route = 0; route < m_nRoute; route++)
-				//{
-				//	//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
-				//	RouteFlow[route] = RouteFlow[route] + (1 / k) * (newRouteFlow[route] - RouteFlow[route]);
-				//}
-				//delete newRouteFlow;
-
-				// 更新路段流量 (SRAM)
+				RouteFlow_K1; // k-1
+				ANRouteFlow_K1; // k-1
+				RouteFlow; //当前flow k=1
+				newRouteFlow; //新flow k=1
 				double GAP_k = 0;
 				double GAP_k1 = 0;
 				for (int route = 0; route < m_nRoute; route++)
@@ -1997,9 +1893,12 @@ void CNetwork::EnumerationProgram()
 					ANRouteFlow_K1[route] = newRouteFlow[route];
 					RouteFlow[route] = RouteFlow[route] + (1 / beita) * (newRouteFlow[route] - RouteFlow[route]);
 				}
+				//cout << "beita: " << beita << endl;
 				delete newRouteFlow;
+			}
 
-				// 更新picku_Up和drop_off点的flow
+			// 更新picku_Up和drop_off点的flow
+			{
 				for (int node = 0; node < m_nNode; node++)
 				{
 					for (int type = 0; type < 3; type++)
@@ -2021,21 +1920,112 @@ void CNetwork::EnumerationProgram()
 					}
 				}
 				k += 1;
-				UEGap = GetUEGap(RouteFlow);// 计算初始gap
-				//PrintUERouteFlow(UEGap, RouteFlow);
-				//cout << "UEGap!!!!: " << UEGap << endl;
-				//PrintUERouteCost();
-				//cout << "UEGap!!!!: " << UEGap << endl;
-				if (UEGap <= MaxUEGap)
+			}
+
+			// Calculate UEGap
+			{
+				UEGap = 0;
+				double temp1 = 0;
+				double temp2 = 0;
+				for (int route = 0; route < m_nRoute; route++)
 				{
-					//cout << "k: " << k << endl;
+					temp1 += (RouteFlow[route] - RouteFlow_K1[route]) * (RouteFlow[route] - RouteFlow_K1[route]);
+					temp2 += RouteFlow_K1[route];
+				}
+				UEGap = sqrt(temp1) / temp2;
+			}
+
+			while (UEGap > MaxUEGap)
+			{
+				// 生成辅助flow
+				double* newRouteFlow = new double[m_nRoute];
+				AllorNothingAssignment(newRouteFlow, ANRouteFlow); //生成了辅助flowk
+
+				//// 更新路段流量 (MSA)
+				//{
+				//	for (int route = 0; route < m_nRoute; route++)
+				//	{
+				//		//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
+				//		RouteFlow[route] = RouteFlow[route] + (1 / k) * (newRouteFlow[route] - RouteFlow[route]);
+				//	}
+				//	delete newRouteFlow;
+				//}
+
+				// 更新路段流量 (SRAM)
+				{
+					double GAP_k = 0;
+					double GAP_k1 = 0;
+					for (int route = 0; route < m_nRoute; route++)
+					{
+						GAP_k += abs(RouteFlow[route] - newRouteFlow[route]);
+						GAP_k1 += abs(RouteFlow_K1[route] - ANRouteFlow_K1[route]);
+					}
+					if (GAP_k >= GAP_k1)
+					{
+						beita += Tao;
+						//beita = k;
+					}
+					else
+					{
+						beita += gama;
+						//beita = k;
+					}
+					for (int route = 0; route < m_nRoute; route++)
+					{
+						//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
+						RouteFlow_K1[route] = RouteFlow[route];
+						ANRouteFlow_K1[route] = newRouteFlow[route];
+						RouteFlow[route] = RouteFlow[route] + (1 / beita) * (newRouteFlow[route] - RouteFlow[route]);
+					}
+					//cout << "beita: " << beita << endl;
+					delete newRouteFlow;
+				}
+
+				// 更新picku_Up和drop_off点的flow
+				{
+					for (int node = 0; node < m_nNode; node++)
+					{
+						for (int type = 0; type < 3; type++)
+						{
+							m_Node[node]->Pickupflow[type] = 0; // 初始化所有node的流量为0
+							m_Node[node]->Dropoffflow[type] = 0;
+						}
+					}
+					for (int route = 0; route < m_nRoute; route++)
+					{
+						int Pickuptype = m_Route[route]->PickupType; //1, 2
+						//cout << "Pickuptype：" << Pickuptype << endl;
+						int Dropofftype = m_Route[route]->DropoffType; //1, 2, 3
+						//cout << "Dropofftype：" << Dropofftype << endl;
+						if (Pickuptype != -1 && Dropofftype != -1)
+						{
+							m_Route[route]->PickupNode->Pickupflow[Pickuptype - 1] += RouteFlow[route];
+							m_Route[route]->DropoffNode->Dropoffflow[Dropofftype - 1] += RouteFlow[route];
+						}
+					}
+					k += 1;
+				}
+
+				// Calculate UEGap
+				{
+					UEGap = 0;
+					double temp1 = 0;
+					double temp2 = 0;
+					for (int route = 0; route < m_nRoute; route++)
+					{
+						temp1 += (RouteFlow[route] - RouteFlow_K1[route]) * (RouteFlow[route] - RouteFlow_K1[route]);
+						temp2 += RouteFlow_K1[route];
+					}
+					UEGap = sqrt(temp1) / temp2;
 				}
 			}
 
-			m_Solution[sol]->ObjectiveValue = cal_obj(sol, m_Solution); //计算目标函数值
+			//Calculate the objective value
+			m_Solution[sol]->ObjectiveValue = cal_obj(sol, m_Solution); 
 
 			//PrintUERouteFlow(UEGap, RouteFlow);
 			//PrintUERouteCost();
+
 			delete RouteFlow;
 			delete RouteFlow_K1;
 			delete ANRouteFlow;
@@ -2043,9 +2033,8 @@ void CNetwork::EnumerationProgram()
 			RecordBest(sol, m_Solution);
 			////////////////////////////////////////UE////////////////////////////////////////
 
-			m_Solution[sol]->node_capacity_upper_level_temp = m_Solution[sol]->node_capacity_upper_level;
-
 			//Update Capacity (armijio method, integer capacity)
+			m_Solution[sol]->node_capacity_upper_level_temp = m_Solution[sol]->node_capacity_upper_level;
 			for (int node = 0; node < m_nNode; node++)
 			{
 				for (int type = 0; type < 2; type++)
@@ -2068,8 +2057,8 @@ void CNetwork::EnumerationProgram()
 							}
 							NodeType(sol, m_Solution);
 
-							//////////////////////////////////////////////////////////// 解UE
-							double k = 1; // 迭代次数
+							////////////////////////////////////////UE////////////////////////////////////////
+							// 初始化部分：
 							RouteFlow = new double[m_nRoute];
 							RouteFlow_K1 = new double[m_nRoute];
 							ANRouteFlow = new double[m_nRoute];
@@ -2091,23 +2080,23 @@ void CNetwork::EnumerationProgram()
 								}
 							}
 							AllorNothingAssignment(RouteFlow, ANRouteFlow); // 做全有全无分配，得到辅助路段流量 (zero-flow)
-							UEGap = GetUEGap(RouteFlow);// 计算初始gap (根据当前routeflow)
+							// 生成辅助flow
+							newRouteFlow = new double[m_nRoute];
+							AllorNothingAssignment(newRouteFlow, ANRouteFlow); //生成了辅助flowk
 
-							while (UEGap > MaxUEGap)
+							//PrintUERouteFlow(UEGap, newRouteFlow);
+							//// 更新路段流量 (MSA)
+							//{
+							//	for (int route = 0; route < m_nRoute; route++)
+							//	{
+							//		//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
+							//		RouteFlow[route] = RouteFlow[route] + (1 / k) * (newRouteFlow[route] - RouteFlow[route]);
+							//	}
+							//	delete newRouteFlow;
+							//}
+
+							// 更新路段流量 (SRAM)
 							{
-								// 生成辅助flow
-								double* newRouteFlow = new double[m_nRoute];
-								AllorNothingAssignment(newRouteFlow, ANRouteFlow); //生成了辅助flowk
-
-								//// 更新路段流量 (MSA)
-								//for (int route = 0; route < m_nRoute; route++)
-								//{
-								//	//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
-								//	RouteFlow[route] = RouteFlow[route] + (1 / k) * (newRouteFlow[route] - RouteFlow[route]);
-								//}
-								//delete newRouteFlow;
-
-								// 更新路段流量 (SRAM)
 								double GAP_k = 0;
 								double GAP_k1 = 0;
 								for (int route = 0; route < m_nRoute; route++)
@@ -2132,9 +2121,12 @@ void CNetwork::EnumerationProgram()
 									ANRouteFlow_K1[route] = newRouteFlow[route];
 									RouteFlow[route] = RouteFlow[route] + (1 / beita) * (newRouteFlow[route] - RouteFlow[route]);
 								}
+								//cout << "beita: " << beita << endl;
 								delete newRouteFlow;
+							}
 
-								// 更新picku_Up和drop_off点的flow
+							// 更新picku_Up和drop_off点的flow
+							{
 								for (int node = 0; node < m_nNode; node++)
 								{
 									for (int type = 0; type < 3; type++)
@@ -2156,13 +2148,106 @@ void CNetwork::EnumerationProgram()
 									}
 								}
 								k += 1;
-								UEGap = GetUEGap(RouteFlow);// 计算初始gap
-								if (UEGap <= MaxUEGap)
+							}
+
+							// Calculate UEGap
+							{
+								UEGap = 0;
+								double temp1 = 0;
+								double temp2 = 0;
+								for (int route = 0; route < m_nRoute; route++)
 								{
-									//cout << "k: " << k << endl;
+									temp1 += (RouteFlow[route] - RouteFlow_K1[route]) * (RouteFlow[route] - RouteFlow_K1[route]);
+									temp2 += RouteFlow_K1[route];
+								}
+								UEGap = sqrt(temp1) / temp2;
+							}
+
+							while (UEGap > MaxUEGap)
+							{
+								// 生成辅助flow
+								double* newRouteFlow = new double[m_nRoute];
+								AllorNothingAssignment(newRouteFlow, ANRouteFlow); //生成了辅助flowk
+
+								//// 更新路段流量 (MSA)
+								//{
+								//	for (int route = 0; route < m_nRoute; route++)
+								//	{
+								//		//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
+								//		RouteFlow[route] = RouteFlow[route] + (1 / k) * (newRouteFlow[route] - RouteFlow[route]);
+								//	}
+								//	delete newRouteFlow;
+								//}
+
+								// 更新路段流量 (SRAM)
+								{
+									double GAP_k = 0;
+									double GAP_k1 = 0;
+									for (int route = 0; route < m_nRoute; route++)
+									{
+										GAP_k += abs(RouteFlow[route] - newRouteFlow[route]);
+										GAP_k1 += abs(RouteFlow_K1[route] - ANRouteFlow_K1[route]);
+									}
+									if (GAP_k >= GAP_k1)
+									{
+										beita += Tao;
+										//beita = k;
+									}
+									else
+									{
+										beita += gama;
+										//beita = k;
+									}
+									for (int route = 0; route < m_nRoute; route++)
+									{
+										//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
+										RouteFlow_K1[route] = RouteFlow[route];
+										ANRouteFlow_K1[route] = newRouteFlow[route];
+										RouteFlow[route] = RouteFlow[route] + (1 / beita) * (newRouteFlow[route] - RouteFlow[route]);
+									}
+									//cout << "beita: " << beita << endl;
+									delete newRouteFlow;
+								}
+
+								// 更新picku_Up和drop_off点的flow
+								{
+									for (int node = 0; node < m_nNode; node++)
+									{
+										for (int type = 0; type < 3; type++)
+										{
+											m_Node[node]->Pickupflow[type] = 0; // 初始化所有node的流量为0
+											m_Node[node]->Dropoffflow[type] = 0;
+										}
+									}
+									for (int route = 0; route < m_nRoute; route++)
+									{
+										int Pickuptype = m_Route[route]->PickupType; //1, 2
+										//cout << "Pickuptype：" << Pickuptype << endl;
+										int Dropofftype = m_Route[route]->DropoffType; //1, 2, 3
+										//cout << "Dropofftype：" << Dropofftype << endl;
+										if (Pickuptype != -1 && Dropofftype != -1)
+										{
+											m_Route[route]->PickupNode->Pickupflow[Pickuptype - 1] += RouteFlow[route];
+											m_Route[route]->DropoffNode->Dropoffflow[Dropofftype - 1] += RouteFlow[route];
+										}
+									}
+									k += 1;
+								}
+
+								// Calculate UEGap
+								{
+									UEGap = 0;
+									double temp1 = 0;
+									double temp2 = 0;
+									for (int route = 0; route < m_nRoute; route++)
+									{
+										temp1 += (RouteFlow[route] - RouteFlow_K1[route]) * (RouteFlow[route] - RouteFlow_K1[route]);
+										temp2 += RouteFlow_K1[route];
+									}
+									UEGap = sqrt(temp1) / temp2;
 								}
 							}
-							//////////////////////////////////////////////////////////// 解UE
+							////////////////////////////////////////UE////////////////////////////////////////
 
 							m_Solution[sol]->ObjectiveValue_temp = cal_obj(sol, m_Solution);
 							if (m_Solution[sol]->ObjectiveValue_temp >= m_Solution[sol]->ObjectiveValue)
@@ -2194,8 +2279,8 @@ void CNetwork::EnumerationProgram()
 							}
 							NodeType(sol, m_Solution);
 
-							//////////////////////////////////////////////////////////// 解UE
-							double k = 1; // 迭代次数
+							////////////////////////////////////////UE////////////////////////////////////////
+							// 初始化部分：
 							RouteFlow = new double[m_nRoute];
 							RouteFlow_K1 = new double[m_nRoute];
 							ANRouteFlow = new double[m_nRoute];
@@ -2217,22 +2302,23 @@ void CNetwork::EnumerationProgram()
 								}
 							}
 							AllorNothingAssignment(RouteFlow, ANRouteFlow); // 做全有全无分配，得到辅助路段流量 (zero-flow)
-							UEGap = GetUEGap(RouteFlow);// 计算初始gap (根据当前routeflow)
-							while (UEGap > MaxUEGap)
+							// 生成辅助flow
+							newRouteFlow = new double[m_nRoute];
+							AllorNothingAssignment(newRouteFlow, ANRouteFlow); //生成了辅助flowk
+
+							//PrintUERouteFlow(UEGap, newRouteFlow);
+							//// 更新路段流量 (MSA)
+							//{
+							//	for (int route = 0; route < m_nRoute; route++)
+							//	{
+							//		//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
+							//		RouteFlow[route] = RouteFlow[route] + (1 / k) * (newRouteFlow[route] - RouteFlow[route]);
+							//	}
+							//	delete newRouteFlow;
+							//}
+
+							// 更新路段流量 (SRAM)
 							{
-								// 生成辅助flow
-								double* newRouteFlow = new double[m_nRoute];
-								AllorNothingAssignment(newRouteFlow, ANRouteFlow); //生成了辅助flowk
-
-								//// 更新路段流量 (MSA)
-								//for (int route = 0; route < m_nRoute; route++)
-								//{
-								//	//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
-								//	RouteFlow[route] = RouteFlow[route] + (1 / k) * (newRouteFlow[route] - RouteFlow[route]);
-								//}
-								//delete newRouteFlow;
-
-								// 更新路段流量 (SRAM)
 								double GAP_k = 0;
 								double GAP_k1 = 0;
 								for (int route = 0; route < m_nRoute; route++)
@@ -2257,9 +2343,12 @@ void CNetwork::EnumerationProgram()
 									ANRouteFlow_K1[route] = newRouteFlow[route];
 									RouteFlow[route] = RouteFlow[route] + (1 / beita) * (newRouteFlow[route] - RouteFlow[route]);
 								}
+								//cout << "beita: " << beita << endl;
 								delete newRouteFlow;
+							}
 
-								// 更新picku_Up和drop_off点的flow
+							// 更新picku_Up和drop_off点的flow
+							{
 								for (int node = 0; node < m_nNode; node++)
 								{
 									for (int type = 0; type < 3; type++)
@@ -2281,13 +2370,106 @@ void CNetwork::EnumerationProgram()
 									}
 								}
 								k += 1;
-								UEGap = GetUEGap(RouteFlow);// 计算初始gap
-								if (UEGap <= MaxUEGap)
+							}
+
+							// Calculate UEGap
+							{
+								UEGap = 0;
+								double temp1 = 0;
+								double temp2 = 0;
+								for (int route = 0; route < m_nRoute; route++)
 								{
-									//cout << "k: " << k << endl;
+									temp1 += (RouteFlow[route] - RouteFlow_K1[route]) * (RouteFlow[route] - RouteFlow_K1[route]);
+									temp2 += RouteFlow_K1[route];
+								}
+								UEGap = sqrt(temp1) / temp2;
+							}
+
+							while (UEGap > MaxUEGap)
+							{
+								// 生成辅助flow
+								double* newRouteFlow = new double[m_nRoute];
+								AllorNothingAssignment(newRouteFlow, ANRouteFlow); //生成了辅助flowk
+
+								//// 更新路段流量 (MSA)
+								//{
+								//	for (int route = 0; route < m_nRoute; route++)
+								//	{
+								//		//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
+								//		RouteFlow[route] = RouteFlow[route] + (1 / k) * (newRouteFlow[route] - RouteFlow[route]);
+								//	}
+								//	delete newRouteFlow;
+								//}
+
+								// 更新路段流量 (SRAM)
+								{
+									double GAP_k = 0;
+									double GAP_k1 = 0;
+									for (int route = 0; route < m_nRoute; route++)
+									{
+										GAP_k += abs(RouteFlow[route] - newRouteFlow[route]);
+										GAP_k1 += abs(RouteFlow_K1[route] - ANRouteFlow_K1[route]);
+									}
+									if (GAP_k >= GAP_k1)
+									{
+										beita += Tao;
+										//beita = k;
+									}
+									else
+									{
+										beita += gama;
+										//beita = k;
+									}
+									for (int route = 0; route < m_nRoute; route++)
+									{
+										//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
+										RouteFlow_K1[route] = RouteFlow[route];
+										ANRouteFlow_K1[route] = newRouteFlow[route];
+										RouteFlow[route] = RouteFlow[route] + (1 / beita) * (newRouteFlow[route] - RouteFlow[route]);
+									}
+									//cout << "beita: " << beita << endl;
+									delete newRouteFlow;
+								}
+
+								// 更新picku_Up和drop_off点的flow
+								{
+									for (int node = 0; node < m_nNode; node++)
+									{
+										for (int type = 0; type < 3; type++)
+										{
+											m_Node[node]->Pickupflow[type] = 0; // 初始化所有node的流量为0
+											m_Node[node]->Dropoffflow[type] = 0;
+										}
+									}
+									for (int route = 0; route < m_nRoute; route++)
+									{
+										int Pickuptype = m_Route[route]->PickupType; //1, 2
+										//cout << "Pickuptype：" << Pickuptype << endl;
+										int Dropofftype = m_Route[route]->DropoffType; //1, 2, 3
+										//cout << "Dropofftype：" << Dropofftype << endl;
+										if (Pickuptype != -1 && Dropofftype != -1)
+										{
+											m_Route[route]->PickupNode->Pickupflow[Pickuptype - 1] += RouteFlow[route];
+											m_Route[route]->DropoffNode->Dropoffflow[Dropofftype - 1] += RouteFlow[route];
+										}
+									}
+									k += 1;
+								}
+
+								// Calculate UEGap
+								{
+									UEGap = 0;
+									double temp1 = 0;
+									double temp2 = 0;
+									for (int route = 0; route < m_nRoute; route++)
+									{
+										temp1 += (RouteFlow[route] - RouteFlow_K1[route]) * (RouteFlow[route] - RouteFlow_K1[route]);
+										temp2 += RouteFlow_K1[route];
+									}
+									UEGap = sqrt(temp1) / temp2;
 								}
 							}
-							//////////////////////////////////////////////////////////// 解UE
+							////////////////////////////////////////UE////////////////////////////////////////
 
 							m_Solution[sol]->ObjectiveValue_temp = cal_obj(sol, m_Solution);
 							if (m_Solution[sol]->ObjectiveValue_temp >= m_Solution[sol]->ObjectiveValue)
@@ -2314,7 +2496,6 @@ void CNetwork::EnumerationProgram()
 
 			////////////////////////////////////////UE////////////////////////////////////////
 			// 初始化部分：
-			k = 1; // 迭代次数
 			RouteFlow = new double[m_nRoute];
 			RouteFlow_K1 = new double[m_nRoute];
 			ANRouteFlow = new double[m_nRoute];
@@ -2336,25 +2517,23 @@ void CNetwork::EnumerationProgram()
 				}
 			}
 			AllorNothingAssignment(RouteFlow, ANRouteFlow); // 做全有全无分配，得到辅助路段流量 (zero-flow)
-			UEGap = GetUEGap(RouteFlow);// 计算初始gap (根据当前routeflow)
-			//cout << UEGap << " 第二次" << endl;
-			//PrintUERouteFlow(UEGap, RouteFlow);
-			//PrintUERouteCost();
-			while (UEGap > MaxUEGap)
+			// 生成辅助flow
+			newRouteFlow = new double[m_nRoute];
+			AllorNothingAssignment(newRouteFlow, ANRouteFlow); //生成了辅助flowk
+
+			//PrintUERouteFlow(UEGap, newRouteFlow);
+			//// 更新路段流量 (MSA)
+			//{
+			//	for (int route = 0; route < m_nRoute; route++)
+			//	{
+			//		//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
+			//		RouteFlow[route] = RouteFlow[route] + (1 / k) * (newRouteFlow[route] - RouteFlow[route]);
+			//	}
+			//	delete newRouteFlow;
+			//}
+
+			// 更新路段流量 (SRAM)
 			{
-				// 生成辅助flow
-				double* newRouteFlow = new double[m_nRoute];
-				AllorNothingAssignment(newRouteFlow, ANRouteFlow); //生成了辅助flowk
-
-				//// 更新路段流量 (MSA)
-				//for (int route = 0; route < m_nRoute; route++)
-				//{
-				//	//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
-				//	RouteFlow[route] = RouteFlow[route] + (1 / k) * (newRouteFlow[route] - RouteFlow[route]);
-				//}
-				//delete newRouteFlow;
-
-				// 更新路段流量 (SRAM)
 				double GAP_k = 0;
 				double GAP_k1 = 0;
 				for (int route = 0; route < m_nRoute; route++)
@@ -2379,9 +2558,12 @@ void CNetwork::EnumerationProgram()
 					ANRouteFlow_K1[route] = newRouteFlow[route];
 					RouteFlow[route] = RouteFlow[route] + (1 / beita) * (newRouteFlow[route] - RouteFlow[route]);
 				}
+				//cout << "beita: " << beita << endl;
 				delete newRouteFlow;
+			}
 
-				// 更新picku_Up和drop_off点的flow
+			// 更新picku_Up和drop_off点的flow
+			{
 				for (int node = 0; node < m_nNode; node++)
 				{
 					for (int type = 0; type < 3; type++)
@@ -2403,90 +2585,116 @@ void CNetwork::EnumerationProgram()
 					}
 				}
 				k += 1;
-				UEGap = GetUEGap(RouteFlow);// 计算初始gap
-				//cout << "UEGap: " << UEGap << endl;
-				if (UEGap <= MaxUEGap)
+			}
+
+			// Calculate UEGap
+			{
+				UEGap = 0;
+				double temp1 = 0;
+				double temp2 = 0;
+				for (int route = 0; route < m_nRoute; route++)
 				{
-					//cout << "k: " << k << endl;
+					temp1 += (RouteFlow[route] - RouteFlow_K1[route]) * (RouteFlow[route] - RouteFlow_K1[route]);
+					temp2 += RouteFlow_K1[route];
+				}
+				UEGap = sqrt(temp1) / temp2;
+			}
+
+			while (UEGap > MaxUEGap)
+			{
+				// 生成辅助flow
+				double* newRouteFlow = new double[m_nRoute];
+				AllorNothingAssignment(newRouteFlow, ANRouteFlow); //生成了辅助flowk
+
+				//// 更新路段流量 (MSA)
+				//{
+				//	for (int route = 0; route < m_nRoute; route++)
+				//	{
+				//		//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
+				//		RouteFlow[route] = RouteFlow[route] + (1 / k) * (newRouteFlow[route] - RouteFlow[route]);
+				//	}
+				//	delete newRouteFlow;
+				//}
+
+				// 更新路段流量 (SRAM)
+				{
+					double GAP_k = 0;
+					double GAP_k1 = 0;
+					for (int route = 0; route < m_nRoute; route++)
+					{
+						GAP_k += abs(RouteFlow[route] - newRouteFlow[route]);
+						GAP_k1 += abs(RouteFlow_K1[route] - ANRouteFlow_K1[route]);
+					}
+					if (GAP_k >= GAP_k1)
+					{
+						beita += Tao;
+						//beita = k;
+					}
+					else
+					{
+						beita += gama;
+						//beita = k;
+					}
+					for (int route = 0; route < m_nRoute; route++)
+					{
+						//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
+						RouteFlow_K1[route] = RouteFlow[route];
+						ANRouteFlow_K1[route] = newRouteFlow[route];
+						RouteFlow[route] = RouteFlow[route] + (1 / beita) * (newRouteFlow[route] - RouteFlow[route]);
+					}
+					//cout << "beita: " << beita << endl;
+					delete newRouteFlow;
+				}
+
+				// 更新picku_Up和drop_off点的flow
+				{
+					for (int node = 0; node < m_nNode; node++)
+					{
+						for (int type = 0; type < 3; type++)
+						{
+							m_Node[node]->Pickupflow[type] = 0; // 初始化所有node的流量为0
+							m_Node[node]->Dropoffflow[type] = 0;
+						}
+					}
+					for (int route = 0; route < m_nRoute; route++)
+					{
+						int Pickuptype = m_Route[route]->PickupType; //1, 2
+						//cout << "Pickuptype：" << Pickuptype << endl;
+						int Dropofftype = m_Route[route]->DropoffType; //1, 2, 3
+						//cout << "Dropofftype：" << Dropofftype << endl;
+						if (Pickuptype != -1 && Dropofftype != -1)
+						{
+							m_Route[route]->PickupNode->Pickupflow[Pickuptype - 1] += RouteFlow[route];
+							m_Route[route]->DropoffNode->Dropoffflow[Dropofftype - 1] += RouteFlow[route];
+						}
+					}
+					k += 1;
+				}
+
+				// Calculate UEGap
+				{
+					UEGap = 0;
+					double temp1 = 0;
+					double temp2 = 0;
+					for (int route = 0; route < m_nRoute; route++)
+					{
+						temp1 += (RouteFlow[route] - RouteFlow_K1[route]) * (RouteFlow[route] - RouteFlow_K1[route]);
+						temp2 += RouteFlow_K1[route];
+					}
+					UEGap = sqrt(temp1) / temp2;
 				}
 			}
 
+			//Calculate the objective value
 			m_Solution[sol]->ObjectiveValue = cal_obj(sol, m_Solution);
 
-			//if (m_Solution[sol]->node_type_upper_level[0][0] == 1 &&
-			//	m_Solution[sol]->node_type_upper_level[0][1] == -1 &&
-			//	m_Solution[sol]->node_type_upper_level[0][2] == -1 &&
-
-			//	m_Solution[sol]->node_type_upper_level[1][0] == -1 &&
-			//	m_Solution[0]->node_type_upper_level[1][1] == -1 &&
-			//	m_Solution[sol]->node_type_upper_level[1][2] == 3 &&
-
-			//	m_Solution[sol]->node_type_upper_level[2][0] == -1 &&
-			//	m_Solution[sol]->node_type_upper_level[2][1] == -1 &&
-			//	m_Solution[sol]->node_type_upper_level[2][2] == 3 &&
-
-			//	m_Solution[sol]->node_type_upper_level[3][0] == 1 &&
-			//	m_Solution[sol]->node_type_upper_level[3][1] == -1 &&
-			//	m_Solution[sol]->node_type_upper_level[3][2] == -1 &&
-
-			//	m_Solution[sol]->node_type_upper_level[4][0] == 1 &&
-			//	m_Solution[sol]->node_type_upper_level[4][1] == -1 &&
-			//	m_Solution[sol]->node_type_upper_level[4][2] == -1)
-			//{
-			//	//看下当前的solution配置
-			//	for (int node = 0; node < m_nNode; node++)
-			//	{
-			//		for (int type = 0; type < 3; type++)
-			//		{
-			//			cout << m_Solution[sol]->node_type_upper_level[node][type] << " ";
-			//		}
-			//		cout << endl;
-			//	}
-			//	cout << endl;
-			//	//看下当前的cap配置
-			//	for (int node = 0; node < m_nNode; node++)
-			//	{
-			//		for (int type = 0; type < 3; type++)
-			//		{
-			//			cout << m_Solution[sol]->node_capacity_upper_level[node][type] << " ";
-			//		}
-			//		cout << endl;
-			//	}
-			//	cout << endl;
-			//	cout << "m_Solution[sol]->ObjectiveValue: " << m_Solution[sol]->ObjectiveValue << endl;
-			//}
-
-			//if (sol == 85)
-			//{
-			//	cout << m_Solution[sol]->ObjectiveValue << endl;
-			//	//看下当前的solution配置
-			//	for (int node = 0; node < m_nNode; node++)
-			//	{
-			//		for (int type = 0; type < 3; type++)
-			//		{
-			//			cout << m_Solution[sol]->node_type_upper_level[node][type] << " ";
-			//		}
-			//		cout << endl;
-			//	}
-			//	cout << endl;
-			//	//看下当前的cap配置
-			//	for (int node = 0; node < m_nNode; node++)
-			//	{
-			//		for (int type = 0; type < 3; type++)
-			//		{
-			//			cout << m_Solution[sol]->node_capacity_upper_level[node][type] << " ";
-			//		}
-			//		cout << endl;
-			//	}
-			//	cout << endl;
-			//}
 			//PrintUERouteFlow(UEGap, RouteFlow);
 			//PrintUERouteCost();
+
 			delete RouteFlow;
 			delete RouteFlow_K1;
 			delete ANRouteFlow;
 			delete ANRouteFlow_K1;
-
 			RecordBest(sol, m_Solution);
 			////////////////////////////////////////UE////////////////////////////////////////
 		}
@@ -2549,6 +2757,7 @@ void CNetwork::InitialNodeType()
 //GA修复解
 void CNetwork::RepairSolution(vector<CSolution*> m_Solution)
 {
+	//Node detection
 	for (int sol = 0; sol < m_nSolution; sol++)
 	{
 		for (int node = 0; node < m_nNode; node++) //一个一个点检测
@@ -2630,7 +2839,7 @@ void CNetwork::RepairSolution(vector<CSolution*> m_Solution)
 		}
 	}
 
-	//修复capacity
+	//Fix capacity
 	for (int sol = 0; sol < m_nSolution; sol++)
 	{
 		for (int node = 0; node < m_nNode; node++) //一个一个点检测

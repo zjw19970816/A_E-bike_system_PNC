@@ -12,27 +12,27 @@ int main(int argc, char** argv)
 	start = clock();
 	srand(0);
 	
-	////Enumeration method for 4 nodes的network
-	//CNetwork* Network = new CNetwork(stod(argv[1]), stod(argv[2]), stod(argv[3]), stod(argv[4]), stod(argv[5]), stod(argv[6]), stod(argv[7]), stod(argv[8]), stod(argv[9]), stod(argv[10]), stod(argv[11]), stod(argv[12]));
-	////CNetwork* Network = new CNetwork();
-	//Network->ReadNode("Node_example.txt");
-	//Network->ReadDepot("Depot_example.txt");
-	//Network->ReadLink("Link_example.txt");
-	//Network->ReadDistance("DepotNode_example.txt");
-	//Network->ReadODpairs("ODPairs_example.txt");
-	//Network->EnumerationProgram();
-	//delete Network;	//释放堆区
-
-	//Enumeration method for 5 nodes的network
-	CNetwork* Network = new CNetwork(stod(argv[1]), stod(argv[2]), stod(argv[3]), stod(argv[4]), stod(argv[5]), stod(argv[6]), stod(argv[7]), stod(argv[8]), stod(argv[9]), stod(argv[10]), stod(argv[11]), stod(argv[12]));
+	//Enumeration method for 4 nodes的network
+	CNetwork* Network = new CNetwork(stod(argv[1]), stod(argv[2]), stod(argv[3]), stod(argv[4]), stod(argv[5]), stod(argv[6]), stod(argv[7]), stod(argv[8]), stod(argv[9]), stod(argv[10]), stod(argv[11]), stod(argv[12]), stod(argv[13]), stod(argv[14]));
 	//CNetwork* Network = new CNetwork();
-	Network->ReadNode("Node_example_5Nodes.txt");
-	Network->ReadDepot("Depot_example_5Nodes.txt");
-	Network->ReadLink("Link_example_5Nodes.txt");
-	Network->ReadDistance("DepotNode_example_5Nodes.txt");
-	Network->ReadODpairs("ODPairs_example_5Nodes.txt");
+	Network->ReadNode("Node_example.txt");
+	Network->ReadDepot("Depot_example.txt");
+	Network->ReadLink("Link_example.txt");
+	Network->ReadDistance("DepotNode_example.txt");
+	Network->ReadODpairs("ODPairs_example.txt");
 	Network->EnumerationProgram();
 	delete Network;	//释放堆区
+
+	////Enumeration method for 5 nodes的network
+	//CNetwork* Network = new CNetwork(stod(argv[1]), stod(argv[2]), stod(argv[3]), stod(argv[4]), stod(argv[5]), stod(argv[6]), stod(argv[7]), stod(argv[8]), stod(argv[9]), stod(argv[10]), stod(argv[11]), stod(argv[12]));
+	////CNetwork* Network = new CNetwork();
+	//Network->ReadNode("Node_example_5Nodes.txt");
+	//Network->ReadDepot("Depot_example_5Nodes.txt");
+	//Network->ReadLink("Link_example_5Nodes.txt");
+	//Network->ReadDistance("DepotNode_example_5Nodes.txt");
+	//Network->ReadODpairs("ODPairs_example_5Nodes.txt");
+	//Network->EnumerationProgram();
+	//delete Network;	//释放堆区
 
 	////Enumeration method for 6 nodes的network
 	//CNetwork* Network = new CNetwork(stod(argv[1]), stod(argv[2]), stod(argv[3]), stod(argv[4]), stod(argv[5]), stod(argv[6]), stod(argv[7]), stod(argv[8]), stod(argv[9]), stod(argv[10]), stod(argv[11]), stod(argv[12]));

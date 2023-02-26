@@ -50,7 +50,7 @@ public:
 	double gama = 0.25; //1.5
 	vector<double> LinkTravelTime; //路段走行时间
 	//double MaxUEGap = 1.0e-4; //UE的最大误差 
-	double MaxUEGap = 1.0e-3; //UE的最大误差 
+	double MaxUEGap = 1.0e-4; //UE的最大误差 
 	double UEGap; //UE误差
 	double* ShortestPathCost;//临时变量，所有节点到起点的最短路 free
 	int* ShortestPathParent;//最短路上，所有节点到起点的在最短路上的前继路段  free
@@ -85,7 +85,7 @@ public:
 	double incentive = 5; //停到C的奖励 5
 	double penalty = 10; //停到N的惩罚 10
 	double b_be_2 = 8;//unit rental fare 8
-	CNetwork(double EnPe, double PaM, double CaM, double PaC, double CaC, double xit1, double xit5, double xit6_1, double xit6_2, double incen, double penal, double b_be2)
+	CNetwork(double EnPe, double PaM, double CaM, double PaC, double CaC, double xit1, double xit5, double xit6_1, double xit6_2, double incen, double penal, double b_be2, double tao, double gam)
 	{
 		EnvironmantalPenalty = EnPe;
 		ConstructionCost[0] = PaM;
@@ -99,6 +99,8 @@ public:
 		incentive = incen; 
 		penalty = penal; 
 		b_be_2 = b_be2;
+		Tao = tao; //1.5~2
+		gama = gam; //0.01~0.5
 	}
 
 public:
