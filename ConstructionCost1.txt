@@ -1,0 +1,784 @@
+
+BestSolution_NodeType: 
+-1 -1 3 
+-1 -1 3 
+1 -1 -1 
+-1 2 -1 
+
+BestSolution_NodeCapacity: 
+0 0 0 
+0 0 0 
+5 0 0 
+0 5 0 
+
+BestSolution_ObjectiveValue: 799.66
+BestSolution->UEcost: 357.354
+BestSolution->UnmetDemandCost: 0
+BestSolution->ConstructionCost: 30
+BestSolution->CapacityCost: 75
+BestSolution->UnsatisfiedDemandCost: 0.585699
+BestSolution->BatterySwapCost: 9.44882
+BestSolution->Reposition1: 77.4803
+BestSolution->Reposition2: 0
+BestSolution->LossDemandCost: 74.4135
+BestSolution->PenaltyCost: 0
+BestSolution->IncentiveCost: 196.85
+BestSolution->RentalFare: 21.473
+time = 260.498s
+100 10 20 5 10 1 15 1 2 5 10 8 
+
+BestSolution_NodeType: 
+-1 -1 3 
+-1 -1 3 
+1 -1 -1 
+-1 2 -1 
+
+BestSolution_NodeCapacity: 
+0 0 0 
+0 0 0 
+5 0 0 
+0 5 0 
+
+BestSolution_ObjectiveValue: 809.66
+BestSolution->UEcost: 357.354
+BestSolution->UnmetDemandCost: 0
+BestSolution->ConstructionCost: 40
+BestSolution->CapacityCost: 75
+BestSolution->UnsatisfiedDemandCost: 0.585699
+BestSolution->BatterySwapCost: 9.44882
+BestSolution->Reposition1: 77.4803
+BestSolution->Reposition2: 0
+BestSolution->LossDemandCost: 74.4135
+BestSolution->PenaltyCost: 0
+BestSolution->IncentiveCost: 196.85
+BestSolution->RentalFare: 21.473
+time = 260.674s
+100 20 20 5 10 1 15 1 2 5 10 8 
+
+BestSolution_NodeType: 
+-1 -1 3 
+-1 -1 3 
+1 -1 -1 
+-1 2 -1 
+
+BestSolution_NodeCapacity: 
+0 0 0 
+0 0 0 
+5 0 0 
+0 5 0 
+
+BestSolution_ObjectiveValue: 819.66
+BestSolution->UEcost: 357.354
+BestSolution->UnmetDemandCost: 0
+BestSolution->ConstructionCost: 50
+BestSolution->CapacityCost: 75
+BestSolution->UnsatisfiedDemandCost: 0.585699
+BestSolution->BatterySwapCost: 9.44882
+BestSolution->Reposition1: 77.4803
+BestSolution->Reposition2: 0
+BestSolution->LossDemandCost: 74.4135
+BestSolution->PenaltyCost: 0
+BestSolution->IncentiveCost: 196.85
+BestSolution->RentalFare: 21.473
+time = 260.26s
+100 30 20 5 10 1 15 1 2 5 10 8 
+
+BestSolution_NodeType: 
+-1 -1 3 
+-1 -1 3 
+1 -1 -1 
+-1 2 -1 
+
+BestSolution_NodeCapacity: 
+0 0 0 
+0 0 0 
+5 0 0 
+0 5 0 
+
+BestSolution_ObjectiveValue: 829.66
+BestSolution->UEcost: 357.354
+BestSolution->UnmetDemandCost: 0
+BestSolution->ConstructionCost: 60
+BestSolution->CapacityCost: 75
+BestSolution->UnsatisfiedDemandCost: 0.585699
+BestSolution->BatterySwapCost: 9.44882
+BestSolution->Reposition1: 77.4803
+BestSolution->Reposition2: 0
+BestSolution->LossDemandCost: 74.4135
+BestSolution->PenaltyCost: 0
+BestSolution->IncentiveCost: 196.85
+BestSolution->RentalFare: 21.473
+time = 260.016s
+100 40 20 5 10 1 15 1 2 5 10 8 
+
+BestSolution_NodeType: 
+-1 -1 3 
+-1 -1 3 
+1 -1 -1 
+-1 2 -1 
+
+BestSolution_NodeCapacity: 
+0 0 0 
+0 0 0 
+5 0 0 
+0 5 0 
+
+BestSolution_ObjectiveValue: 839.66
+BestSolution->UEcost: 357.354
+BestSolution->UnmetDemandCost: 0
+BestSolution->ConstructionCost: 70
+BestSolution->CapacityCost: 75
+BestSolution->UnsatisfiedDemandCost: 0.585699
+BestSolution->BatterySwapCost: 9.44882
+BestSolution->Reposition1: 77.4803
+BestSolution->Reposition2: 0
+BestSolution->LossDemandCost: 74.4135
+BestSolution->PenaltyCost: 0
+BestSolution->IncentiveCost: 196.85
+BestSolution->RentalFare: 21.473
+time = 260.607s
+100 50 20 5 10 1 15 1 2 5 10 8 
+
+BestSolution_NodeType: 
+-1 -1 3 
+-1 -1 3 
+1 -1 -1 
+-1 2 -1 
+
+BestSolution_NodeCapacity: 
+0 0 0 
+0 0 0 
+5 0 0 
+0 5 0 
+
+BestSolution_ObjectiveValue: 849.66
+BestSolution->UEcost: 357.354
+BestSolution->UnmetDemandCost: 0
+BestSolution->ConstructionCost: 80
+BestSolution->CapacityCost: 75
+BestSolution->UnsatisfiedDemandCost: 0.585699
+BestSolution->BatterySwapCost: 9.44882
+BestSolution->Reposition1: 77.4803
+BestSolution->Reposition2: 0
+BestSolution->LossDemandCost: 74.4135
+BestSolution->PenaltyCost: 0
+BestSolution->IncentiveCost: 196.85
+BestSolution->RentalFare: 21.473
+time = 260.453s
+100 60 20 5 10 1 15 1 2 5 10 8 
+
+BestSolution_NodeType: 
+-1 -1 3 
+-1 -1 3 
+1 -1 -1 
+-1 2 -1 
+
+BestSolution_NodeCapacity: 
+0 0 0 
+0 0 0 
+5 0 0 
+0 5 0 
+
+BestSolution_ObjectiveValue: 859.66
+BestSolution->UEcost: 357.354
+BestSolution->UnmetDemandCost: 0
+BestSolution->ConstructionCost: 90
+BestSolution->CapacityCost: 75
+BestSolution->UnsatisfiedDemandCost: 0.585699
+BestSolution->BatterySwapCost: 9.44882
+BestSolution->Reposition1: 77.4803
+BestSolution->Reposition2: 0
+BestSolution->LossDemandCost: 74.4135
+BestSolution->PenaltyCost: 0
+BestSolution->IncentiveCost: 196.85
+BestSolution->RentalFare: 21.473
+time = 260.952s
+100 70 20 5 10 1 15 1 2 5 10 8 
+
+BestSolution_NodeType: 
+-1 -1 3 
+-1 -1 3 
+1 -1 -1 
+-1 2 -1 
+
+BestSolution_NodeCapacity: 
+0 0 0 
+0 0 0 
+5 0 0 
+0 5 0 
+
+BestSolution_ObjectiveValue: 869.66
+BestSolution->UEcost: 357.354
+BestSolution->UnmetDemandCost: 0
+BestSolution->ConstructionCost: 100
+BestSolution->CapacityCost: 75
+BestSolution->UnsatisfiedDemandCost: 0.585699
+BestSolution->BatterySwapCost: 9.44882
+BestSolution->Reposition1: 77.4803
+BestSolution->Reposition2: 0
+BestSolution->LossDemandCost: 74.4135
+BestSolution->PenaltyCost: 0
+BestSolution->IncentiveCost: 196.85
+BestSolution->RentalFare: 21.473
+time = 260.778s
+100 80 20 5 10 1 15 1 2 5 10 8 
+
+BestSolution_NodeType: 
+-1 -1 3 
+-1 -1 3 
+1 -1 -1 
+-1 2 -1 
+
+BestSolution_NodeCapacity: 
+0 0 0 
+0 0 0 
+5 0 0 
+0 5 0 
+
+BestSolution_ObjectiveValue: 879.66
+BestSolution->UEcost: 357.354
+BestSolution->UnmetDemandCost: 0
+BestSolution->ConstructionCost: 110
+BestSolution->CapacityCost: 75
+BestSolution->UnsatisfiedDemandCost: 0.585699
+BestSolution->BatterySwapCost: 9.44882
+BestSolution->Reposition1: 77.4803
+BestSolution->Reposition2: 0
+BestSolution->LossDemandCost: 74.4135
+BestSolution->PenaltyCost: 0
+BestSolution->IncentiveCost: 196.85
+BestSolution->RentalFare: 21.473
+time = 260.809s
+100 90 20 5 10 1 15 1 2 5 10 8 
+
+BestSolution_NodeType: 
+-1 -1 3 
+-1 -1 3 
+1 -1 -1 
+-1 2 -1 
+
+BestSolution_NodeCapacity: 
+0 0 0 
+0 0 0 
+5 0 0 
+0 5 0 
+
+BestSolution_ObjectiveValue: 889.66
+BestSolution->UEcost: 357.354
+BestSolution->UnmetDemandCost: 0
+BestSolution->ConstructionCost: 120
+BestSolution->CapacityCost: 75
+BestSolution->UnsatisfiedDemandCost: 0.585699
+BestSolution->BatterySwapCost: 9.44882
+BestSolution->Reposition1: 77.4803
+BestSolution->Reposition2: 0
+BestSolution->LossDemandCost: 74.4135
+BestSolution->PenaltyCost: 0
+BestSolution->IncentiveCost: 196.85
+BestSolution->RentalFare: 21.473
+time = 261.135s
+100 100 20 5 10 1 15 1 2 5 10 8 
+
+BestSolution_NodeType: 
+-1 2 -1 
+-1 -1 3 
+-1 2 -1 
+-1 -1 3 
+
+BestSolution_NodeCapacity: 
+0 5 0 
+0 0 0 
+0 5 0 
+0 0 0 
+
+BestSolution_ObjectiveValue: 962.962
+BestSolution->UEcost: 697.769
+BestSolution->UnmetDemandCost: 0
+BestSolution->ConstructionCost: 40
+BestSolution->CapacityCost: 100
+BestSolution->UnsatisfiedDemandCost: 6.01337e-006
+BestSolution->BatterySwapCost: 0
+BestSolution->Reposition1: 40
+BestSolution->Reposition2: 0
+BestSolution->LossDemandCost: 78
+BestSolution->PenaltyCost: 0
+BestSolution->IncentiveCost: 200
+BestSolution->RentalFare: 192.808
+time = 262.394s
+100 200 20 5 10 1 15 1 2 5 10 8 
+
+BestSolution_NodeType: 
+-1 2 -1 
+-1 -1 3 
+-1 2 -1 
+-1 -1 3 
+
+BestSolution_NodeCapacity: 
+0 5 0 
+0 0 0 
+0 5 0 
+0 0 0 
+
+BestSolution_ObjectiveValue: 962.962
+BestSolution->UEcost: 697.769
+BestSolution->UnmetDemandCost: 0
+BestSolution->ConstructionCost: 40
+BestSolution->CapacityCost: 100
+BestSolution->UnsatisfiedDemandCost: 6.01337e-006
+BestSolution->BatterySwapCost: 0
+BestSolution->Reposition1: 40
+BestSolution->Reposition2: 0
+BestSolution->LossDemandCost: 78
+BestSolution->PenaltyCost: 0
+BestSolution->IncentiveCost: 200
+BestSolution->RentalFare: 192.808
+time = 261.443s
+100 300 20 5 10 1 15 1 2 5 10 8 
+
+BestSolution_NodeType: 
+-1 2 -1 
+-1 -1 3 
+-1 2 -1 
+-1 -1 3 
+
+BestSolution_NodeCapacity: 
+0 5 0 
+0 0 0 
+0 5 0 
+0 0 0 
+
+BestSolution_ObjectiveValue: 962.962
+BestSolution->UEcost: 697.769
+BestSolution->UnmetDemandCost: 0
+BestSolution->ConstructionCost: 40
+BestSolution->CapacityCost: 100
+BestSolution->UnsatisfiedDemandCost: 6.01337e-006
+BestSolution->BatterySwapCost: 0
+BestSolution->Reposition1: 40
+BestSolution->Reposition2: 0
+BestSolution->LossDemandCost: 78
+BestSolution->PenaltyCost: 0
+BestSolution->IncentiveCost: 200
+BestSolution->RentalFare: 192.808
+time = 260.888s
+100 400 20 5 10 1 15 1 2 5 10 8 
+
+BestSolution_NodeType: 
+-1 2 -1 
+-1 -1 3 
+-1 2 -1 
+-1 -1 3 
+
+BestSolution_NodeCapacity: 
+0 5 0 
+0 0 0 
+0 5 0 
+0 0 0 
+
+BestSolution_ObjectiveValue: 962.962
+BestSolution->UEcost: 697.769
+BestSolution->UnmetDemandCost: 0
+BestSolution->ConstructionCost: 40
+BestSolution->CapacityCost: 100
+BestSolution->UnsatisfiedDemandCost: 6.01337e-006
+BestSolution->BatterySwapCost: 0
+BestSolution->Reposition1: 40
+BestSolution->Reposition2: 0
+BestSolution->LossDemandCost: 78
+BestSolution->PenaltyCost: 0
+BestSolution->IncentiveCost: 200
+BestSolution->RentalFare: 192.808
+time = 261.199s
+100 500 20 5 10 1 15 1 2 5 10 8 
+
+BestSolution_NodeType: 
+-1 2 -1 
+-1 -1 3 
+-1 2 -1 
+-1 -1 3 
+
+BestSolution_NodeCapacity: 
+0 5 0 
+0 0 0 
+0 5 0 
+0 0 0 
+
+BestSolution_ObjectiveValue: 962.962
+BestSolution->UEcost: 697.769
+BestSolution->UnmetDemandCost: 0
+BestSolution->ConstructionCost: 40
+BestSolution->CapacityCost: 100
+BestSolution->UnsatisfiedDemandCost: 6.01337e-006
+BestSolution->BatterySwapCost: 0
+BestSolution->Reposition1: 40
+BestSolution->Reposition2: 0
+BestSolution->LossDemandCost: 78
+BestSolution->PenaltyCost: 0
+BestSolution->IncentiveCost: 200
+BestSolution->RentalFare: 192.808
+time = 261.336s
+100 600 20 5 10 1 15 1 2 5 10 8 
+
+BestSolution_NodeType: 
+-1 2 -1 
+-1 -1 3 
+-1 2 -1 
+-1 -1 3 
+
+BestSolution_NodeCapacity: 
+0 5 0 
+0 0 0 
+0 5 0 
+0 0 0 
+
+BestSolution_ObjectiveValue: 962.962
+BestSolution->UEcost: 697.769
+BestSolution->UnmetDemandCost: 0
+BestSolution->ConstructionCost: 40
+BestSolution->CapacityCost: 100
+BestSolution->UnsatisfiedDemandCost: 6.01337e-006
+BestSolution->BatterySwapCost: 0
+BestSolution->Reposition1: 40
+BestSolution->Reposition2: 0
+BestSolution->LossDemandCost: 78
+BestSolution->PenaltyCost: 0
+BestSolution->IncentiveCost: 200
+BestSolution->RentalFare: 192.808
+time = 260.636s
+100 700 20 5 10 1 15 1 2 5 10 8 
+
+BestSolution_NodeType: 
+-1 2 -1 
+-1 -1 3 
+-1 2 -1 
+-1 -1 3 
+
+BestSolution_NodeCapacity: 
+0 5 0 
+0 0 0 
+0 5 0 
+0 0 0 
+
+BestSolution_ObjectiveValue: 962.962
+BestSolution->UEcost: 697.769
+BestSolution->UnmetDemandCost: 0
+BestSolution->ConstructionCost: 40
+BestSolution->CapacityCost: 100
+BestSolution->UnsatisfiedDemandCost: 6.01337e-006
+BestSolution->BatterySwapCost: 0
+BestSolution->Reposition1: 40
+BestSolution->Reposition2: 0
+BestSolution->LossDemandCost: 78
+BestSolution->PenaltyCost: 0
+BestSolution->IncentiveCost: 200
+BestSolution->RentalFare: 192.808
+time = 260.647s
+100 800 20 5 10 1 15 1 2 5 10 8 
+
+BestSolution_NodeType: 
+-1 2 -1 
+-1 -1 3 
+-1 2 -1 
+-1 -1 3 
+
+BestSolution_NodeCapacity: 
+0 5 0 
+0 0 0 
+0 5 0 
+0 0 0 
+
+BestSolution_ObjectiveValue: 962.962
+BestSolution->UEcost: 697.769
+BestSolution->UnmetDemandCost: 0
+BestSolution->ConstructionCost: 40
+BestSolution->CapacityCost: 100
+BestSolution->UnsatisfiedDemandCost: 6.01337e-006
+BestSolution->BatterySwapCost: 0
+BestSolution->Reposition1: 40
+BestSolution->Reposition2: 0
+BestSolution->LossDemandCost: 78
+BestSolution->PenaltyCost: 0
+BestSolution->IncentiveCost: 200
+BestSolution->RentalFare: 192.808
+time = 261.018s
+100 900 20 5 10 1 15 1 2 5 10 8 
+
+BestSolution_NodeType: 
+-1 2 -1 
+-1 -1 3 
+-1 2 -1 
+-1 -1 3 
+
+BestSolution_NodeCapacity: 
+0 5 0 
+0 0 0 
+0 5 0 
+0 0 0 
+
+BestSolution_ObjectiveValue: 962.962
+BestSolution->UEcost: 697.769
+BestSolution->UnmetDemandCost: 0
+BestSolution->ConstructionCost: 40
+BestSolution->CapacityCost: 100
+BestSolution->UnsatisfiedDemandCost: 6.01337e-006
+BestSolution->BatterySwapCost: 0
+BestSolution->Reposition1: 40
+BestSolution->Reposition2: 0
+BestSolution->LossDemandCost: 78
+BestSolution->PenaltyCost: 0
+BestSolution->IncentiveCost: 200
+BestSolution->RentalFare: 192.808
+time = 260.644s
+100 1000 20 5 10 1 15 1 2 5 10 8 
+
+BestSolution_NodeType: 
+-1 2 -1 
+-1 -1 3 
+-1 2 -1 
+-1 -1 3 
+
+BestSolution_NodeCapacity: 
+0 5 0 
+0 0 0 
+0 5 0 
+0 0 0 
+
+BestSolution_ObjectiveValue: 962.962
+BestSolution->UEcost: 697.769
+BestSolution->UnmetDemandCost: 0
+BestSolution->ConstructionCost: 40
+BestSolution->CapacityCost: 100
+BestSolution->UnsatisfiedDemandCost: 6.01337e-006
+BestSolution->BatterySwapCost: 0
+BestSolution->Reposition1: 40
+BestSolution->Reposition2: 0
+BestSolution->LossDemandCost: 78
+BestSolution->PenaltyCost: 0
+BestSolution->IncentiveCost: 200
+BestSolution->RentalFare: 192.808
+time = 261.004s
+100 2000 20 5 10 1 15 1 2 5 10 8 
+
+BestSolution_NodeType: 
+-1 2 -1 
+-1 -1 3 
+-1 2 -1 
+-1 -1 3 
+
+BestSolution_NodeCapacity: 
+0 5 0 
+0 0 0 
+0 5 0 
+0 0 0 
+
+BestSolution_ObjectiveValue: 962.962
+BestSolution->UEcost: 697.769
+BestSolution->UnmetDemandCost: 0
+BestSolution->ConstructionCost: 40
+BestSolution->CapacityCost: 100
+BestSolution->UnsatisfiedDemandCost: 6.01337e-006
+BestSolution->BatterySwapCost: 0
+BestSolution->Reposition1: 40
+BestSolution->Reposition2: 0
+BestSolution->LossDemandCost: 78
+BestSolution->PenaltyCost: 0
+BestSolution->IncentiveCost: 200
+BestSolution->RentalFare: 192.808
+time = 261.056s
+100 3000 20 5 10 1 15 1 2 5 10 8 
+
+BestSolution_NodeType: 
+-1 2 -1 
+-1 -1 3 
+-1 2 -1 
+-1 -1 3 
+
+BestSolution_NodeCapacity: 
+0 5 0 
+0 0 0 
+0 5 0 
+0 0 0 
+
+BestSolution_ObjectiveValue: 962.962
+BestSolution->UEcost: 697.769
+BestSolution->UnmetDemandCost: 0
+BestSolution->ConstructionCost: 40
+BestSolution->CapacityCost: 100
+BestSolution->UnsatisfiedDemandCost: 6.01337e-006
+BestSolution->BatterySwapCost: 0
+BestSolution->Reposition1: 40
+BestSolution->Reposition2: 0
+BestSolution->LossDemandCost: 78
+BestSolution->PenaltyCost: 0
+BestSolution->IncentiveCost: 200
+BestSolution->RentalFare: 192.808
+time = 262.177s
+100 4000 20 5 10 1 15 1 2 5 10 8 
+
+BestSolution_NodeType: 
+-1 2 -1 
+-1 -1 3 
+-1 2 -1 
+-1 -1 3 
+
+BestSolution_NodeCapacity: 
+0 5 0 
+0 0 0 
+0 5 0 
+0 0 0 
+
+BestSolution_ObjectiveValue: 962.962
+BestSolution->UEcost: 697.769
+BestSolution->UnmetDemandCost: 0
+BestSolution->ConstructionCost: 40
+BestSolution->CapacityCost: 100
+BestSolution->UnsatisfiedDemandCost: 6.01337e-006
+BestSolution->BatterySwapCost: 0
+BestSolution->Reposition1: 40
+BestSolution->Reposition2: 0
+BestSolution->LossDemandCost: 78
+BestSolution->PenaltyCost: 0
+BestSolution->IncentiveCost: 200
+BestSolution->RentalFare: 192.808
+time = 261.439s
+100 5000 20 5 10 1 15 1 2 5 10 8 
+
+BestSolution_NodeType: 
+-1 2 -1 
+-1 -1 3 
+-1 2 -1 
+-1 -1 3 
+
+BestSolution_NodeCapacity: 
+0 5 0 
+0 0 0 
+0 5 0 
+0 0 0 
+
+BestSolution_ObjectiveValue: 962.962
+BestSolution->UEcost: 697.769
+BestSolution->UnmetDemandCost: 0
+BestSolution->ConstructionCost: 40
+BestSolution->CapacityCost: 100
+BestSolution->UnsatisfiedDemandCost: 6.01337e-006
+BestSolution->BatterySwapCost: 0
+BestSolution->Reposition1: 40
+BestSolution->Reposition2: 0
+BestSolution->LossDemandCost: 78
+BestSolution->PenaltyCost: 0
+BestSolution->IncentiveCost: 200
+BestSolution->RentalFare: 192.808
+time = 261.282s
+100 6000 20 5 10 1 15 1 2 5 10 8 
+
+BestSolution_NodeType: 
+-1 2 -1 
+-1 -1 3 
+-1 2 -1 
+-1 -1 3 
+
+BestSolution_NodeCapacity: 
+0 5 0 
+0 0 0 
+0 5 0 
+0 0 0 
+
+BestSolution_ObjectiveValue: 962.962
+BestSolution->UEcost: 697.769
+BestSolution->UnmetDemandCost: 0
+BestSolution->ConstructionCost: 40
+BestSolution->CapacityCost: 100
+BestSolution->UnsatisfiedDemandCost: 6.01337e-006
+BestSolution->BatterySwapCost: 0
+BestSolution->Reposition1: 40
+BestSolution->Reposition2: 0
+BestSolution->LossDemandCost: 78
+BestSolution->PenaltyCost: 0
+BestSolution->IncentiveCost: 200
+BestSolution->RentalFare: 192.808
+time = 260.788s
+100 7000 20 5 10 1 15 1 2 5 10 8 
+
+BestSolution_NodeType: 
+-1 2 -1 
+-1 -1 3 
+-1 2 -1 
+-1 -1 3 
+
+BestSolution_NodeCapacity: 
+0 5 0 
+0 0 0 
+0 5 0 
+0 0 0 
+
+BestSolution_ObjectiveValue: 962.962
+BestSolution->UEcost: 697.769
+BestSolution->UnmetDemandCost: 0
+BestSolution->ConstructionCost: 40
+BestSolution->CapacityCost: 100
+BestSolution->UnsatisfiedDemandCost: 6.01337e-006
+BestSolution->BatterySwapCost: 0
+BestSolution->Reposition1: 40
+BestSolution->Reposition2: 0
+BestSolution->LossDemandCost: 78
+BestSolution->PenaltyCost: 0
+BestSolution->IncentiveCost: 200
+BestSolution->RentalFare: 192.808
+time = 260.392s
+100 8000 20 5 10 1 15 1 2 5 10 8 
+
+BestSolution_NodeType: 
+-1 2 -1 
+-1 -1 3 
+-1 2 -1 
+-1 -1 3 
+
+BestSolution_NodeCapacity: 
+0 5 0 
+0 0 0 
+0 5 0 
+0 0 0 
+
+BestSolution_ObjectiveValue: 962.962
+BestSolution->UEcost: 697.769
+BestSolution->UnmetDemandCost: 0
+BestSolution->ConstructionCost: 40
+BestSolution->CapacityCost: 100
+BestSolution->UnsatisfiedDemandCost: 6.01337e-006
+BestSolution->BatterySwapCost: 0
+BestSolution->Reposition1: 40
+BestSolution->Reposition2: 0
+BestSolution->LossDemandCost: 78
+BestSolution->PenaltyCost: 0
+BestSolution->IncentiveCost: 200
+BestSolution->RentalFare: 192.808
+time = 260.696s
+100 9000 20 5 10 1 15 1 2 5 10 8 
+
+BestSolution_NodeType: 
+-1 2 -1 
+-1 -1 3 
+-1 2 -1 
+-1 -1 3 
+
+BestSolution_NodeCapacity: 
+0 5 0 
+0 0 0 
+0 5 0 
+0 0 0 
+
+BestSolution_ObjectiveValue: 962.962
+BestSolution->UEcost: 697.769
+BestSolution->UnmetDemandCost: 0
+BestSolution->ConstructionCost: 40
+BestSolution->CapacityCost: 100
+BestSolution->UnsatisfiedDemandCost: 6.01337e-006
+BestSolution->BatterySwapCost: 0
+BestSolution->Reposition1: 40
+BestSolution->Reposition2: 0
+BestSolution->LossDemandCost: 78
+BestSolution->PenaltyCost: 0
+BestSolution->IncentiveCost: 200
+BestSolution->RentalFare: 192.808
+time = 260.458s
+100 10000 20 5 10 1 15 1 2 5 10 8 
