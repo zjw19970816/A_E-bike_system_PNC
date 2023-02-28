@@ -810,3 +810,31 @@ BestSolution->IncentiveCost: 202.501
 BestSolution->RentalFare: 59.627
 time = 89.508s
 100 10 20 5 10 1 15 1 2 5 10 8 0.8 9 
+
+BestSolution_NodeType: 
+1 -1 -1 
+-1 2 -1 
+-1 -1 3 
+-1 2 -1 
+
+BestSolution_NodeCapacity: 
+5 0 0 
+0 5 0 
+0 0 0 
+0 5 0 
+
+BestSolution_ObjectiveValue: 844.974
+BestSolution->UEcost: 440.352
+BestSolution->UnmetDemandCost: 0
+BestSolution->ConstructionCost: 50
+BestSolution->CapacityCost: 125
+BestSolution->UnsatisfiedDemandCost: 0.0143619
+BestSolution->BatterySwapCost: 0
+BestSolution->Reposition1: 86.2144
+BestSolution->Reposition2: 0
+BestSolution->LossDemandCost: 73.9973
+BestSolution->PenaltyCost: 0
+BestSolution->IncentiveCost: 200
+BestSolution->RentalFare: 130.604
+time = 84.382s
+100 10 20 5 10 1 15 1 2 5 10 8 0.8 10 
