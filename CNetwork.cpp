@@ -1649,27 +1649,26 @@ void CNetwork::EnumerationProgram()
 	//m_Solution[40]->node_capacity_upper_level[4][0] = 5;
 	//RepairSolution(m_Solution);
 
-	//m_Solution[0]->node_type_upper_level[0][0] = 1;
-	//m_Solution[0]->node_type_upper_level[0][1] = -1;
-	//m_Solution[0]->node_type_upper_level[0][2] = -1;
+	m_Solution[0]->node_type_upper_level[0][0] = -1;
+	m_Solution[0]->node_type_upper_level[0][1] = -1;
+	m_Solution[0]->node_type_upper_level[0][2] = 3;
 
-	//m_Solution[0]->node_type_upper_level[1][0] = -1;
-	//m_Solution[0]->node_type_upper_level[1][1] = 2;
-	//m_Solution[0]->node_type_upper_level[1][2] = -1;
+	m_Solution[0]->node_type_upper_level[1][0] = -1;
+	m_Solution[0]->node_type_upper_level[1][1] = -1;
+	m_Solution[0]->node_type_upper_level[1][2] = 3;
 
-	//m_Solution[0]->node_type_upper_level[2][0] = 1;
-	//m_Solution[0]->node_type_upper_level[2][1] = 2;
-	//m_Solution[0]->node_type_upper_level[2][2] = -1;
+	m_Solution[0]->node_type_upper_level[2][0] = 1;
+	m_Solution[0]->node_type_upper_level[2][1] = -1;
+	m_Solution[0]->node_type_upper_level[2][2] = -1;
 
-	//m_Solution[0]->node_type_upper_level[3][0] = -1;
-	//m_Solution[0]->node_type_upper_level[3][1] = -1;
-	//m_Solution[0]->node_type_upper_level[3][2] = 3;
+	m_Solution[0]->node_type_upper_level[3][0] = -1;
+	m_Solution[0]->node_type_upper_level[3][1] = 2;
+	m_Solution[0]->node_type_upper_level[3][2] = -1;
 
-	//m_Solution[0]->node_capacity_upper_level[0][0] = 11;
-	//m_Solution[0]->node_capacity_upper_level[1][1] = 9;
-	//m_Solution[0]->node_capacity_upper_level[2][0] = 6;
-	//m_Solution[0]->node_capacity_upper_level[2][1] = 8;
-	//m_Solution[0]->node_capacity_upper_level[3][1] = 0;
+	m_Solution[0]->node_capacity_upper_level[0][0] = 0;
+	m_Solution[0]->node_capacity_upper_level[1][1] = 0;
+	m_Solution[0]->node_capacity_upper_level[2][0] = 5;
+	m_Solution[0]->node_capacity_upper_level[3][1] = 5;
 
 	//m_Solution[10]->node_type_upper_level[0][0] = -1;
 	//m_Solution[10]->node_type_upper_level[0][1] = -1;
@@ -2033,7 +2032,7 @@ void CNetwork::EnumerationProgram()
 			delete ANRouteFlow_K1;
 			RecordBest(sol, m_Solution);
 			////////////////////////////////////////UE////////////////////////////////////////
-
+			//cout << "UEGap: " << UEGap << endl;
 			//Update Capacity (armijio method, integer capacity)
 			m_Solution[sol]->node_capacity_upper_level_temp = m_Solution[sol]->node_capacity_upper_level;
 			for (int node = 0; node < m_nNode; node++)
