@@ -1649,26 +1649,27 @@ void CNetwork::EnumerationProgram()
 	//m_Solution[40]->node_capacity_upper_level[4][0] = 5;
 	//RepairSolution(m_Solution);
 
-	//m_Solution[0]->node_type_upper_level[0][0] = -1;
+	//m_Solution[0]->node_type_upper_level[0][0] = 1;
 	//m_Solution[0]->node_type_upper_level[0][1] = -1;
-	//m_Solution[0]->node_type_upper_level[0][2] = 3;
+	//m_Solution[0]->node_type_upper_level[0][2] = -1;
 
 	//m_Solution[0]->node_type_upper_level[1][0] = -1;
-	//m_Solution[0]->node_type_upper_level[1][1] = -1;
-	//m_Solution[0]->node_type_upper_level[1][2] = 3;
+	//m_Solution[0]->node_type_upper_level[1][1] = 2;
+	//m_Solution[0]->node_type_upper_level[1][2] = -1;
 
 	//m_Solution[0]->node_type_upper_level[2][0] = 1;
-	//m_Solution[0]->node_type_upper_level[2][1] = -1;
+	//m_Solution[0]->node_type_upper_level[2][1] = 2;
 	//m_Solution[0]->node_type_upper_level[2][2] = -1;
 
 	//m_Solution[0]->node_type_upper_level[3][0] = -1;
-	//m_Solution[0]->node_type_upper_level[3][1] = 2;
-	//m_Solution[0]->node_type_upper_level[3][2] = -1;
+	//m_Solution[0]->node_type_upper_level[3][1] = -1;
+	//m_Solution[0]->node_type_upper_level[3][2] = 3;
 
-	//m_Solution[0]->node_capacity_upper_level[0][0] = 0;
-	//m_Solution[0]->node_capacity_upper_level[1][0] = 0;
+	//m_Solution[0]->node_capacity_upper_level[0][0] = 11;
+	//m_Solution[0]->node_capacity_upper_level[1][1] = 9;
 	//m_Solution[0]->node_capacity_upper_level[2][0] = 6;
-	//m_Solution[0]->node_capacity_upper_level[3][1] = 9;
+	//m_Solution[0]->node_capacity_upper_level[2][1] = 8;
+	//m_Solution[0]->node_capacity_upper_level[3][1] = 0;
 
 	//m_Solution[10]->node_type_upper_level[0][0] = -1;
 	//m_Solution[10]->node_type_upper_level[0][1] = -1;
@@ -1739,7 +1740,7 @@ void CNetwork::EnumerationProgram()
 	//cout << "Solution: " << m_nSolution << endl;
 	//Lower-level
 	for (int sol = 0; sol < m_nSolution; sol++)
-	//for (int sol = 0; sol < 11; sol++)
+	//for (int sol = 0; sol < 1; sol++)
 	{
 
 		NodeType(sol, m_Solution); //根据初始生成的solution, 为每个node赋值
@@ -1831,7 +1832,7 @@ void CNetwork::EnumerationProgram()
 			RouteFlow_K1 = new double[m_nRoute];
 			ANRouteFlow = new double[m_nRoute];
 			ANRouteFlow_K1 = new double[m_nRoute];
-			beita = 0;
+			beita = 1;
 			for (int route = 0; route < m_nRoute; route++)
 			{
 				RouteFlow[route] = 0; // 初始化所有route流量为0
@@ -2063,7 +2064,7 @@ void CNetwork::EnumerationProgram()
 							RouteFlow_K1 = new double[m_nRoute];
 							ANRouteFlow = new double[m_nRoute];
 							ANRouteFlow_K1 = new double[m_nRoute];
-							beita = 0;
+							beita = 1;
 							for (int route = 0; route < m_nRoute; route++)
 							{
 								RouteFlow[route] = 0; // 初始化所有route流量为0
@@ -2285,7 +2286,7 @@ void CNetwork::EnumerationProgram()
 							RouteFlow_K1 = new double[m_nRoute];
 							ANRouteFlow = new double[m_nRoute];
 							ANRouteFlow_K1 = new double[m_nRoute];
-							beita = 0;
+							beita = 1;
 							for (int route = 0; route < m_nRoute; route++)
 							{
 								RouteFlow[route] = 0; // 初始化所有route流量为0
@@ -2500,7 +2501,7 @@ void CNetwork::EnumerationProgram()
 			RouteFlow_K1 = new double[m_nRoute];
 			ANRouteFlow = new double[m_nRoute];
 			ANRouteFlow_K1 = new double[m_nRoute];
-			beita = 0;
+			beita = 1;
 			for (int route = 0; route < m_nRoute; route++)
 			{
 				RouteFlow[route] = 0; // 初始化所有route流量为0
