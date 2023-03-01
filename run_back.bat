@@ -1,403 +1,200 @@
-.\output 10 10 20 5 10 1 15 1 2 5 10 8 > EnvironmantalPenalty.txt
-.\output 11 10 20 5 10 1 15 1 2 5 10 8 >> EnvironmantalPenalty.txt
-.\output 12 10 20 5 10 1 15 1 2 5 10 8 >> EnvironmantalPenalty.txt
-.\output 13 10 20 5 10 1 15 1 2 5 10 8 >> EnvironmantalPenalty.txt
-.\output 14 10 20 5 10 1 15 1 2 5 10 8 >> EnvironmantalPenalty.txt
-.\output 15 10 20 5 10 1 15 1 2 5 10 8 >> EnvironmantalPenalty.txt
-.\output 16 10 20 5 10 1 15 1 2 5 10 8 >> EnvironmantalPenalty.txt
-.\output 17 10 20 5 10 1 15 1 2 5 10 8 >> EnvironmantalPenalty.txt
-.\output 18 10 20 5 10 1 15 1 2 5 10 8 >> EnvironmantalPenalty.txt
-.\output 19 10 20 5 10 1 15 1 2 5 10 8 >> EnvironmantalPenalty.txt
-.\output 20 10 20 5 10 1 15 1 2 5 10 8 >> EnvironmantalPenalty.txt
-.\output 30 10 20 5 10 1 15 1 2 5 10 8 >> EnvironmantalPenalty.txt
-.\output 40 10 20 5 10 1 15 1 2 5 10 8 >> EnvironmantalPenalty.txt
-.\output 50 10 20 5 10 1 15 1 2 5 10 8 >> EnvironmantalPenalty.txt
-.\output 60 10 20 5 10 1 15 1 2 5 10 8 >> EnvironmantalPenalty.txt
-.\output 70 10 20 5 10 1 15 1 2 5 10 8 >> EnvironmantalPenalty.txt
-.\output 80 10 20 5 10 1 15 1 2 5 10 8 >> EnvironmantalPenalty.txt
-.\output 90 10 20 5 10 1 15 1 2 5 10 8 >> EnvironmantalPenalty.txt
-.\output 100 10 20 5 10 1 15 1 2 5 10 8 >> EnvironmantalPenalty.txt
-.\output 200 10 20 5 10 1 15 1 2 5 10 8 >> EnvironmantalPenalty.txt
-.\output 300 10 20 5 10 1 15 1 2 5 10 8 >> EnvironmantalPenalty.txt
-.\output 400 10 20 5 10 1 15 1 2 5 10 8 >> EnvironmantalPenalty.txt
-.\output 500 10 20 5 10 1 15 1 2 5 10 8 >> EnvironmantalPenalty.txt
-.\output 100 10 20 5 10 1 15 1 2 5 10 8 > ConstructionCost1.txt
-.\output 100 20 20 5 10 1 15 1 2 5 10 8 >> ConstructionCost1.txt
-.\output 100 30 20 5 10 1 15 1 2 5 10 8 >> ConstructionCost1.txt
-.\output 100 40 20 5 10 1 15 1 2 5 10 8 >> ConstructionCost1.txt
-.\output 100 50 20 5 10 1 15 1 2 5 10 8 >> ConstructionCost1.txt
-.\output 100 60 20 5 10 1 15 1 2 5 10 8 >> ConstructionCost1.txt
-.\output 100 70 20 5 10 1 15 1 2 5 10 8 >> ConstructionCost1.txt
-.\output 100 80 20 5 10 1 15 1 2 5 10 8 >> ConstructionCost1.txt
-.\output 100 90 20 5 10 1 15 1 2 5 10 8 >> ConstructionCost1.txt
-.\output 100 100 20 5 10 1 15 1 2 5 10 8 >> ConstructionCost1.txt
-.\output 100 200 20 5 10 1 15 1 2 5 10 8 >> ConstructionCost1.txt
-.\output 100 300 20 5 10 1 15 1 2 5 10 8 >> ConstructionCost1.txt
-.\output 100 400 20 5 10 1 15 1 2 5 10 8 >> ConstructionCost1.txt
-.\output 100 500 20 5 10 1 15 1 2 5 10 8 >> ConstructionCost1.txt
-.\output 100 600 20 5 10 1 15 1 2 5 10 8 >> ConstructionCost1.txt
-.\output 100 700 20 5 10 1 15 1 2 5 10 8 >> ConstructionCost1.txt
-.\output 100 800 20 5 10 1 15 1 2 5 10 8 >> ConstructionCost1.txt
-.\output 100 900 20 5 10 1 15 1 2 5 10 8 >> ConstructionCost1.txt
-.\output 100 1000 20 5 10 1 15 1 2 5 10 8 >> ConstructionCost1.txt
-.\output 100 2000 20 5 10 1 15 1 2 5 10 8 >> ConstructionCost1.txt
-.\output 100 3000 20 5 10 1 15 1 2 5 10 8 >> ConstructionCost1.txt
-.\output 100 4000 20 5 10 1 15 1 2 5 10 8 >> ConstructionCost1.txt
-.\output 100 5000 20 5 10 1 15 1 2 5 10 8 >> ConstructionCost1.txt
-.\output 100 6000 20 5 10 1 15 1 2 5 10 8 >> ConstructionCost1.txt
-.\output 100 7000 20 5 10 1 15 1 2 5 10 8 >> ConstructionCost1.txt
-.\output 100 8000 20 5 10 1 15 1 2 5 10 8 >> ConstructionCost1.txt
-.\output 100 9000 20 5 10 1 15 1 2 5 10 8 >> ConstructionCost1.txt
-.\output 100 10000 20 5 10 1 15 1 2 5 10 8 >> ConstructionCost1.txt
-.\output 100 10 20 5 10 1 15 1 2 5 10 8 > ConstructionCost2.txt
-.\output 100 10 20 5 10 1 15 1 2 5 10 8 >> ConstructionCost2.txt
-.\output 100 10 30 5 10 1 15 1 2 5 10 8 >> ConstructionCost2.txt
-.\output 100 10 40 5 10 1 15 1 2 5 10 8 >> ConstructionCost2.txt
-.\output 100 10 50 5 10 1 15 1 2 5 10 8 >> ConstructionCost2.txt
-.\output 100 10 60 5 10 1 15 1 2 5 10 8 >> ConstructionCost2.txt
-.\output 100 10 70 5 10 1 15 1 2 5 10 8 >> ConstructionCost2.txt
-.\output 100 10 80 5 10 1 15 1 2 5 10 8 >> ConstructionCost2.txt
-.\output 100 10 90 5 10 1 15 1 2 5 10 8 >> ConstructionCost2.txt
-.\output 100 10 100 5 10 1 15 1 2 5 10 8 >> ConstructionCost2.txt
-.\output 100 10 200 5 10 1 15 1 2 5 10 8 >> ConstructionCost2.txt
-.\output 100 10 300 5 10 1 15 1 2 5 10 8 >> ConstructionCost2.txt
-.\output 100 10 400 5 10 1 15 1 2 5 10 8 >> ConstructionCost2.txt
-.\output 100 10 500 5 10 1 15 1 2 5 10 8 >> ConstructionCost2.txt
-.\output 100 10 600 5 10 1 15 1 2 5 10 8 >> ConstructionCost2.txt
-.\output 100 10 700 5 10 1 15 1 2 5 10 8 >> ConstructionCost2.txt
-.\output 100 10 800 5 10 1 15 1 2 5 10 8 >> ConstructionCost2.txt
-.\output 100 10 900 5 10 1 15 1 2 5 10 8 >> ConstructionCost2.txt
-.\output 100 10 1000 5 10 1 15 1 2 5 10 8 >> ConstructionCost2.txt
-.\output 100 10 2000 5 10 1 15 1 2 5 10 8 >> ConstructionCost2.txt
-.\output 100 10 3000 5 10 1 15 1 2 5 10 8 >> ConstructionCost2.txt
-.\output 100 10 4000 5 10 1 15 1 2 5 10 8 >> ConstructionCost2.txt
-.\output 100 10 5000 5 10 1 15 1 2 5 10 8 >> ConstructionCost2.txt
-.\output 100 10 6000 5 10 1 15 1 2 5 10 8 >> ConstructionCost2.txt
-.\output 100 10 7000 5 10 1 15 1 2 5 10 8 >> ConstructionCost2.txt
-.\output 100 10 8000 5 10 1 15 1 2 5 10 8 >> ConstructionCost2.txt
-.\output 100 10 9000 5 10 1 15 1 2 5 10 8 >> ConstructionCost2.txt
-.\output 100 10 10000 5 10 1 15 1 2 5 10 8 >> ConstructionCost2.txt
-.\output 100 10 20 5 10 1 15 1 2 5 10 8 > ConstructionCost3.txt
-.\output 100 15 30 5 10 1 15 1 2 5 10 8 >> ConstructionCost3.txt
-.\output 100 20 40 5 10 1 15 1 2 5 10 8 >> ConstructionCost3.txt
-.\output 100 25 50 5 10 1 15 1 2 5 10 8 >> ConstructionCost3.txt
-.\output 100 30 60 5 10 1 15 1 2 5 10 8 >> ConstructionCost3.txt
-.\output 100 45 70 5 10 1 15 1 2 5 10 8 >> ConstructionCost3.txt
-.\output 100 40 80 5 10 1 15 1 2 5 10 8 >> ConstructionCost3.txt
-.\output 100 45 90 5 10 1 15 1 2 5 10 8 >> ConstructionCost3.txt
-.\output 100 50 100 5 10 1 15 1 2 5 10 8 >> ConstructionCost3.txt
-.\output 100 100 200 5 10 1 15 1 2 5 10 8 >> ConstructionCost3.txt
-.\output 100 150 300 5 10 1 15 1 2 5 10 8 >> ConstructionCost3.txt
-.\output 100 200 400 5 10 1 15 1 2 5 10 8 >> ConstructionCost3.txt
-.\output 100 250 500 5 10 1 15 1 2 5 10 8 >> ConstructionCost3.txt
-.\output 100 300 600 5 10 1 15 1 2 5 10 8 >> ConstructionCost3.txt
-.\output 100 450 700 5 10 1 15 1 2 5 10 8 >> ConstructionCost3.txt
-.\output 100 400 800 5 10 1 15 1 2 5 10 8 >> ConstructionCost3.txt
-.\output 100 450 900 5 10 1 15 1 2 5 10 8 >> ConstructionCost3.txt
-.\output 100 500 1000 5 10 1 15 1 2 5 10 8 >> ConstructionCost3.txt
-.\output 100 1000 2000 5 10 1 15 1 2 5 10 8 >> ConstructionCost3.txt
-.\output 100 1500 3000 5 10 1 15 1 2 5 10 8 >> ConstructionCost3.txt
-.\output 100 2000 4000 5 10 1 15 1 2 5 10 8 >> ConstructionCost3.txt
-.\output 100 2500 5000 5 10 1 15 1 2 5 10 8 >> ConstructionCost3.txt
-.\output 100 3000 6000 5 10 1 15 1 2 5 10 8 >> ConstructionCost3.txt
-.\output 100 3500 7000 5 10 1 15 1 2 5 10 8 >> ConstructionCost3.txt
-.\output 100 4000 8000 5 10 1 15 1 2 5 10 8 >> ConstructionCost3.txt
-.\output 100 4500 9000 5 10 1 15 1 2 5 10 8 >> ConstructionCost3.txt
-.\output 100 5000 10000 5 10 1 15 1 2 5 10 8 >> ConstructionCost3.txt
-.\output 100 10 20 0 10 1 15 1 2 5 10 8 > UnitCapacityCost1.txt
-.\output 100 10 20 1 10 1 15 1 2 5 10 8 >> UnitCapacityCost1.txt
-.\output 100 10 20 2 10 1 15 1 2 5 10 8 >> UnitCapacityCost1.txt
-.\output 100 10 20 3 10 1 15 1 2 5 10 8 >> UnitCapacityCost1.txt
-.\output 100 10 20 4 10 1 15 1 2 5 10 8 >> UnitCapacityCost1.txt
-.\output 100 10 20 5 10 1 15 1 2 5 10 8 >> UnitCapacityCost1.txt
-.\output 100 10 20 6 10 1 15 1 2 5 10 8 >> UnitCapacityCost1.txt
-.\output 100 10 20 7 10 1 15 1 2 5 10 8 >> UnitCapacityCost1.txt
-.\output 100 10 20 8 10 1 15 1 2 5 10 8 >> UnitCapacityCost1.txt
-.\output 100 10 20 9 10 1 15 1 2 5 10 8 >> UnitCapacityCost1.txt
-.\output 100 10 20 10 10 1 15 1 2 5 10 8 >> UnitCapacityCost1.txt
-.\output 100 10 20 20 10 1 15 1 2 5 10 8 >> UnitCapacityCost1.txt
-.\output 100 10 20 30 10 1 15 1 2 5 10 8 >> UnitCapacityCost1.txt
-.\output 100 10 20 40 10 1 15 1 2 5 10 8 >> UnitCapacityCost1.txt
-.\output 100 10 20 50 10 1 15 1 2 5 10 8 >> UnitCapacityCost1.txt
-.\output 100 10 20 60 10 1 15 1 2 5 10 8 >> UnitCapacityCost1.txt
-.\output 100 10 20 70 10 1 15 1 2 5 10 8 >> UnitCapacityCost1.txt
-.\output 100 10 20 80 10 1 15 1 2 5 10 8 >> UnitCapacityCost1.txt
-.\output 100 10 20 90 10 1 15 1 2 5 10 8 >> UnitCapacityCost1.txt
-.\output 100 10 20 100 10 1 15 1 2 5 10 8 >> UnitCapacityCost1.txt
-.\output 100 10 20 200 10 1 15 1 2 5 10 8 >> UnitCapacityCost1.txt
-.\output 100 10 20 300 10 1 15 1 2 5 10 8 >> UnitCapacityCost1.txt
-.\output 100 10 20 400 10 1 15 1 2 5 10 8 >> UnitCapacityCost1.txt
-.\output 100 10 20 500 10 1 15 1 2 5 10 8 >> UnitCapacityCost1.txt
-.\output 100 10 20 600 10 1 15 1 2 5 10 8 >> UnitCapacityCost1.txt
-.\output 100 10 20 700 10 1 15 1 2 5 10 8 >> UnitCapacityCost1.txt
-.\output 100 10 20 800 10 1 15 1 2 5 10 8 >> UnitCapacityCost1.txt
-.\output 100 10 20 900 10 1 15 1 2 5 10 8 >> UnitCapacityCost1.txt
-.\output 100 10 20 1000 10 1 15 1 2 5 10 8 >> UnitCapacityCost1.txt
-.\output 100 10 20 2000 10 1 15 1 2 5 10 8 >> UnitCapacityCost1.txt
-.\output 100 10 20 3000 10 1 15 1 2 5 10 8 >> UnitCapacityCost1.txt
-.\output 100 10 20 4000 10 1 15 1 2 5 10 8 >> UnitCapacityCost1.txt
-.\output 100 10 20 5000 10 1 15 1 2 5 10 8 >> UnitCapacityCost1.txt
-.\output 100 10 20 5 0 1 15 1 2 5 10 8 > UnitCapacityCost2.txt
-.\output 100 10 20 5 1 1 15 1 2 5 10 8 >> UnitCapacityCost2.txt
-.\output 100 10 20 5 2 1 15 1 2 5 10 8 >> UnitCapacityCost2.txt
-.\output 100 10 20 5 3 1 15 1 2 5 10 8 >> UnitCapacityCost2.txt
-.\output 100 10 20 5 4 1 15 1 2 5 10 8 >> UnitCapacityCost2.txt
-.\output 100 10 20 5 5 1 15 1 2 5 10 8 >> UnitCapacityCost2.txt
-.\output 100 10 20 5 6 1 15 1 2 5 10 8 >> UnitCapacityCost2.txt
-.\output 100 10 20 5 7 1 15 1 2 5 10 8 >> UnitCapacityCost2.txt
-.\output 100 10 20 5 8 1 15 1 2 5 10 8 >> UnitCapacityCost2.txt
-.\output 100 10 20 5 9 1 15 1 2 5 10 8 >> UnitCapacityCost2.txt
-.\output 100 10 20 5 10 1 15 1 2 5 10 8 >> UnitCapacityCost2.txt
-.\output 100 10 20 5 20 1 15 1 2 5 10 8 >> UnitCapacityCost2.txt
-.\output 100 10 20 5 30 1 15 1 2 5 10 8 >> UnitCapacityCost2.txt
-.\output 100 10 20 5 40 1 15 1 2 5 10 8 >> UnitCapacityCost2.txt
-.\output 100 10 20 5 50 1 15 1 2 5 10 8 >> UnitCapacityCost2.txt
-.\output 100 10 20 5 60 1 15 1 2 5 10 8 >> UnitCapacityCost2.txt
-.\output 100 10 20 5 70 1 15 1 2 5 10 8 >> UnitCapacityCost2.txt
-.\output 100 10 20 5 80 1 15 1 2 5 10 8 >> UnitCapacityCost2.txt
-.\output 100 10 20 5 90 1 15 1 2 5 10 8 >> UnitCapacityCost2.txt
-.\output 100 10 20 5 100 1 15 1 2 5 10 8 >> UnitCapacityCost2.txt
-.\output 100 10 20 5 200 1 15 1 2 5 10 8 >> UnitCapacityCost2.txt
-.\output 100 10 20 5 300 1 15 1 2 5 10 8 >> UnitCapacityCost2.txt
-.\output 100 10 20 5 400 1 15 1 2 5 10 8 >> UnitCapacityCost2.txt
-.\output 100 10 20 5 500 1 15 1 2 5 10 8 >> UnitCapacityCost2.txt
-.\output 100 10 20 5 600 1 15 1 2 5 10 8 >> UnitCapacityCost2.txt
-.\output 100 10 20 5 700 1 15 1 2 5 10 8 >> UnitCapacityCost2.txt
-.\output 100 10 20 5 800 1 15 1 2 5 10 8 >> UnitCapacityCost2.txt
-.\output 100 10 20 5 900 1 15 1 2 5 10 8 >> UnitCapacityCost2.txt
-.\output 100 10 20 5 1000 1 15 1 2 5 10 8 >> UnitCapacityCost2.txt
-.\output 100 10 20 5 2000 1 15 1 2 5 10 8 >> UnitCapacityCost2.txt
-.\output 100 10 20 5 3000 1 15 1 2 5 10 8 >> UnitCapacityCost2.txt
-.\output 100 10 20 5 4000 1 15 1 2 5 10 8 >> UnitCapacityCost2.txt
-.\output 100 10 20 5 5000 1 15 1 2 5 10 8 >> UnitCapacityCost2.txt
-.\output 100 10 20 5 6000 1 15 1 2 5 10 8 >> UnitCapacityCost2.txt
-.\output 100 10 20 5 7000 1 15 1 2 5 10 8 >> UnitCapacityCost2.txt
-.\output 100 10 20 5 8000 1 15 1 2 5 10 8 >> UnitCapacityCost2.txt
-.\output 100 10 20 5 9000 1 15 1 2 5 10 8 >> UnitCapacityCost2.txt
-.\output 100 10 20 5 10000 1 15 1 2 5 10 8 >> UnitCapacityCost2.txt
-.\output 100 10 20 5 10 1 15 1 2 5 10 8 > UnitCapacityCost3.txt
-.\output 100 10 20 10 20 1 15 1 2 5 10 8 >> UnitCapacityCost3.txt
-.\output 100 10 20 15 30 1 15 1 2 5 10 8 >> UnitCapacityCost3.txt
-.\output 100 10 20 20 40 1 15 1 2 5 10 8 >> UnitCapacityCost3.txt
-.\output 100 10 20 25 50 1 15 1 2 5 10 8 >> UnitCapacityCost3.txt
-.\output 100 10 20 30 60 1 15 1 2 5 10 8 >> UnitCapacityCost3.txt
-.\output 100 10 20 35 70 1 15 1 2 5 10 8 >> UnitCapacityCost3.txt
-.\output 100 10 20 40 80 1 15 1 2 5 10 8 >> UnitCapacityCost3.txt
-.\output 100 10 20 45 90 1 15 1 2 5 10 8 >> UnitCapacityCost3.txt
-.\output 100 10 20 50 100 1 15 1 2 5 10 8 >> UnitCapacityCost3.txt
-.\output 100 10 20 100 200 1 15 1 2 5 10 8 >> UnitCapacityCost3.txt
-.\output 100 10 20 150 300 1 15 1 2 5 10 8 >> UnitCapacityCost3.txt
-.\output 100 10 20 200 400 1 15 1 2 5 10 8 >> UnitCapacityCost3.txt
-.\output 100 10 20 250 500 1 15 1 2 5 10 8 >> UnitCapacityCost3.txt
-.\output 100 10 20 300 600 1 15 1 2 5 10 8 >> UnitCapacityCost3.txt
-.\output 100 10 20 350 700 1 15 1 2 5 10 8 >> UnitCapacityCost3.txt
-.\output 100 10 20 400 800 1 15 1 2 5 10 8 >> UnitCapacityCost3.txt
-.\output 100 10 20 450 900 1 15 1 2 5 10 8 >> UnitCapacityCost3.txt
-.\output 100 10 20 500 1000 1 15 1 2 5 10 8 >> UnitCapacityCost3.txt
-.\output 100 10 20 1000 2000 1 15 1 2 5 10 8 >> UnitCapacityCost3.txt
-.\output 100 10 20 1500 3000 1 15 1 2 5 10 8 >> UnitCapacityCost3.txt
-.\output 100 10 20 2000 4000 1 15 1 2 5 10 8 >> UnitCapacityCost3.txt
-.\output 100 10 20 2500 5000 1 15 1 2 5 10 8 >> UnitCapacityCost3.txt
-.\output 100 10 20 3000 6000 1 15 1 2 5 10 8 >> UnitCapacityCost3.txt
-.\output 100 10 20 3500 7000 1 15 1 2 5 10 8 >> UnitCapacityCost3.txt
-.\output 100 10 20 4000 8000 1 15 1 2 5 10 8 >> UnitCapacityCost3.txt
-.\output 100 10 20 4500 9000 1 15 1 2 5 10 8 >> UnitCapacityCost3.txt
-.\output 100 10 20 5000 10000 1 15 1 2 5 10 8 >> UnitCapacityCost3.txt
-.\output 100 10 20 5 10 0 15 1 2 5 10 8 > Unsatified.txt
-.\output 100 10 20 5 10 0.001 15 1 2 5 10 8 >> Unsatified.txt
-.\output 100 10 20 5 10 0.01 15 1 2 5 10 8 >> Unsatified.txt
-.\output 100 10 20 5 10 0.1 15 1 2 5 10 8 >> Unsatified.txt
-.\output 100 10 20 5 10 1 15 1 2 5 10 8 >> Unsatified.txt
-.\output 100 10 20 5 10 2 15 1 2 5 10 8 >> Unsatified.txt
-.\output 100 10 20 5 10 3 15 1 2 5 10 8 >> Unsatified.txt
-.\output 100 10 20 5 10 4 15 1 2 5 10 8 >> Unsatified.txt
-.\output 100 10 20 5 10 5 15 1 2 5 10 8 >> Unsatified.txt
-.\output 100 10 20 5 10 6 15 1 2 5 10 8 >> Unsatified.txt
-.\output 100 10 20 5 10 7 15 1 2 5 10 8 >> Unsatified.txt
-.\output 100 10 20 5 10 8 15 1 2 5 10 8 >> Unsatified.txt
-.\output 100 10 20 5 10 9 15 1 2 5 10 8 >> Unsatified.txt
-.\output 100 10 20 5 10 10 15 1 2 5 10 8 >> Unsatified.txt
-.\output 100 10 20 5 10 20 15 1 2 5 10 8 >> Unsatified.txt
-.\output 100 10 20 5 10 30 15 1 2 5 10 8 >> Unsatified.txt
-.\output 100 10 20 5 10 40 15 1 2 5 10 8 >> Unsatified.txt
-.\output 100 10 20 5 10 50 15 1 2 5 10 8 >> Unsatified.txt
-.\output 100 10 20 5 10 60 15 1 2 5 10 8 >> Unsatified.txt
-.\output 100 10 20 5 10 70 15 1 2 5 10 8 >> Unsatified.txt
-.\output 100 10 20 5 10 80 15 1 2 5 10 8 >> Unsatified.txt
-.\output 100 10 20 5 10 90 15 1 2 5 10 8 >> Unsatified.txt
-.\output 100 10 20 5 10 100 15 1 2 5 10 8 >> Unsatified.txt
-.\output 100 10 20 5 10 1 0 1 2 5 10 8 > BatterySwap.txt
-.\output 100 10 20 5 10 1 1 1 2 5 10 8 >> BatterySwap.txt
-.\output 100 10 20 5 10 1 2 1 2 5 10 8 >> BatterySwap.txt
-.\output 100 10 20 5 10 1 3 1 2 5 10 8 >> BatterySwap.txt
-.\output 100 10 20 5 10 1 4 1 2 5 10 8 >> BatterySwap.txt
-.\output 100 10 20 5 10 1 5 1 2 5 10 8 >> BatterySwap.txt
-.\output 100 10 20 5 10 1 6 1 2 5 10 8 >> BatterySwap.txt
-.\output 100 10 20 5 10 1 7 1 2 5 10 8 >> BatterySwap.txt
-.\output 100 10 20 5 10 1 8 1 2 5 10 8 >> BatterySwap.txt
-.\output 100 10 20 5 10 1 9 1 2 5 10 8 >> BatterySwap.txt
-.\output 100 10 20 5 10 1 10 1 2 5 10 8 >> BatterySwap.txt
-.\output 100 10 20 5 10 1 20 1 2 5 10 8 >> BatterySwap.txt
-.\output 100 10 20 5 10 1 30 1 2 5 10 8 >> BatterySwap.txt
-.\output 100 10 20 5 10 1 40 1 2 5 10 8 >> BatterySwap.txt
-.\output 100 10 20 5 10 1 50 1 2 5 10 8 >> BatterySwap.txt
-.\output 100 10 20 5 10 1 60 1 2 5 10 8 >> BatterySwap.txt
-.\output 100 10 20 5 10 1 70 1 2 5 10 8 >> BatterySwap.txt
-.\output 100 10 20 5 10 1 80 1 2 5 10 8 >> BatterySwap.txt
-.\output 100 10 20 5 10 1 90 1 2 5 10 8 >> BatterySwap.txt
-.\output 100 10 20 5 10 1 100 1 2 5 10 8 >> BatterySwap.txt
-.\output 100 10 20 5 10 1 200 1 2 5 10 8 >> BatterySwap.txt
-.\output 100 10 20 5 10 1 300 1 2 5 10 8 >> BatterySwap.txt
-.\output 100 10 20 5 10 1 400 1 2 5 10 8 >> BatterySwap.txt
-.\output 100 10 20 5 10 1 500 1 2 5 10 8 >> BatterySwap.txt
-.\output 100 10 20 5 10 1 600 1 2 5 10 8 >> BatterySwap.txt
-.\output 100 10 20 5 10 1 700 1 2 5 10 8 >> BatterySwap.txt
-.\output 100 10 20 5 10 1 800 1 2 5 10 8 >> BatterySwap.txt
-.\output 100 10 20 5 10 1 900 1 2 5 10 8 >> BatterySwap.txt
-.\output 100 10 20 5 10 1 1000 1 2 5 10 8 >> BatterySwap.txt
-.\output 100 10 20 5 10 1 15 0 2 5 10 8 > Relocation1.txt
-.\output 100 10 20 5 10 1 15 0.001 2 5 10 8 >> Relocation1.txt
-.\output 100 10 20 5 10 1 15 0.01 2 5 10 8 >> Relocation1.txt
-.\output 100 10 20 5 10 1 15 0.1 2 5 10 8 >> Relocation1.txt
-.\output 100 10 20 5 10 1 15 1 2 5 10 8 >> Relocation1.txt
-.\output 100 10 20 5 10 1 15 2 2 5 10 8 >> Relocation1.txt
-.\output 100 10 20 5 10 1 15 3 2 5 10 8 >> Relocation1.txt
-.\output 100 10 20 5 10 1 15 4 2 5 10 8 >> Relocation1.txt
-.\output 100 10 20 5 10 1 15 5 2 5 10 8 >> Relocation1.txt
-.\output 100 10 20 5 10 1 15 6 2 5 10 8 >> Relocation1.txt
-.\output 100 10 20 5 10 1 15 7 2 5 10 8 >> Relocation1.txt
-.\output 100 10 20 5 10 1 15 8 2 5 10 8 >> Relocation1.txt
-.\output 100 10 20 5 10 1 15 9 2 5 10 8 >> Relocation1.txt
-.\output 100 10 20 5 10 1 15 10 2 5 10 8 >> Relocation1.txt
-.\output 100 10 20 5 10 1 15 20 2 5 10 8 >> Relocation1.txt
-.\output 100 10 20 5 10 1 15 30 2 5 10 8 >> Relocation1.txt
-.\output 100 10 20 5 10 1 15 40 2 5 10 8 >> Relocation1.txt
-.\output 100 10 20 5 10 1 15 50 2 5 10 8 >> Relocation1.txt
-.\output 100 10 20 5 10 1 15 60 2 5 10 8 >> Relocation1.txt
-.\output 100 10 20 5 10 1 15 70 2 5 10 8 >> Relocation1.txt
-.\output 100 10 20 5 10 1 15 80 2 5 10 8 >> Relocation1.txt
-.\output 100 10 20 5 10 1 15 90 2 5 10 8 >> Relocation1.txt
-.\output 100 10 20 5 10 1 15 100 2 5 10 8 >> Relocation1.txt
-.\output 100 10 20 5 10 1 15 200 2 5 10 8 >> Relocation1.txt
-.\output 100 10 20 5 10 1 15 300 2 5 10 8 >> Relocation1.txt
-.\output 100 10 20 5 10 1 15 400 2 5 10 8 >> Relocation1.txt
-.\output 100 10 20 5 10 1 15 500 2 5 10 8 >> Relocation1.txt
-.\output 100 10 20 5 10 1 15 600 2 5 10 8 >> Relocation1.txt
-.\output 100 10 20 5 10 1 15 700 2 5 10 8 >> Relocation1.txt
-.\output 100 10 20 5 10 1 15 800 2 5 10 8 >> Relocation1.txt
-.\output 100 10 20 5 10 1 15 900 2 5 10 8 >> Relocation1.txt
-.\output 100 10 20 5 10 1 15 1000 2 5 10 8 >> Relocation1.txt
-.\output 100 10 20 5 10 1 15 1 0 5 10 8 > Relocation2.txt
-.\output 100 10 20 5 10 1 15 1 0.001 5 10 8 >> Relocation2.txt
-.\output 100 10 20 5 10 1 15 1 0.01 5 10 8 >> Relocation2.txt
-.\output 100 10 20 5 10 1 15 1 0.1 5 10 8 >> Relocation2.txt
-.\output 100 10 20 5 10 1 15 1 1 5 10 8 >> Relocation2.txt
-.\output 100 10 20 5 10 1 15 1 2 5 10 8 >> Relocation2.txt
-.\output 100 10 20 5 10 1 15 1 3 5 10 8 >> Relocation2.txt
-.\output 100 10 20 5 10 1 15 1 4 5 10 8 >> Relocation2.txt
-.\output 100 10 20 5 10 1 15 1 5 5 10 8 >> Relocation2.txt
-.\output 100 10 20 5 10 1 15 1 6 5 10 8 >> Relocation2.txt
-.\output 100 10 20 5 10 1 15 1 7 5 10 8 >> Relocation2.txt
-.\output 100 10 20 5 10 1 15 1 8 5 10 8 >> Relocation2.txt
-.\output 100 10 20 5 10 1 15 1 9 5 10 8 >> Relocation2.txt
-.\output 100 10 20 5 10 1 15 1 10 5 10 8 >> Relocation2.txt
-.\output 100 10 20 5 10 1 15 1 20 5 10 8 >> Relocation2.txt
-.\output 100 10 20 5 10 1 15 1 30 5 10 8 >> Relocation2.txt
-.\output 100 10 20 5 10 1 15 1 40 5 10 8 >> Relocation2.txt
-.\output 100 10 20 5 10 1 15 1 50 5 10 8 >> Relocation2.txt
-.\output 100 10 20 5 10 1 15 1 60 5 10 8 >> Relocation2.txt
-.\output 100 10 20 5 10 1 15 1 70 5 10 8 >> Relocation2.txt
-.\output 100 10 20 5 10 1 15 1 80 5 10 8 >> Relocation2.txt
-.\output 100 10 20 5 10 1 15 1 90 5 10 8 >> Relocation2.txt
-.\output 100 10 20 5 10 1 15 1 100 5 10 8 >> Relocation2.txt
-.\output 100 10 20 5 10 1 15 1 200 5 10 8 >> Relocation2.txt
-.\output 100 10 20 5 10 1 15 1 300 5 10 8 >> Relocation2.txt
-.\output 100 10 20 5 10 1 15 1 400 5 10 8 >> Relocation2.txt
-.\output 100 10 20 5 10 1 15 1 500 5 10 8 >> Relocation2.txt
-.\output 100 10 20 5 10 1 15 1 600 5 10 8 >> Relocation2.txt
-.\output 100 10 20 5 10 1 15 1 700 5 10 8 >> Relocation2.txt
-.\output 100 10 20 5 10 1 15 1 800 5 10 8 >> Relocation2.txt
-.\output 100 10 20 5 10 1 15 1 900 5 10 8 >> Relocation2.txt
-.\output 100 10 20 5 10 1 15 1 1000 5 10 8 >> Relocation2.txt
-.\output 100 10 20 5 10 1 15 1 2000 5 10 8 >> Relocation2.txt
-.\output 100 10 20 5 10 1 15 1 2 5 10 8 > Relocation3.txt
-.\output 100 10 20 5 10 1 15 2 4 5 10 8 >> Relocation3.txt
-.\output 100 10 20 5 10 1 15 3 6 5 10 8 >> Relocation3.txt
-.\output 100 10 20 5 10 1 15 4 8 5 10 8 >> Relocation3.txt
-.\output 100 10 20 5 10 1 15 5 10 5 10 8 >> Relocation3.txt
-.\output 100 10 20 5 10 1 15 10 20 5 10 8 >> Relocation3.txt
-.\output 100 10 20 5 10 1 15 15 30 5 10 8 >> Relocation3.txt
-.\output 100 10 20 5 10 1 15 20 40 5 10 8 >> Relocation3.txt
-.\output 100 10 20 5 10 1 15 25 50 5 10 8 >> Relocation3.txt
-.\output 100 10 20 5 10 1 15 30 60 5 10 8 >> Relocation3.txt
-.\output 100 10 20 5 10 1 15 35 70 5 10 8 >> Relocation3.txt
-.\output 100 10 20 5 10 1 15 40 80 5 10 8 >> Relocation3.txt
-.\output 100 10 20 5 10 1 15 45 90 5 10 8 >> Relocation3.txt
-.\output 100 10 20 5 10 1 15 50 100 5 10 8 >> Relocation3.txt
-.\output 100 10 20 5 10 1 15 100 200 5 10 8 >> Relocation3.txt
-.\output 100 10 20 5 10 1 15 150 300 5 10 8 >> Relocation3.txt
-.\output 100 10 20 5 10 1 15 200 400 5 10 8 >> Relocation3.txt
-.\output 100 10 20 5 10 1 15 250 500 5 10 8 >> Relocation3.txt
-.\output 100 10 20 5 10 1 15 300 600 5 10 8 >> Relocation3.txt
-.\output 100 10 20 5 10 1 15 350 700 5 10 8 >> Relocation3.txt
-.\output 100 10 20 5 10 1 15 400 800 5 10 8 >> Relocation3.txt
-.\output 100 10 20 5 10 1 15 450 900 5 10 8 >> Relocation3.txt
-.\output 100 10 20 5 10 1 15 500 1000 5 10 8 >> Relocation3.txt
-.\output 100 10 20 5 10 1 15 1 2 0 10 8 > Incentive.txt
-.\output 100 10 20 5 10 1 15 1 2 1 10 8 >> Incentive.txt
-.\output 100 10 20 5 10 1 15 1 2 2 10 8 >> Incentive.txt
-.\output 100 10 20 5 10 1 15 1 2 3 10 8 >> Incentive.txt
-.\output 100 10 20 5 10 1 15 1 2 4 10 8 >> Incentive.txt
-.\output 100 10 20 5 10 1 15 1 2 5 10 8 >> Incentive.txt
-.\output 100 10 20 5 10 1 15 1 2 6 10 8 >> Incentive.txt
-.\output 100 10 20 5 10 1 15 1 2 7 10 8 >> Incentive.txt
-.\output 100 10 20 5 10 1 15 1 2 8 10 8 >> Incentive.txt
-.\output 100 10 20 5 10 1 15 1 2 9 10 8 >> Incentive.txt
-.\output 100 10 20 5 10 1 15 1 2 10 10 8 >> Incentive.txt
-.\output 100 10 20 5 10 1 15 1 2 20 10 8 >> Incentive.txt
-.\output 100 10 20 5 10 1 15 1 2 30 10 8 >> Incentive.txt
-.\output 100 10 20 5 10 1 15 1 2 40 10 8 >> Incentive.txt
-.\output 100 10 20 5 10 1 15 1 2 50 10 8 >> Incentive.txt
-.\output 100 10 20 5 10 1 15 1 2 60 10 8 >> Incentive.txt
-.\output 100 10 20 5 10 1 15 1 2 70 10 8 >> Incentive.txt
-.\output 100 10 20 5 10 1 15 1 2 80 10 8 >> Incentive.txt
-.\output 100 10 20 5 10 1 15 1 2 90 10 8 >> Incentive.txt
-.\output 100 10 20 5 10 1 15 1 2 100 10 8 >> Incentive.txt
-.\output 100 10 20 5 10 1 15 1 2 200 10 8 >> Incentive.txt
-.\output 100 10 20 5 10 1 15 1 2 300 10 8 >> Incentive.txt
-.\output 100 10 20 5 10 1 15 1 2 400 10 8 >> Incentive.txt
-.\output 100 10 20 5 10 1 15 1 2 500 10 8 >> Incentive.txt
-.\output 100 10 20 5 10 1 15 1 2 600 10 8 >> Incentive.txt
-.\output 100 10 20 5 10 1 15 1 2 700 10 8 >> Incentive.txt
-.\output 100 10 20 5 10 1 15 1 2 800 10 8 >> Incentive.txt
-.\output 100 10 20 5 10 1 15 1 2 900 10 8 >> Incentive.txt
-.\output 100 10 20 5 10 1 15 1 2 1000 10 8 >> Incentive.txt
-.\output 100 10 20 5 10 1 15 1 2 5 0 8 > Penalty.txt
-.\output 100 10 20 5 10 1 15 1 2 5 1 8 >> Penalty.txt
-.\output 100 10 20 5 10 1 15 1 2 5 2 8 >> Penalty.txt
-.\output 100 10 20 5 10 1 15 1 2 5 3 8 >> Penalty.txt
-.\output 100 10 20 5 10 1 15 1 2 5 4 8 >> Penalty.txt
-.\output 100 10 20 5 10 1 15 1 2 5 5 8 >> Penalty.txt
-.\output 100 10 20 5 10 1 15 1 2 5 6 8 >> Penalty.txt
-.\output 100 10 20 5 10 1 15 1 2 5 7 8 >> Penalty.txt
-.\output 100 10 20 5 10 1 15 1 2 5 8 8 >> Penalty.txt
-.\output 100 10 20 5 10 1 15 1 2 5 9 8 >> Penalty.txt
-.\output 100 10 20 5 10 1 15 1 2 5 10 8 >> Penalty.txt
-.\output 100 10 20 5 10 1 15 1 2 5 20 8 >> Penalty.txt
-.\output 100 10 20 5 10 1 15 1 2 5 30 8 >> Penalty.txt
-.\output 100 10 20 5 10 1 15 1 2 5 40 8 >> Penalty.txt
-.\output 100 10 20 5 10 1 15 1 2 5 50 8 >> Penalty.txt
-.\output 100 10 20 5 10 1 15 1 2 5 60 8 >> Penalty.txt
-.\output 100 10 20 5 10 1 15 1 2 5 70 8 >> Penalty.txt
-.\output 100 10 20 5 10 1 15 1 2 5 80 8 >> Penalty.txt
-.\output 100 10 20 5 10 1 15 1 2 5 90 8 >> Penalty.txt
-.\output 100 10 20 5 10 1 15 1 2 5 100 8 >> Penalty.txt
-.\output 100 10 20 5 10 1 15 1 2 5 200 8 >> Penalty.txt
-.\output 100 10 20 5 10 1 15 1 2 5 300 8 >> Penalty.txt
-.\output 100 10 20 5 10 1 15 1 2 5 400 8 >> Penalty.txt
-.\output 100 10 20 5 10 1 15 1 2 5 500 8 >> Penalty.txt
-.\output 100 10 20 5 10 1 15 1 2 5 600 8 >> Penalty.txt
-.\output 100 10 20 5 10 1 15 1 2 5 700 8 >> Penalty.txt
-.\output 100 10 20 5 10 1 15 1 2 5 800 8 >> Penalty.txt
-.\output 100 10 20 5 10 1 15 1 2 5 900 8 >> Penalty.txt
-.\output 100 10 20 5 10 1 15 1 2 5 1000 8 >> Penalty.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 1 1 > SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 2 1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 3 1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 4 1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 5 1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 6 1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 7 1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 8 1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 9 1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 10 1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 11 1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 12 1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 13 1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 14 1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 15 1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 16 1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 17 1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 18 1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 19 1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 20 1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 1 0.9 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 2 0.9 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 3 0.9 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 4 0.9 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 5 0.9 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 6 0.9 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 7 0.9 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 8 0.9 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 9 0.9 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 10 0.9 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 11 0.9 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 12 0.9 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 13 0.9 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 14 0.9 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 15 0.9 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 16 0.9 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 17 0.9 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 18 0.9 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 19 0.9 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 20 10.9 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 1 0.8 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 2 0.8 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 3 0.8 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 4 0.8 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 5 0.8 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 6 0.8 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 7 0.8 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 8 0.8 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 9 0.8 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 10 0.8 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 11 0.8 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 12 0.8 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 13 0.8 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 14 0.8 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 15 0.8 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 16 0.8 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 17 0.8 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 18 0.8 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 19 0.8 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 20 0.8 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 1 0.7 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 2 0.7 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 3 0.7 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 4 0.7 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 5 0.7 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 6 0.7 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 7 0.7 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 8 0.7 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 9 0.7 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 10 0.7 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 11 0.7 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 12 0.7 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 13 0.7 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 14 0.7 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 15 0.7 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 16 0.7 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 17 0.7 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 18 0.7 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 19 0.7 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 20 0.7 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 1 0.6 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 2 0.6 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 3 0.6 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 4 0.6 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 5 0.6 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 6 0.6 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 7 0.6 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 8 0.6 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 9 0.6 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 10 0.6 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 11 0.6 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 12 0.6 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 13 0.6 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 14 0.6 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 15 0.6 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 16 0.6 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 17 0.6 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 18 0.6 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 19 0.6 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 20 0.6 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 1 0.5 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 2 0.5 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 3 0.5 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 4 0.5 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 5 0.5 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 6 0.5 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 7 0.5 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 8 0.5 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 9 0.5 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 10 0.5 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 11 0.5 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 12 0.5 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 13 0.5 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 14 0.5 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 15 0.5 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 16 0.5 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 17 0.5 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 18 0.5 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 19 0.5 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 20 0.5 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 1 0.4 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 2 0.4 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 3 0.4 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 4 0.4 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 5 0.4 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 6 0.4 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 7 0.4 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 8 0.4 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 9 0.4 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 10 0.4 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 11 0.4 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 12 0.4 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 13 0.4 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 14 0.4 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 15 0.4 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 16 0.4 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 17 0.4 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 18 0.4 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 19 0.4 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 20 0.4 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 1 0.3 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 2 0.3 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 3 0.3 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 4 0.3 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 5 0.3 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 6 0.3 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 7 0.3 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 8 0.3 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 9 0.3 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 10 0.3 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 11 0.3 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 12 0.3 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 13 0.3 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 14 0.3 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 15 0.3 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 16 0.3 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 17 0.3 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 18 0.3 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 19 0.3 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 20 0.3 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 1 0.2 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 2 0.2 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 3 0.2 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 4 0.2 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 5 0.2 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 6 0.2 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 7 0.2 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 8 0.2 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 9 0.2 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 10 0.2 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 11 0.2 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 12 0.2 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 13 0.2 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 14 0.2 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 15 0.2 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 16 0.2 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 17 0.2 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 18 0.2 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 19 0.2 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 20 0.2 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 1 0.1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 2 0.1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 3 0.1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 4 0.1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 5 0.1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 6 0.1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 7 0.1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 8 0.1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 9 0.1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 10 0.1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 11 0.1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 12 0.1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 13 0.1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 14 0.1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 15 0.1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 16 0.1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 17 0.1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 18 0.1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 19 0.1 >> SRAM.txt
+.\output 100 10 20 5 10 1 15 1 2 5 10 8 20 0.1 >> SRAM.txt

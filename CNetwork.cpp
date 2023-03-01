@@ -1,42 +1,42 @@
-#include "CNetwork.h"
+ï»¿#include "CNetwork.h"
 #include<iostream>
 #include <fstream>
 #include<math.h>
 using namespace std;
 
-////4 nodesµÄnetwork
-//int node_type_upper_level[4][3] = { {1, -1, -1}, {-1, 2, -1}, {-1, -1, 3}, {1, -1, -1 } }; //¶ÔÏÂ²ãÄ£ĞÍÀ´Ëµ£¬ÉÏ²ãÉú³ÉµÄnode_typeÊÇconstant
-//double node_capacity_upper_level[4][3] = { {10,INF,INF},{INF,10,INF}, {INF,INF,INF}, {10,INF,INF} }; //¶ÔÏÂ²ãÄ£ĞÍÀ´Ëµ£¬ÉÏ²ãÉú³ÉµÄnode_capacityÊÇconstant
+////4 nodesçš„network
+//int node_type_upper_level[4][3] = { {1, -1, -1}, {-1, 2, -1}, {-1, -1, 3}, {1, -1, -1 } }; //å¯¹ä¸‹å±‚æ¨¡å‹æ¥è¯´ï¼Œä¸Šå±‚ç”Ÿæˆçš„node_typeæ˜¯constant
+//double node_capacity_upper_level[4][3] = { {10,INF,INF},{INF,10,INF}, {INF,INF,INF}, {10,INF,INF} }; //å¯¹ä¸‹å±‚æ¨¡å‹æ¥è¯´ï¼Œä¸Šå±‚ç”Ÿæˆçš„node_capacityæ˜¯constant
 
-////13 nodesµÄnetwork
-//int node_type_upper_level[13][3] = { {-1, -1, 3}, {1, -1, -1}, {-1, -1, 3}, {-1, -1, 3}, {-1, 2, -1}, {1, 2, -1}, {-1, -1, 3}, {-1, -1, 3}, {-1, -1, 3}, {-1, -1, 3}, {1, 2, -1}, {1, -1, -1}, {-1, 2, -1} }; //¶ÔÏÂ²ãÄ£ĞÍÀ´Ëµ£¬ÉÏ²ãÉú³ÉµÄnode_typeÊÇconstant
-//double node_capacity_upper_level[13][3] = { {INF,INF,INF}, {10,INF,INF}, {INF,INF,INF}, {INF,INF,INF}, {INF,10,INF}, {10,10,INF}, {INF,INF,INF}, {INF,INF,INF}, {INF,INF,INF},{INF,INF,INF}, {10,10,INF}, {10,INF,INF}, {INF,10,INF} }; //¶ÔÏÂ²ãÄ£ĞÍÀ´Ëµ£¬ÉÏ²ãÉú³ÉµÄnode_capacityÊÇconstant
+////13 nodesçš„network
+//int node_type_upper_level[13][3] = { {-1, -1, 3}, {1, -1, -1}, {-1, -1, 3}, {-1, -1, 3}, {-1, 2, -1}, {1, 2, -1}, {-1, -1, 3}, {-1, -1, 3}, {-1, -1, 3}, {-1, -1, 3}, {1, 2, -1}, {1, -1, -1}, {-1, 2, -1} }; //å¯¹ä¸‹å±‚æ¨¡å‹æ¥è¯´ï¼Œä¸Šå±‚ç”Ÿæˆçš„node_typeæ˜¯constant
+//double node_capacity_upper_level[13][3] = { {INF,INF,INF}, {10,INF,INF}, {INF,INF,INF}, {INF,INF,INF}, {INF,10,INF}, {10,10,INF}, {INF,INF,INF}, {INF,INF,INF}, {INF,INF,INF},{INF,INF,INF}, {10,10,INF}, {10,INF,INF}, {INF,10,INF} }; //å¯¹ä¸‹å±‚æ¨¡å‹æ¥è¯´ï¼Œä¸Šå±‚ç”Ÿæˆçš„node_capacityæ˜¯constant
 
 //double FreeflowSpeed = 20;
 //double Capacity = 50;
 
-//¶ÁNode information
+//è¯»Node information
 void CNetwork::ReadNode(string DataPath)
 {
-	ifstream in(DataPath); //ifstream ¶ÁÎÄ¼ş in() ¶ÁÎÄ¼ş
+	ifstream in(DataPath); //ifstream è¯»æ–‡ä»¶ in() è¯»æ–‡ä»¶
 	string row;
 	vector<string> Data;
 
-	m_Node.clear();//³õÊ¼»¯  vector<CNode*> m_Node; //ÍøÂç½Úµã¼¯ºÏ
-	m_nNode = 0;//³õÊ¼»¯ ½ÚµãÊı
+	m_Node.clear();//åˆå§‹åŒ–  vector<CNode*> m_Node; //ç½‘ç»œèŠ‚ç‚¹é›†åˆ
+	m_nNode = 0;//åˆå§‹åŒ– èŠ‚ç‚¹æ•°
 
-	if (in) //ÕÒµ½ "DataPath" ÎÄ¼ş
+	if (in) //æ‰¾åˆ° "DataPath" æ–‡ä»¶
 	{
-		while (getline(in, row)) //°´Ò»ÕûĞĞµÄ·½Ê½¶ÁÈ¡£¬´æ´¢ÔÚstring rowÖĞ
+		while (getline(in, row)) //æŒ‰ä¸€æ•´è¡Œçš„æ–¹å¼è¯»å–ï¼Œå­˜å‚¨åœ¨string rowä¸­
 		{
 			if (row.empty())
 			{
 				continue;
 			}
-			Data = split(row, "\t"); //½«rowÖĞµÄ¶«Î÷°´ÕÕ (ÖÆ±í·û) ·Ö¸î¿ª£¬rowÊÇ×Ö·û´®£¬splitº¯ÊıÊÇÔÚCNetworkÖĞ×Ô¼ºÉè¼ÆµÄ£¬Ëü·µ»ØÒ»¸övector<string>Êı¾İ¡£
-			CNode* pNode = new CNode; //´´½¨Ò»¸öĞÂµÄCNodeµÄÀà£¬ÓÃÖ¸ÕëpNode±íÊ¾
+			Data = split(row, "\t"); //å°†rowä¸­çš„ä¸œè¥¿æŒ‰ç…§ (åˆ¶è¡¨ç¬¦) åˆ†å‰²å¼€ï¼Œrowæ˜¯å­—ç¬¦ä¸²ï¼Œsplitå‡½æ•°æ˜¯åœ¨CNetworkä¸­è‡ªå·±è®¾è®¡çš„ï¼Œå®ƒè¿”å›ä¸€ä¸ªvector<string>æ•°æ®ã€‚
+			CNode* pNode = new CNode; //åˆ›å»ºä¸€ä¸ªæ–°çš„CNodeçš„ç±»ï¼Œç”¨æŒ‡é’ˆpNodeè¡¨ç¤º
 			pNode->ID = m_nNode;
-			pNode->PositionX = atof(Data[1].c_str()); //½«string×ª»»³ÉdoubleµÄÊı¾İÀàĞÍ
+			pNode->PositionX = atof(Data[1].c_str()); //å°†stringè½¬æ¢æˆdoubleçš„æ•°æ®ç±»å‹
 			pNode->PositionY = atof(Data[2].c_str());
 			pNode->Incentive = incentive;
 			pNode->Penalty = penalty;
@@ -45,34 +45,34 @@ void CNetwork::ReadNode(string DataPath)
 		}
 		in.close();
 	}
-	else //Ã»ÕÒµ½ "DataPath" ÎÄ¼ş
+	else //æ²¡æ‰¾åˆ° "DataPath" æ–‡ä»¶
 	{
 		cout << DataPath << " does not exist!";
 	}
 }
 
-//¶ÁDepot information
+//è¯»Depot information
 void CNetwork::ReadDepot(string DataPath)
 {
-	ifstream in(DataPath); //ifstream ¶ÁÎÄ¼ş in() ¶ÁÎÄ¼ş
+	ifstream in(DataPath); //ifstream è¯»æ–‡ä»¶ in() è¯»æ–‡ä»¶
 	string row;
 	vector<string> Data;
 
-	m_Depot.clear();//³õÊ¼»¯  vector<CNode*> m_Depot; //ÍøÂç½Úµã¼¯ºÏ
-	m_nDepot = 0;//³õÊ¼»¯ ½ÚµãÊı
+	m_Depot.clear();//åˆå§‹åŒ–  vector<CNode*> m_Depot; //ç½‘ç»œèŠ‚ç‚¹é›†åˆ
+	m_nDepot = 0;//åˆå§‹åŒ– èŠ‚ç‚¹æ•°
 
-	if (in) //ÕÒµ½ "DataPath" ÎÄ¼ş
+	if (in) //æ‰¾åˆ° "DataPath" æ–‡ä»¶
 	{
-		while (getline(in, row)) //°´Ò»ÕûĞĞµÄ·½Ê½¶ÁÈ¡£¬´æ´¢ÔÚstring rowÖĞ
+		while (getline(in, row)) //æŒ‰ä¸€æ•´è¡Œçš„æ–¹å¼è¯»å–ï¼Œå­˜å‚¨åœ¨string rowä¸­
 		{
 			if (row.empty())
 			{
 				continue;
 			}
-			Data = split(row, "\t"); //½«rowÖĞµÄ¶«Î÷°´ÕÕ (ÖÆ±í·û) ·Ö¸î¿ª£¬rowÊÇ×Ö·û´®£¬splitº¯ÊıÊÇÔÚCNetworkÖĞ×Ô¼ºÉè¼ÆµÄ£¬Ëü·µ»ØÒ»¸övector<string>Êı¾İ¡£
-			CNode* pDepot = new CNode; //´´½¨Ò»¸öĞÂµÄCNodeµÄÀà£¬ÓÃÖ¸ÕëpNode±íÊ¾
+			Data = split(row, "\t"); //å°†rowä¸­çš„ä¸œè¥¿æŒ‰ç…§ (åˆ¶è¡¨ç¬¦) åˆ†å‰²å¼€ï¼Œrowæ˜¯å­—ç¬¦ä¸²ï¼Œsplitå‡½æ•°æ˜¯åœ¨CNetworkä¸­è‡ªå·±è®¾è®¡çš„ï¼Œå®ƒè¿”å›ä¸€ä¸ªvector<string>æ•°æ®ã€‚
+			CNode* pDepot = new CNode; //åˆ›å»ºä¸€ä¸ªæ–°çš„CNodeçš„ç±»ï¼Œç”¨æŒ‡é’ˆpNodeè¡¨ç¤º
 			pDepot->ID = m_nDepot;
-			pDepot->PositionX = atof(Data[1].c_str()); //½«string×ª»»³ÉdoubleµÄÊı¾İÀàĞÍ
+			pDepot->PositionX = atof(Data[1].c_str()); //å°†stringè½¬æ¢æˆdoubleçš„æ•°æ®ç±»å‹
 			pDepot->PositionY = atof(Data[2].c_str());
 			pDepot->Incentive = incentive;
 			pDepot->Penalty = penalty;
@@ -81,13 +81,13 @@ void CNetwork::ReadDepot(string DataPath)
 		}
 		in.close();
 	}
-	else //Ã»ÕÒµ½ "DataPath" ÎÄ¼ş
+	else //æ²¡æ‰¾åˆ° "DataPath" æ–‡ä»¶
 	{
 		cout << DataPath << " does not exist!";
 	}
 }
 
-//¶ÁLink information
+//è¯»Link information
 void CNetwork::ReadLink(string DataPath)
 {
 	ifstream in(DataPath);
@@ -109,14 +109,14 @@ void CNetwork::ReadLink(string DataPath)
 			CLink* pLink = new CLink();
 
 			pLink->ID = m_nLink;
-			auto inNodeIndex = atoi(Data[0].c_str()) - 1; //autoÊÇ×Ô¶¯Êı¾İÀàĞÍ 
-			pLink->pInNode = m_Node[inNodeIndex]; //ÓÃÎªÔÚÉÏ±ßÒÑ¾­½«ËùÓĞµÄnode¶¼¶ÁÈ¡ÁË£¬ÕâÀïÓÃnode numberÖ±½Ó¶ÔÓ¦ÉÏlinkµÄÆğµãnode
+			auto inNodeIndex = atoi(Data[0].c_str()) - 1; //autoæ˜¯è‡ªåŠ¨æ•°æ®ç±»å‹ 
+			pLink->pInNode = m_Node[inNodeIndex]; //ç”¨ä¸ºåœ¨ä¸Šè¾¹å·²ç»å°†æ‰€æœ‰çš„nodeéƒ½è¯»å–äº†ï¼Œè¿™é‡Œç”¨node numberç›´æ¥å¯¹åº”ä¸Šlinkçš„èµ·ç‚¹node
 			auto outNodeIndex = atoi(Data[1].c_str()) - 1;
 			pLink->pOutNode = m_Node[outNodeIndex];
-			//pLink->FreeFlowTravelTime = atof(Data[2].c_str()); //string×ªdouble
-			pLink->LinkDistance = atof(Data[2].c_str()); //string×ªdouble
+			//pLink->FreeFlowTravelTime = atof(Data[2].c_str()); //stringè½¬double
+			pLink->LinkDistance = atof(Data[2].c_str()); //stringè½¬double
 			//pLink->Capacity = atof(Data[3].c_str());
-			pLink->pInNode->OutgoingLink.push_back(pLink->ID); //¶ÔÒ»Ìõlink±àºÅÎªA£¬ÀıÈç£¨1, 2£©£¬¶ÔÓÚnode1£¬ËüÊÇoutgoinglink£¬¶ÔÓÚnode2£¬ËüÊÇIncominglink
+			pLink->pInNode->OutgoingLink.push_back(pLink->ID); //å¯¹ä¸€æ¡linkç¼–å·ä¸ºAï¼Œä¾‹å¦‚ï¼ˆ1, 2ï¼‰ï¼Œå¯¹äºnode1ï¼Œå®ƒæ˜¯outgoinglinkï¼Œå¯¹äºnode2ï¼Œå®ƒæ˜¯Incominglink
 			pLink->pOutNode->IncomingLink.push_back(pLink->ID);
 			m_nLink++;
 			m_Link.push_back(pLink);
@@ -130,7 +130,7 @@ void CNetwork::ReadLink(string DataPath)
 	}
 }
 
-//¶ÁLink information
+//è¯»Link information
 void CNetwork::ReadDistance(string DataPath)
 {
 	ifstream in(DataPath);
@@ -152,14 +152,14 @@ void CNetwork::ReadDistance(string DataPath)
 			CLink* pDepotNode = new CLink();
 
 			pDepotNode->ID = m_nDepotNode;
-			auto inNodeIndex = atoi(Data[0].c_str()) - 1; //autoÊÇ×Ô¶¯Êı¾İÀàĞÍ 
-			pDepotNode->pInNode = m_Depot[inNodeIndex]; //ÓÃÎªÔÚÉÏ±ßÒÑ¾­½«ËùÓĞµÄnode¶¼¶ÁÈ¡ÁË£¬ÕâÀïÓÃnode numberÖ±½Ó¶ÔÓ¦ÉÏlinkµÄÆğµãnode
+			auto inNodeIndex = atoi(Data[0].c_str()) - 1; //autoæ˜¯è‡ªåŠ¨æ•°æ®ç±»å‹ 
+			pDepotNode->pInNode = m_Depot[inNodeIndex]; //ç”¨ä¸ºåœ¨ä¸Šè¾¹å·²ç»å°†æ‰€æœ‰çš„nodeéƒ½è¯»å–äº†ï¼Œè¿™é‡Œç”¨node numberç›´æ¥å¯¹åº”ä¸Šlinkçš„èµ·ç‚¹node
 			auto outNodeIndex = atoi(Data[1].c_str()) - 1;
 			pDepotNode->pOutNode = m_Node[outNodeIndex];
-			//pLink->FreeFlowTravelTime = atof(Data[2].c_str()); //string×ªdouble
-			pDepotNode->LinkDistance = atof(Data[2].c_str()); //string×ªdouble
+			//pLink->FreeFlowTravelTime = atof(Data[2].c_str()); //stringè½¬double
+			pDepotNode->LinkDistance = atof(Data[2].c_str()); //stringè½¬double
 			//pLink->Capacity = atof(Data[3].c_str());
-			pDepotNode->pInNode->OutgoingLink.push_back(pDepotNode->ID); //¶ÔÒ»Ìõlink±àºÅÎªA£¬ÀıÈç£¨1, 2£©£¬¶ÔÓÚnode1£¬ËüÊÇoutgoinglink£¬¶ÔÓÚnode2£¬ËüÊÇIncominglink
+			pDepotNode->pInNode->OutgoingLink.push_back(pDepotNode->ID); //å¯¹ä¸€æ¡linkç¼–å·ä¸ºAï¼Œä¾‹å¦‚ï¼ˆ1, 2ï¼‰ï¼Œå¯¹äºnode1ï¼Œå®ƒæ˜¯outgoinglinkï¼Œå¯¹äºnode2ï¼Œå®ƒæ˜¯Incominglink
 			pDepotNode->pOutNode->IncomingLink.push_back(pDepotNode->ID);
 			m_nDepotNode++;
 			m_DepotNode.push_back(pDepotNode);
@@ -172,7 +172,7 @@ void CNetwork::ReadDistance(string DataPath)
 	}
 }
 
-//¶ÁO/D demand information
+//è¯»O/D demand information
 void CNetwork::ReadODpairs(string DataPath)
 {
 	ifstream in(DataPath);
@@ -192,16 +192,16 @@ void CNetwork::ReadODpairs(string DataPath)
 			if (row.empty()) continue;
 			Data = split(row, "\t");
 			auto Origin_node = atoi(Data[0].c_str()) - 1;
-			pNode = m_Node[Origin_node]; //Æğµãnode»¹ÊÇÓÃ±àºÅÀ´Ö±½Ó¶ÔÓ¦
-			if (pNode->Origin_ID == -1) //Èô¸Ãµã±êÊ¶·û²»ÊÇÆğµã£¬Ò»¿ªÊ¼Ä¬ÈÏÃ¿¸öµã¶¼²»ÊÇÆğµã
+			pNode = m_Node[Origin_node]; //èµ·ç‚¹nodeè¿˜æ˜¯ç”¨ç¼–å·æ¥ç›´æ¥å¯¹åº”
+			if (pNode->Origin_ID == -1) //è‹¥è¯¥ç‚¹æ ‡è¯†ç¬¦ä¸æ˜¯èµ·ç‚¹ï¼Œä¸€å¼€å§‹é»˜è®¤æ¯ä¸ªç‚¹éƒ½ä¸æ˜¯èµ·ç‚¹
 			{
-				pOrigin = new COrigin();//¶ÔÓÚĞÂµÄÆğµãnode, ´´½¨Ò»¸öCOriginÀà
+				pOrigin = new COrigin();//å¯¹äºæ–°çš„èµ·ç‚¹node, åˆ›å»ºä¸€ä¸ªCOriginç±»
 				pOrigin->ID = m_nOrigin;
 				m_nOrigin++;
 				pOrigin->pOriginNode = m_Node[Origin_node];
 				//pOrigin->ID = m_Origin.size();
 				//pOrigin->pOriginNode =  m_Node[atoi(Data[0].c_str()) - 1];
-				pNode->Origin_ID = pOrigin->ID;//½«±êÊ¶·ûOrigin_ID¸³ÖµÎªÆğµãµÄID
+				pNode->Origin_ID = pOrigin->ID;//å°†æ ‡è¯†ç¬¦Origin_IDèµ‹å€¼ä¸ºèµ·ç‚¹çš„ID
 				m_Origin.push_back(pOrigin);
 			}
 			else
@@ -210,7 +210,7 @@ void CNetwork::ReadODpairs(string DataPath)
 			}
 			auto Destination_node = atoi(Data[1].c_str()) - 1;
 			pNode = m_Node[Destination_node];
-			pOrigin->DestinationNode.push_back(pNode->ID); //·ÅµÄÊÇdestination nodeµÄnumber
+			pOrigin->DestinationNode.push_back(pNode->ID); //æ”¾çš„æ˜¯destination nodeçš„number
 			double demand = atof(Data[2].c_str());
 			pOrigin->ODDemand.push_back(demand);
 			pOrigin->ODpairNumber.push_back(m_nODpair);
@@ -226,7 +226,7 @@ void CNetwork::ReadODpairs(string DataPath)
 	}
 }
 
-//Upper-levelÃ¶¾ÙnodeµÄtype
+//Upper-levelæšä¸¾nodeçš„type
 void CNetwork::GeneratePossible(int n)
 {
 	if (n == 0)
@@ -251,14 +251,14 @@ void CNetwork::GeneratePossible(int n)
 			for (int type = 0; type < 3; type++)
 			{
 				node_type_temp.push_back(node_type[temp[size] - 1][type]);
-				if (node_type[temp[size] - 1][type] == -1 || node_type[temp[size] - 1][type] == 3) //Ã»¿ª=-1»òÕß=3£¨non-parking node£©£¬capacity = 0
+				if (node_type[temp[size] - 1][type] == -1 || node_type[temp[size] - 1][type] == 3) //æ²¡å¼€=-1æˆ–è€…=3ï¼ˆnon-parking nodeï¼‰ï¼Œcapacity = 0
 				{
 					capacity_type_temp.push_back(0);
 				}
-				if (node_type[temp[size] - 1][type] == 1 || node_type[temp[size] - 1][type] == 2) //¿ªÊÇ1£¨parking£©»òÕß2£¨charging£©£¬capacityËæ»úÒ»¸öÖµ
+				if (node_type[temp[size] - 1][type] == 1 || node_type[temp[size] - 1][type] == 2) //å¼€æ˜¯1ï¼ˆparkingï¼‰æˆ–è€…2ï¼ˆchargingï¼‰ï¼Œcapacityéšæœºä¸€ä¸ªå€¼
 				{
-					//double capacity_temp = (rand() % (50 - 0)) + 0 + 1; //capacityËæ»úÉú³É(0, 50]
-					int capacity_temp = (rand() % (CapUpper - CapLower + 1)) + CapLower; // capacityËæ»úÉú³É[5, 15]
+					//double capacity_temp = (rand() % (50 - 0)) + 0 + 1; //capacityéšæœºç”Ÿæˆ(0, 50]
+					int capacity_temp = (rand() % (CapUpper - CapLower + 1)) + CapLower; // capacityéšæœºç”Ÿæˆ[5, 15]
 					capacity_type_temp.push_back(capacity_temp);
 				}
 			}
@@ -275,7 +275,7 @@ void CNetwork::GeneratePossible(int n)
 
 	for (int i = 1; i < 5; i++)  //i = 1, 2, 3, 4
 	{
-		str = str + to_string(i); //to_string£¬½«int i×ª»»ÎªstringÊıÖµ
+		str = str + to_string(i); //to_stringï¼Œå°†int iè½¬æ¢ä¸ºstringæ•°å€¼
 		GeneratePossible(n - 1);
 	}
 
@@ -286,59 +286,59 @@ void CNetwork::GeneratePossible(int n)
 }
 void CNetwork::EnumerationNodeType()
 {
-	m_Solution.clear();//³õÊ¼»¯ vector<CSolution*> m_Solution; //ÍøÂç½Úµã¼¯ºÏ
+	m_Solution.clear();//åˆå§‹åŒ– vector<CSolution*> m_Solution; //ç½‘ç»œèŠ‚ç‚¹é›†åˆ
 	m_nSolution = 0;
 
 	GeneratePossible(m_nNode);
 }
 
 //Shortest path algorithm for link information
-//·µ»ØÒ»¸övector °üº¬link number
+//è¿”å›ä¸€ä¸ªvector åŒ…å«link number
 double CNetwork::Dijstra(int Start, int End)
 {
 	CNode* pNode;
 	CLink* pLink;
-	// ³õÊ¼»¯
-	int startposition = 0;//Á½¸öÓÃÀ´ÅĞ¶ÏwhileµÄ±êÊ¶·û
+	// åˆå§‹åŒ–
+	int startposition = 0;//ä¸¤ä¸ªç”¨æ¥åˆ¤æ–­whileçš„æ ‡è¯†ç¬¦
 	int endposition = 1;
 	ShortestPathCost = new double[m_nNode]; //Cost
-	ShortestPathParent = new int[m_nNode]; //Ç°Çı½Úµã
-	int* checkList = new int[m_nNode];//¶ÓÁĞ£¬Ñ­»·Ê¹ÓÃ
+	ShortestPathParent = new int[m_nNode]; //å‰é©±èŠ‚ç‚¹
+	int* checkList = new int[m_nNode];//é˜Ÿåˆ—ï¼Œå¾ªç¯ä½¿ç”¨
 	//cout << (&checkList)[3] << endl;
-	bool* binCheckList = new bool[m_nNode]; //ÊÇ·ñÔÚ¶ÓÁĞÖĞ
+	bool* binCheckList = new bool[m_nNode]; //æ˜¯å¦åœ¨é˜Ÿåˆ—ä¸­
 	bool* bscanStatus = new bool[m_nNode];
 
 	for (int node = 0; node < m_nNode; node++)
 	{
-		ShortestPathCost[node] = INF;//³õÊ¼Ã¿¸öµãµÄcost¶¼ÉèÎªÎŞÇî
-		ShortestPathParent[node] = -1;//Ã¿Ò»¸öµã¶¼±ê¼Ç-1
-		//ShortestPathCost[node] = numeric_limits<double>::max(); //ºÃÏñÊÇ½«inf¸øÀ©´ó
+		ShortestPathCost[node] = INF;//åˆå§‹æ¯ä¸ªç‚¹çš„costéƒ½è®¾ä¸ºæ— ç©·
+		ShortestPathParent[node] = -1;//æ¯ä¸€ä¸ªç‚¹éƒ½æ ‡è®°-1
+		//ShortestPathCost[node] = numeric_limits<double>::max(); //å¥½åƒæ˜¯å°†infç»™æ‰©å¤§
 		//cout << ShortestPathCost[node] << endl;	
-		binCheckList[node] = false;//ËùÓĞµÄnode±ê¼ÇÎªfalse
+		binCheckList[node] = false;//æ‰€æœ‰çš„nodeæ ‡è®°ä¸ºfalse
 	}
-	ShortestPathCost[Start] = 0;//³õÊ¼ÆğÊ¼µãµÄcostÎª0
+	ShortestPathCost[Start] = 0;//åˆå§‹èµ·å§‹ç‚¹çš„costä¸º0
 	checkList[0] = Start; //PList
 
-	//¿ªÊ¼whileÑ­»·  ÕâÀïÖ÷ÒªÊÇ¼ÆËãShortestPathCost£¬¼ÇÂ¼ÒÔstartµã£¬µ½ÍøÂçÖĞËùÓĞµãµÄ×î¶Ìtravel cost¡£
+	//å¼€å§‹whileå¾ªç¯  è¿™é‡Œä¸»è¦æ˜¯è®¡ç®—ShortestPathCostï¼Œè®°å½•ä»¥startç‚¹ï¼Œåˆ°ç½‘ç»œä¸­æ‰€æœ‰ç‚¹çš„æœ€çŸ­travel costã€‚
 	while (startposition != endposition)
 	{
 		if (startposition >= m_nNode)
 		{
 			startposition = 0;
 		}
-		int i = checkList[startposition]; //Æğµãnumber
+		int i = checkList[startposition]; //èµ·ç‚¹number
 		startposition++; //1, 2
-		pNode = m_Node[i]; //Æğµã¸øpNode, (µ±Ç°µãµÄclass£¬¸øpNode)
-		for (int index = 0; index < pNode->OutgoingLink.size(); index++) //index: Àë¿ªÂ·¶ÎµÄ¸öÊı OutgoingLink.size()Ö¸ÓĞ¶àÉÙ¸öÒÔpNodeÎªÆğµãµÄlink
+		pNode = m_Node[i]; //èµ·ç‚¹ç»™pNode, (å½“å‰ç‚¹çš„classï¼Œç»™pNode)
+		for (int index = 0; index < pNode->OutgoingLink.size(); index++) //index: ç¦»å¼€è·¯æ®µçš„ä¸ªæ•° OutgoingLink.size()æŒ‡æœ‰å¤šå°‘ä¸ªä»¥pNodeä¸ºèµ·ç‚¹çš„link
 		{
-			pLink = m_Link[pNode->OutgoingLink[index]];//ÆğµãÁ¬½ÓµÄËùÓĞlink£¬¸øpLink¡£¶ÔÓÚiµã£¬Á¬½ÓËüµÄlink
-			int j = pLink->pOutNode->ID; //ÓëÆğµãÏàÁ¬µÄlinkµÄÖÕµã£¬ £¨j: linkµÄÖÕµã£©
-			double value = pLink->LinkDistance;//£¨value: Link travel time£©
+			pLink = m_Link[pNode->OutgoingLink[index]];//èµ·ç‚¹è¿æ¥çš„æ‰€æœ‰linkï¼Œç»™pLinkã€‚å¯¹äºiç‚¹ï¼Œè¿æ¥å®ƒçš„link
+			int j = pLink->pOutNode->ID; //ä¸èµ·ç‚¹ç›¸è¿çš„linkçš„ç»ˆç‚¹ï¼Œ ï¼ˆj: linkçš„ç»ˆç‚¹ï¼‰
+			double value = pLink->LinkDistance;//ï¼ˆvalue: Link travel timeï¼‰
 			if (ShortestPathCost[j] > ShortestPathCost[i] + value) //INF > 0 + link travel time
 			{
 				ShortestPathCost[j] = ShortestPathCost[i] + value;
-				ShortestPathParent[j] = i;//¼ÇÂ¼Ò»ÏÂjÇ°±ßÊÇi
-				// Ìí¼Óµ½¶ÓÁĞÎ²²¿
+				ShortestPathParent[j] = i;//è®°å½•ä¸€ä¸‹jå‰è¾¹æ˜¯i
+				// æ·»åŠ åˆ°é˜Ÿåˆ—å°¾éƒ¨
 				if (endposition >= m_nNode)
 				{
 					endposition = 0;
@@ -353,10 +353,10 @@ double CNetwork::Dijstra(int Start, int End)
 	return ShortestPathCost[End];
 }
 
-//¼ÆËãÈÎºÎÁ½µãÖ®¼äµÄ¾àÀë
+//è®¡ç®—ä»»ä½•ä¸¤ç‚¹ä¹‹é—´çš„è·ç¦»
 void CNetwork::CalNodeDistance()
 {
-	NodeDistance = new double* [m_nNode]; //ÈÎºÎÁ½µãµÄdistance
+	NodeDistance = new double* [m_nNode]; //ä»»ä½•ä¸¤ç‚¹çš„distance
 	for (int node = 0; node < m_nNode; node++)
 	{
 		NodeDistance[node] = new double[m_nNode];
@@ -377,10 +377,10 @@ void CNetwork::CalNodeDistance()
 	}
 }
 
-//¸ù¾İÉÏ²ã¸ønode type£¬capacity½øĞĞ±êÊ¶
+//æ ¹æ®ä¸Šå±‚ç»™node typeï¼Œcapacityè¿›è¡Œæ ‡è¯†
 void CNetwork::NodeType(int sol, vector<CSolution*> m_Solution)
 {
-	//²âÊÔ4 node
+	//æµ‹è¯•4 node
 	for (int node = 0; node < m_nNode; node++)
 	{
 		//m_Node[node]->Node_type = node_type_upper_level[node];
@@ -393,11 +393,11 @@ void CNetwork::NodeType(int sol, vector<CSolution*> m_Solution)
 	}
 }
 
-//¸ù¾İRouteFlowÇé¿ö¸üĞÂRoute cost£¬Í¬Ê±Ò²¸üĞÂ¶ÔÓ¦µÄPickupNodeºÍDropoffNodeµÄflow
-//ĞèÒªÔö¼ÓÅĞ¶Ïnode type£¬ÒÔ¼°¿¼ÂÇnon-parking nodeºÍchargingµÄ½±ÀøºÍ³Í·££¬»¹ÓĞnon-parking node²»ÓÃqueue£¬ÒòÎª»áµ¼ÖÂ¼ÆËã´íÎó
+//æ ¹æ®RouteFlowæƒ…å†µæ›´æ–°Route costï¼ŒåŒæ—¶ä¹Ÿæ›´æ–°å¯¹åº”çš„PickupNodeå’ŒDropoffNodeçš„flow
+//éœ€è¦å¢åŠ åˆ¤æ–­node typeï¼Œä»¥åŠè€ƒè™‘non-parking nodeå’Œchargingçš„å¥–åŠ±å’Œæƒ©ç½šï¼Œè¿˜æœ‰non-parking nodeä¸ç”¨queueï¼Œå› ä¸ºä¼šå¯¼è‡´è®¡ç®—é”™è¯¯
 void CNetwork::UpdateRouteCost(double* RouteFlow)
 {
-	//¼ÆËãzero flowÇé¿öÏÂ£¬Ã¿ÌõrouteµÄroute cost
+	//è®¡ç®—zero flowæƒ…å†µä¸‹ï¼Œæ¯æ¡routeçš„route cost
 	for (int route = 0; route < m_nRoute; route++)
 	{
 		//if (m_Route[route]->DropoffNode->Incentive != 5)
@@ -405,7 +405,7 @@ void CNetwork::UpdateRouteCost(double* RouteFlow)
 		//	cout << "Hellow worldHellow worldHellow world: " << m_Route[route]->DropoffNode->Incentive << endl;
 		//}
 		//cout << m_Route[route]->PickupNode->ID << " " << m_Route[route]->DropoffNode->ID << endl;
-		// ¶ÔÓÚËùÓĞµÄroute£¬ÔÚµ±Ç°µÄflow conditionÏÂ¼ÆËãËüµÄroute cost
+		// å¯¹äºæ‰€æœ‰çš„routeï¼Œåœ¨å½“å‰çš„flow conditionä¸‹è®¡ç®—å®ƒçš„route cost
 		double PickupWalkingtimeCost = ValueOfWalkingTime * m_Route[route]->Pickupdistance / WalkingSpeed;
 		double DropoffWalkingtimeCost = ValueOfWalkingTime * m_Route[route]->Dropoffdistance / WalkingSpeed;
 		double RouteFlowTemp = 0;
@@ -419,16 +419,16 @@ void CNetwork::UpdateRouteCost(double* RouteFlow)
 		double RidingSpeed = 0.5 * m_Route[route]->FreeFlowTravelSpeed * (1 + pow((1 - 4 * RouteFlowTemp / (m_Route[route]->FreeFlowTravelSpeed * m_Route[route]->Capacity)), 0.5));
 		//double RidingSpeed = 0.5 * m_Route[route]->FreeFlowTravelSpeed * (1 + pow((1 - 4 * RouteFlow[route] / (m_Route[route]->FreeFlowTravelSpeed * m_Route[route]->Capacity)), 0.5));
 		double RidingtimeCost = ValueOfRidingTime * m_Route[route]->Ridingdistance / RidingSpeed;
-		double RidingRentalCost = b_be_2 * m_Route[route]->Ridingdistance / RidingSpeed; //×â½ğcost
+		double RidingRentalCost = b_be_2 * m_Route[route]->Ridingdistance / RidingSpeed; //ç§Ÿé‡‘cost
 		m_Route[route]->PickupWalkingCost = PickupWalkingtimeCost;
 		m_Route[route]->DropWalkingCost = DropoffWalkingtimeCost;
 		m_Route[route]->RidingTimeCost = RidingtimeCost;
 		m_Route[route]->RentalCost = RidingRentalCost;
-		if (m_Route[route]->PickupType == 1) //¼ÆËãÔÚparking nodeÈ¡³µµÄwaiting time cost
+		if (m_Route[route]->PickupType == 1) //è®¡ç®—åœ¨parking nodeå–è½¦çš„waiting time cost
 		{
 			double PickupArrivalRate = m_Route[route]->PickupNode->Pickupflow[0];
 			//cout << "PickupArrivalRate: " << PickupArrivalRate << endl;
-			double PickupServiceRate = 1 / time_interval; //ÕâÀïÒªÔõÃ´¿¼ÂÇÒ»¸önode¶à¸öÀàĞÍ
+			double PickupServiceRate = 1 / time_interval; //è¿™é‡Œè¦æ€ä¹ˆè€ƒè™‘ä¸€ä¸ªnodeå¤šä¸ªç±»å‹
 			//cout << "PickupServiceRate: " << PickupServiceRate << endl;
 			double PickupUseRate = PickupArrivalRate / PickupServiceRate;
 			//cout << "PickupUseRate: " << PickupUseRate << endl;
@@ -505,12 +505,12 @@ void CNetwork::UpdateRouteCost(double* RouteFlow)
 				}
 			}
 		}
-		if (m_Route[route]->PickupType == 2) //¼ÆËãÔÚplug-in charging stationÈ¡³µµÄwaiting time cost
+		if (m_Route[route]->PickupType == 2) //è®¡ç®—åœ¨plug-in charging stationå–è½¦çš„waiting time cost
 		{
 			double PickupArrivalRate = m_Route[route]->PickupNode->Pickupflow[1];
 			//cout << "PickupArrivalRate: " << PickupArrivalRate << endl;
 			double Capacity = m_Route[route]->PickupNode->Capacity[1];
-			double PickupServiceRate = 1 / average_charging_time; //ÕâÀïÒªÔõÃ´¿¼ÂÇÒ»¸önode¶à¸öÀàĞÍ
+			double PickupServiceRate = 1 / average_charging_time; //è¿™é‡Œè¦æ€ä¹ˆè€ƒè™‘ä¸€ä¸ªnodeå¤šä¸ªç±»å‹
 			//cout << "PickupServiceRate: " << PickupServiceRate << endl;
 			double PickupUseRate = PickupArrivalRate / PickupServiceRate;
 			//cout << "PickupUseRate: " << PickupUseRate << endl;
@@ -586,12 +586,12 @@ void CNetwork::UpdateRouteCost(double* RouteFlow)
 			}
 		}
 
-		if (m_Route[route]->DropoffType == 1) //¼ÆËãÔÚparking nodeÍ£³µµÄwaiting time cost
+		if (m_Route[route]->DropoffType == 1) //è®¡ç®—åœ¨parking nodeåœè½¦çš„waiting time cost
 		{
 			double DropoffArrivalRate = m_Route[route]->DropoffNode->Dropoffflow[0];
 			//cout << "DropoffArrivalRate: " << DropoffArrivalRate << endl;
 			double Capacity = m_Route[route]->DropoffNode->Capacity[0];
-			double DropoffServiceRate = 1 / time_interval; //ÕâÀïÒªÔõÃ´¿¼ÂÇÒ»¸önode¶à¸öÀàĞÍ
+			double DropoffServiceRate = 1 / time_interval; //è¿™é‡Œè¦æ€ä¹ˆè€ƒè™‘ä¸€ä¸ªnodeå¤šä¸ªç±»å‹
 			//cout << "DropoffServiceRate: " << DropoffServiceRate << endl;
 			double DropoffUseRate = DropoffArrivalRate / DropoffServiceRate;
 			//cout << "DropoffUseRate: " << DropoffUseRate << endl;
@@ -606,7 +606,7 @@ void CNetwork::UpdateRouteCost(double* RouteFlow)
 
 				//DropoffArrivalRate = 0.001;
 				//DropoffUseRate = DropoffArrivalRate / DropoffServiceRate;
-				//double OProbability = (1 - DropoffUseRate) / (1 - pow(DropoffUseRate, Capacity + 1)); //³ö´íÊÇÒòÎª non-parking node capacityÉèÖÃÎªINF£¬Ì«´óÁË
+				//double OProbability = (1 - DropoffUseRate) / (1 - pow(DropoffUseRate, Capacity + 1)); //å‡ºé”™æ˜¯å› ä¸º non-parking node capacityè®¾ç½®ä¸ºINFï¼Œå¤ªå¤§äº†
 				////cout << "DropoffOProbability: " << OProbability << endl;
 				//double DropoffLossRate = pow(DropoffUseRate, Capacity) * OProbability;
 				////cout << "DropoffLossRate: " << DropoffLossRate << endl;
@@ -627,7 +627,7 @@ void CNetwork::UpdateRouteCost(double* RouteFlow)
 			{
 				if (DropoffUseRate != 1)
 				{
-					double OProbability = (1 - DropoffUseRate) / (1 - pow(DropoffUseRate, Capacity + 1)); //³ö´íÊÇÒòÎª non-parking node capacityÉèÖÃÎªINF£¬Ì«´óÁË
+					double OProbability = (1 - DropoffUseRate) / (1 - pow(DropoffUseRate, Capacity + 1)); //å‡ºé”™æ˜¯å› ä¸º non-parking node capacityè®¾ç½®ä¸ºINFï¼Œå¤ªå¤§äº†
 					//cout << "DropoffOProbability: " << OProbability << endl;
 					double DropoffLossRate = pow(DropoffUseRate, Capacity) * OProbability;
 					//cout << "DropoffLossRate: " << DropoffLossRate << endl;
@@ -665,13 +665,13 @@ void CNetwork::UpdateRouteCost(double* RouteFlow)
 				}
 			}
 		}
-		if (m_Route[route]->DropoffType == 2) //¼ÆËãÔÚpluh-in charging stationÍ£³µµÄwaiting time cost
+		if (m_Route[route]->DropoffType == 2) //è®¡ç®—åœ¨pluh-in charging stationåœè½¦çš„waiting time cost
 		{
 			double DropoffArrivalRate = m_Route[route]->DropoffNode->Dropoffflow[1];
 			//cout << "DropoffArrivalRate: " << DropoffArrivalRate << endl;
 			double Capacity = m_Route[route]->DropoffNode->Capacity[1];
 			//cout << "Capacity!!!!: " << Capacity << endl;
-			double DropoffServiceRate = 1 / average_charging_time; //ÕâÀïÒªÔõÃ´¿¼ÂÇÒ»¸önode¶à¸öÀàĞÍ
+			double DropoffServiceRate = 1 / average_charging_time; //è¿™é‡Œè¦æ€ä¹ˆè€ƒè™‘ä¸€ä¸ªnodeå¤šä¸ªç±»å‹
 			//cout << "DropoffServiceRate: " << DropoffServiceRate << endl;
 			double DropoffUseRate = DropoffArrivalRate / DropoffServiceRate;
 			//cout << "DropoffUseRate: " << DropoffUseRate << endl;
@@ -686,7 +686,7 @@ void CNetwork::UpdateRouteCost(double* RouteFlow)
 
 				//DropoffArrivalRate = 0.001;
 				//DropoffUseRate = DropoffArrivalRate / DropoffServiceRate;
-				//double OProbability = (1 - DropoffUseRate) / (1 - pow(DropoffUseRate, Capacity + 1)); //³ö´íÊÇÒòÎª non-parking node capacityÉèÖÃÎªINF£¬Ì«´óÁË
+				//double OProbability = (1 - DropoffUseRate) / (1 - pow(DropoffUseRate, Capacity + 1)); //å‡ºé”™æ˜¯å› ä¸º non-parking node capacityè®¾ç½®ä¸ºINFï¼Œå¤ªå¤§äº†
 				////cout << "DropoffOProbability: " << OProbability << endl;
 				//double DropoffLossRate = pow(DropoffUseRate, Capacity) * OProbability;
 				////cout << "DropoffLossRate: " << DropoffLossRate << endl;
@@ -710,7 +710,7 @@ void CNetwork::UpdateRouteCost(double* RouteFlow)
 					double tempp = (1 - pow(DropoffUseRate, Capacity + 1));
 					//cout << "Capacity: " << Capacity << endl;
 					//cout << "tempp: " << tempp << endl;
-					double OProbability = (1 - DropoffUseRate) / tempp; //³ö´íÊÇÒòÎª non-parking node capacityÉèÖÃÎªINF£¬Ì«´óÁË
+					double OProbability = (1 - DropoffUseRate) / tempp; //å‡ºé”™æ˜¯å› ä¸º non-parking node capacityè®¾ç½®ä¸ºINFï¼Œå¤ªå¤§äº†
 					//cout << "DropoffOProbability: " << OProbability << endl;
 					double DropoffLossRate = pow(DropoffUseRate, Capacity) * OProbability;
 					//cout << "DropoffLossRate: " << DropoffLossRate << endl;
@@ -748,7 +748,7 @@ void CNetwork::UpdateRouteCost(double* RouteFlow)
 				}
 			}
 		}
-		if (m_Route[route]->DropoffType == 3) //¼ÆËãÔÚnon-parking nodeÍ£³µµÄwaiting time cost
+		if (m_Route[route]->DropoffType == 3) //è®¡ç®—åœ¨non-parking nodeåœè½¦çš„waiting time cost
 		{
 			m_Route[route]->DropoffNode->Waiting_time_cost_dropoff[2] = 0;
 		}
@@ -824,28 +824,28 @@ void CNetwork::UpdateRouteCost(double* RouteFlow)
 		//	cout << "Hellow world: " << m_Route[route]->DropoffNode->Incentive << endl;
 		//}
 		//cout << "m_Route[route]->EnergyConsumption: " << m_Route[route]->EnergyConsumption << " " << route << endl;
-		// ³õÊ¼»¯È«ÓĞÈ«ÎŞÂ·¶ÎÁ÷Á¿ = 0
+		// åˆå§‹åŒ–å…¨æœ‰å…¨æ— è·¯æ®µæµé‡ = 0
 	}
 }
 
-//Éú³Éroute
+//ç”Ÿæˆroute
 void CNetwork::GenerateRoute()
 {
 	m_Route.clear();
 	m_nRoute = 0;
 	CRoute* pRoute;
 
-	for (int origin = 0; origin < m_nOrigin; origin++) //È¡Ò»¸öÆğµã
+	for (int origin = 0; origin < m_nOrigin; origin++) //å–ä¸€ä¸ªèµ·ç‚¹
 	{
-		m_Origin[origin]; //Æğµã£¨°üº¬ÖÕµã£©
-		for (int destination = 0; destination < m_Origin[origin]->DestinationNode.size(); destination++) //È¡Ò»¸öÖÕµã
+		m_Origin[origin]; //èµ·ç‚¹ï¼ˆåŒ…å«ç»ˆç‚¹ï¼‰
+		for (int destination = 0; destination < m_Origin[origin]->DestinationNode.size(); destination++) //å–ä¸€ä¸ªç»ˆç‚¹
 		{
 			int m_nRoute_temp = m_nRoute;
-			//Éú³ÉÒ»ÌõĞéÄâroute, ±£Ö¤Ã¿Ò»¶ÔOD¿ÉÒÔ³öĞĞ
-			m_Node[origin]; //È¡³µµãÎªÆğµã
+			//ç”Ÿæˆä¸€æ¡è™šæ‹Ÿroute, ä¿è¯æ¯ä¸€å¯¹ODå¯ä»¥å‡ºè¡Œ
+			m_Node[origin]; //å–è½¦ç‚¹ä¸ºèµ·ç‚¹
 			//cout << m_Origin[origin]->DestinationNode[destination] + 1 << endl;
-			m_Node[m_Origin[origin]->DestinationNode[destination]]; //»¹³µµãÎªÖÕµã
-			pRoute = new CRoute();//¶Ô Ã¿Ò»¶ÔODpair£¬´´½¨Ò»¸öroute class
+			m_Node[m_Origin[origin]->DestinationNode[destination]]; //è¿˜è½¦ç‚¹ä¸ºç»ˆç‚¹
+			pRoute = new CRoute();//å¯¹ æ¯ä¸€å¯¹ODpairï¼Œåˆ›å»ºä¸€ä¸ªroute class
 			pRoute->ODID = m_Origin[origin]->ODpairNumber[destination];//OD pair number
 			pRoute->PickupNode = m_Node[origin];
 			pRoute->DropoffNode = m_Node[m_Origin[origin]->DestinationNode[destination]];
@@ -865,23 +865,23 @@ void CNetwork::GenerateRoute()
 			m_nRoute++;
 			m_Route.push_back(pRoute);
 
-			for (int picknode = 0; picknode < m_nNode; picknode++) //È¡ÍøÂçÖĞµÄÈÎÒ»¸öµã×÷Îªpick_upµã
+			for (int picknode = 0; picknode < m_nNode; picknode++) //å–ç½‘ç»œä¸­çš„ä»»ä¸€ä¸ªç‚¹ä½œä¸ºpick_upç‚¹
 			{
-				m_Node[picknode]; //È¡³µµã
-				for (int type1 = 0; type1 < 3; type1++) //È¡³µµã¿ÉÒÔ¶àÖÖÀàĞÍ
+				m_Node[picknode]; //å–è½¦ç‚¹
+				for (int type1 = 0; type1 < 3; type1++) //å–è½¦ç‚¹å¯ä»¥å¤šç§ç±»å‹
 				{
-					if (m_Node[picknode]->NodeType[type1] == 1) //ÔÚparking nodeÈ¡³µ
+					if (m_Node[picknode]->NodeType[type1] == 1) //åœ¨parking nodeå–è½¦
 					{
-						for (int dropnode = 0; dropnode < m_nNode; dropnode++) //È¡ÍøÂçÖĞµÄÈÎÒ»¸öµã×÷Îªdrop_offµã
+						for (int dropnode = 0; dropnode < m_nNode; dropnode++) //å–ç½‘ç»œä¸­çš„ä»»ä¸€ä¸ªç‚¹ä½œä¸ºdrop_offç‚¹
 						{
-							m_Node[dropnode]; //»¹³µµã
-							if (m_Node[dropnode]->ID != m_Node[picknode]->ID) //È¡³µºÍ»¹³µµã²»Í¬
+							m_Node[dropnode]; //è¿˜è½¦ç‚¹
+							if (m_Node[dropnode]->ID != m_Node[picknode]->ID) //å–è½¦å’Œè¿˜è½¦ç‚¹ä¸åŒ
 							{
 								for (int type2 = 0; type2 < 3; type2++)
 								{
-									if (m_Node[dropnode]->NodeType[type2] == 1) //ÔÚparking node»¹³µ
+									if (m_Node[dropnode]->NodeType[type2] == 1) //åœ¨parking nodeè¿˜è½¦
 									{
-										pRoute = new CRoute();//¶Ô Ã¿Ò»¶ÔODpair£¬´´½¨Ò»¸öroute class
+										pRoute = new CRoute();//å¯¹ æ¯ä¸€å¯¹ODpairï¼Œåˆ›å»ºä¸€ä¸ªroute class
 										pRoute->ODID = m_Origin[origin]->ODpairNumber[destination];//OD pair number
 										pRoute->PickupNode = m_Node[picknode];
 										pRoute->DropoffNode = m_Node[dropnode];
@@ -903,9 +903,9 @@ void CNetwork::GenerateRoute()
 											m_Route.push_back(pRoute);
 										}
 									}
-									if (m_Node[dropnode]->NodeType[type2] == 2) //ÔÚplug-in charging station»¹³µ
+									if (m_Node[dropnode]->NodeType[type2] == 2) //åœ¨plug-in charging stationè¿˜è½¦
 									{
-										pRoute = new CRoute();//¶Ô Ã¿Ò»¶ÔODpair£¬´´½¨Ò»¸öroute class
+										pRoute = new CRoute();//å¯¹ æ¯ä¸€å¯¹ODpairï¼Œåˆ›å»ºä¸€ä¸ªroute class
 										pRoute->ODID = m_Origin[origin]->ODpairNumber[destination];//OD pair number
 										pRoute->PickupNode = m_Node[picknode];
 										pRoute->DropoffNode = m_Node[dropnode];
@@ -927,9 +927,9 @@ void CNetwork::GenerateRoute()
 											m_Route.push_back(pRoute);
 										}
 									}
-									if (m_Node[dropnode]->NodeType[type2] == 3) //ÔÚnon-parking node»¹³µ
+									if (m_Node[dropnode]->NodeType[type2] == 3) //åœ¨non-parking nodeè¿˜è½¦
 									{
-										pRoute = new CRoute();//¶Ô Ã¿Ò»¶ÔODpair£¬´´½¨Ò»¸öroute class
+										pRoute = new CRoute();//å¯¹ æ¯ä¸€å¯¹ODpairï¼Œåˆ›å»ºä¸€ä¸ªroute class
 										pRoute->ODID = m_Origin[origin]->ODpairNumber[destination];//OD pair number
 										pRoute->PickupNode = m_Node[picknode];
 										pRoute->DropoffNode = m_Node[dropnode];
@@ -955,19 +955,19 @@ void CNetwork::GenerateRoute()
 							}
 						}
 					}
-					if (m_Node[picknode]->NodeType[type1] == 2) //ÔÚCharging nodeÈ¡³µ
+					if (m_Node[picknode]->NodeType[type1] == 2) //åœ¨Charging nodeå–è½¦
 					{
-						for (int dropnode = 0; dropnode < m_nNode; dropnode++) //È¡ÍøÂçÖĞµÄÈÎÒ»¸öµã×÷Îªdrop_offµã
+						for (int dropnode = 0; dropnode < m_nNode; dropnode++) //å–ç½‘ç»œä¸­çš„ä»»ä¸€ä¸ªç‚¹ä½œä¸ºdrop_offç‚¹
 						{
-							m_Node[dropnode]; //»¹³µµã
+							m_Node[dropnode]; //è¿˜è½¦ç‚¹
 							{
-								if (m_Node[dropnode]->ID != m_Node[picknode]->ID) //È¡³µºÍ»¹³µµã²»Í¬
+								if (m_Node[dropnode]->ID != m_Node[picknode]->ID) //å–è½¦å’Œè¿˜è½¦ç‚¹ä¸åŒ
 								{
 									for (int type2 = 0; type2 < 3; type2++)
 									{
-										if (m_Node[dropnode]->NodeType[type2] == 1) //ÔÚparking node»¹³µ
+										if (m_Node[dropnode]->NodeType[type2] == 1) //åœ¨parking nodeè¿˜è½¦
 										{
-											pRoute = new CRoute();//¶Ô Ã¿Ò»¶ÔODpair£¬´´½¨Ò»¸öroute class
+											pRoute = new CRoute();//å¯¹ æ¯ä¸€å¯¹ODpairï¼Œåˆ›å»ºä¸€ä¸ªroute class
 											pRoute->ODID = m_Origin[origin]->ODpairNumber[destination];//OD pair number
 											pRoute->PickupNode = m_Node[picknode];
 											pRoute->DropoffNode = m_Node[dropnode];
@@ -989,9 +989,9 @@ void CNetwork::GenerateRoute()
 												m_Route.push_back(pRoute);
 											}
 										}
-										if (m_Node[dropnode]->NodeType[type2] == 2) //ÔÚplug-in charging station»¹³µ
+										if (m_Node[dropnode]->NodeType[type2] == 2) //åœ¨plug-in charging stationè¿˜è½¦
 										{
-											pRoute = new CRoute();//¶Ô Ã¿Ò»¶ÔODpair£¬´´½¨Ò»¸öroute class
+											pRoute = new CRoute();//å¯¹ æ¯ä¸€å¯¹ODpairï¼Œåˆ›å»ºä¸€ä¸ªroute class
 											pRoute->ODID = m_Origin[origin]->ODpairNumber[destination];//OD pair number
 											pRoute->PickupNode = m_Node[picknode];
 											pRoute->DropoffNode = m_Node[dropnode];
@@ -1013,9 +1013,9 @@ void CNetwork::GenerateRoute()
 												m_Route.push_back(pRoute);
 											}
 										}
-										if (m_Node[dropnode]->NodeType[type2] == 3) //ÔÚnon-parking node»¹³µ
+										if (m_Node[dropnode]->NodeType[type2] == 3) //åœ¨non-parking nodeè¿˜è½¦
 										{
-											pRoute = new CRoute();//¶Ô Ã¿Ò»¶ÔODpair£¬´´½¨Ò»¸öroute class
+											pRoute = new CRoute();//å¯¹ æ¯ä¸€å¯¹ODpairï¼Œåˆ›å»ºä¸€ä¸ªroute class
 											pRoute->ODID = m_Origin[origin]->ODpairNumber[destination];//OD pair number
 											pRoute->PickupNode = m_Node[picknode];
 											pRoute->DropoffNode = m_Node[dropnode];
@@ -1053,15 +1053,15 @@ void CNetwork::GenerateRoute()
 }
 
 //assign all-or-nothing
-//·µ»ØÒ»¸öÖ¸Õë£¬Ö¸ÏòÒ»¸ödouble[m_nRoute]µÄÊı×é£¬°üº¬ÁËrouteµÄÁ÷Á¿
+//è¿”å›ä¸€ä¸ªæŒ‡é’ˆï¼ŒæŒ‡å‘ä¸€ä¸ªdouble[m_nRoute]çš„æ•°ç»„ï¼ŒåŒ…å«äº†routeçš„æµé‡
 void CNetwork::AllorNothingAssignment(double* RouteFlow1, double* ANRouteFlow)
 {
-	//auto ANRouteFlow = new double[m_nRoute]; // ¸¨ÖúRoute flow
+	//auto ANRouteFlow = new double[m_nRoute]; // è¾…åŠ©Route flow
 	for (int route = 0; route < m_nRoute; route++)
 	{
-		ANRouteFlow[route] = 0; //³õÊ¼Îª0
+		ANRouteFlow[route] = 0; //åˆå§‹ä¸º0
 	}
-	////¼ÆËãzero flowÇé¿öÏÂ£¬Ã¿ÌõrouteµÄroute cost
+	////è®¡ç®—zero flowæƒ…å†µä¸‹ï¼Œæ¯æ¡routeçš„route cost
 	//cout << "all or nothing " << endl;
 	UpdateRouteCost(RouteFlow);
 	//PrintUERouteCost();
@@ -1075,7 +1075,7 @@ void CNetwork::AllorNothingAssignment(double* RouteFlow1, double* ANRouteFlow)
 	{
 		for (int type = 0; type < 3; type++)
 		{
-			m_Node[node]->Pickupflow[type] = 0; // ³õÊ¼»¯ËùÓĞnodeµÄÁ÷Á¿Îª0
+			m_Node[node]->Pickupflow[type] = 0; // åˆå§‹åŒ–æ‰€æœ‰nodeçš„æµé‡ä¸º0
 			m_Node[node]->Dropoffflow[type] = 0;
 		}
 	}
@@ -1087,17 +1087,17 @@ void CNetwork::AllorNothingAssignment(double* RouteFlow1, double* ANRouteFlow)
 	//		cout << "Hellow world: " << m_Route[route]->DropoffNode->Incentive << endl;
 	//	}
 	//}
-	for (int origin = 0; origin < m_nOrigin; origin++) // ±éÀúoriginµÄÑ­»·all or nothing
+	for (int origin = 0; origin < m_nOrigin; origin++) // éå†originçš„å¾ªç¯all or nothing
 	{
-		//int OriginNode = m_Origin[origin]->pOriginNode->ID; // ÈÎÒâÒ»¸öoriginµÄ±àºÅ £¨ÄÃ³öÒ»¸öorigin£©
-		for (int destination = 0; destination < m_Origin[origin]->DestinationNode.size(); destination++) //È¡³öÒ»¸öOD pair
+		//int OriginNode = m_Origin[origin]->pOriginNode->ID; // ä»»æ„ä¸€ä¸ªoriginçš„ç¼–å· ï¼ˆæ‹¿å‡ºä¸€ä¸ªoriginï¼‰
+		for (int destination = 0; destination < m_Origin[origin]->DestinationNode.size(); destination++) //å–å‡ºä¸€ä¸ªOD pair
 		{
 			int ODNumber = m_Origin[origin]->ODpairNumber[destination];
 			double tem_cost = INF;
 			int tem_ID = -1;
 			for (int route = 0; route < m_nRoute; route++)
 			{
-				if (ODNumber == m_Route[route]->ODID) //Èç¹û¶ÔÓÚÒ»¸öODpair£¬ÕÒµ½ÁË¸ÃODpair¶ÔÓ¦µÄroute
+				if (ODNumber == m_Route[route]->ODID) //å¦‚æœå¯¹äºä¸€ä¸ªODpairï¼Œæ‰¾åˆ°äº†è¯¥ODpairå¯¹åº”çš„route
 				{
 					if (tem_cost > m_Route[route]->RouteCost)
 					{
@@ -1108,12 +1108,12 @@ void CNetwork::AllorNothingAssignment(double* RouteFlow1, double* ANRouteFlow)
 			}
 			double Demand = m_Origin[origin]->ODDemand[destination];
 			ANRouteFlow[tem_ID] += Demand;
-			//ÕÒµ½ÕâÌõrouteÈ¡³µµãºÍ»¹³µµã¶ÔÓ¦µÄÀàĞÍ
-			int Pickuptype = m_Route[tem_ID]->PickupType; //1, 2  //ÔÚÈ«²¿¶¼ÊÇ3µÄÇé¿öÏÂ£¬Ã»ÓĞÈ¡³µµã
-			//cout << "Pickuptype£º" << Pickuptype << endl;
+			//æ‰¾åˆ°è¿™æ¡routeå–è½¦ç‚¹å’Œè¿˜è½¦ç‚¹å¯¹åº”çš„ç±»å‹
+			int Pickuptype = m_Route[tem_ID]->PickupType; //1, 2  //åœ¨å…¨éƒ¨éƒ½æ˜¯3çš„æƒ…å†µä¸‹ï¼Œæ²¡æœ‰å–è½¦ç‚¹
+			//cout << "Pickuptypeï¼š" << Pickuptype << endl;
 			int Dropofftype = m_Route[tem_ID]->DropoffType; //1, 2, 3
-			//cout << "Dropofftype£º" << Dropofftype << endl;
-			//cout << "tem_ID£º" << tem_ID << endl;
+			//cout << "Dropofftypeï¼š" << Dropofftype << endl;
+			//cout << "tem_IDï¼š" << tem_ID << endl;
 			if (Pickuptype != -1 && Dropofftype != -1)
 			{
 				m_Route[tem_ID]->PickupNode->Pickupflow[Pickuptype - 1] += Demand;
@@ -1130,42 +1130,42 @@ void CNetwork::AllorNothingAssignment(double* RouteFlow1, double* ANRouteFlow)
 	//}
 	for (int route = 0; route < m_nRoute; route++)
 	{
-		RouteFlow1[route] = ANRouteFlow[route]; //³õÊ¼Îª0
+		RouteFlow1[route] = ANRouteFlow[route]; //åˆå§‹ä¸º0
 	}
 }
 
 //Stop criterion
 double CNetwork::GetUEGap(double* RouteFlow)
 {
-	//cout << "¼ÆËãgap" << endl;
+	//cout << "è®¡ç®—gap" << endl;
 	UpdateRouteCost(RouteFlow);
 	//cout << endl;
 
-	// ¼ÆËã±»¼õÏî·ÖÄ¸ + ¸üĞÂroute trave cost (¸ù¾İµ±Ç°µÄroute flow)
+	// è®¡ç®—è¢«å‡é¡¹åˆ†æ¯ + æ›´æ–°route trave cost (æ ¹æ®å½“å‰çš„route flow)
 	double num1 = 0; //TSTT
 	for (int route = 0; route < m_nRoute; route++)
 	{
 		num1 += RouteFlow[route] * m_Route[route]->RouteCost;
 	}
 
-	// ¼ÆËã±»¼õÏî·Ö×Ó
+	// è®¡ç®—è¢«å‡é¡¹åˆ†å­
 	double num2 = 0; //SPTT
-	auto ANRouteFlow1 = new double[m_nRoute]; // ¸¨ÖúRoute flow£¬ÒªÄÜ´¢´æÏÂÀ´
+	auto ANRouteFlow1 = new double[m_nRoute]; // è¾…åŠ©Route flowï¼Œè¦èƒ½å‚¨å­˜ä¸‹æ¥
 	for (int route = 0; route < m_nRoute; route++)
 	{
-		ANRouteFlow1[route] = 0; //³õÊ¼Îª0
+		ANRouteFlow1[route] = 0; //åˆå§‹ä¸º0
 	}
-	for (int origin = 0; origin < m_nOrigin; origin++) // ±éÀúoriginµÄÑ­»·
+	for (int origin = 0; origin < m_nOrigin; origin++) // éå†originçš„å¾ªç¯
 	{
-		//int OriginNode = m_Origin[origin]->pOriginNode->ID; // ÈÎÒâÒ»¸öoriginµÄ±àºÅ £¨ÄÃ³öÒ»¸öorigin£©
-		for (int destination = 0; destination < m_Origin[origin]->DestinationNode.size(); destination++) //È¡³öÒ»¸öOD pair
+		//int OriginNode = m_Origin[origin]->pOriginNode->ID; // ä»»æ„ä¸€ä¸ªoriginçš„ç¼–å· ï¼ˆæ‹¿å‡ºä¸€ä¸ªoriginï¼‰
+		for (int destination = 0; destination < m_Origin[origin]->DestinationNode.size(); destination++) //å–å‡ºä¸€ä¸ªOD pair
 		{
 			int ODNumber = m_Origin[origin]->ODpairNumber[destination];
 			double tem_cost = INF;
 			int tem_ID = -1;
 			for (int route = 0; route < m_nRoute; route++)
 			{
-				if (ODNumber == m_Route[route]->ODID) //Èç¹û¶ÔÓÚÒ»¸öODpair£¬ÕÒµ½ÁË¸ÃODpair¶ÔÓ¦µÄroute
+				if (ODNumber == m_Route[route]->ODID) //å¦‚æœå¯¹äºä¸€ä¸ªODpairï¼Œæ‰¾åˆ°äº†è¯¥ODpairå¯¹åº”çš„route
 				{
 					if (tem_cost > m_Route[route]->RouteCost)
 					{
@@ -1185,29 +1185,29 @@ double CNetwork::GetUEGap(double* RouteFlow)
 	}
 	delete[] ANRouteFlow1;
 	ANRouteFlow1 = NULL;
-	// ¼ÆËã¼äÏ¶º¯Êı
+	// è®¡ç®—é—´éš™å‡½æ•°
 	//cout << "num1: " << num1 << endl;
 	//cout << "num2: " << num2 << endl;
 	UEGap = 1 - num2 / num1;
 
 	//double temp = 0;
 	//// Calculate the auxiliary flow ANRouteFlow1
-	//auto ANRouteFlow1 = new double[m_nRoute]; // ¸¨ÖúRoute flow£¬ÒªÄÜ´¢´æÏÂÀ´
+	//auto ANRouteFlow1 = new double[m_nRoute]; // è¾…åŠ©Route flowï¼Œè¦èƒ½å‚¨å­˜ä¸‹æ¥
 	//for (int route = 0; route < m_nRoute; route++)
 	//{
-	//	ANRouteFlow1[route] = 0; //³õÊ¼Îª0
+	//	ANRouteFlow1[route] = 0; //åˆå§‹ä¸º0
 	//}
-	//for (int origin = 0; origin < m_nOrigin; origin++) // ±éÀúoriginµÄÑ­»·
+	//for (int origin = 0; origin < m_nOrigin; origin++) // éå†originçš„å¾ªç¯
 	//{
-	//	//int OriginNode = m_Origin[origin]->pOriginNode->ID; // ÈÎÒâÒ»¸öoriginµÄ±àºÅ £¨ÄÃ³öÒ»¸öorigin£©
-	//	for (int destination = 0; destination < m_Origin[origin]->DestinationNode.size(); destination++) //È¡³öÒ»¸öOD pair
+	//	//int OriginNode = m_Origin[origin]->pOriginNode->ID; // ä»»æ„ä¸€ä¸ªoriginçš„ç¼–å· ï¼ˆæ‹¿å‡ºä¸€ä¸ªoriginï¼‰
+	//	for (int destination = 0; destination < m_Origin[origin]->DestinationNode.size(); destination++) //å–å‡ºä¸€ä¸ªOD pair
 	//	{
 	//		int ODNumber = m_Origin[origin]->ODpairNumber[destination];
 	//		double tem_cost = INF;
 	//		int tem_ID = -1;
 	//		for (int route = 0; route < m_nRoute; route++)
 	//		{
-	//			if (ODNumber == m_Route[route]->ODID) //Èç¹û¶ÔÓÚÒ»¸öODpair£¬ÕÒµ½ÁË¸ÃODpair¶ÔÓ¦µÄroute
+	//			if (ODNumber == m_Route[route]->ODID) //å¦‚æœå¯¹äºä¸€ä¸ªODpairï¼Œæ‰¾åˆ°äº†è¯¥ODpairå¯¹åº”çš„route
 	//			{
 	//				if (tem_cost > m_Route[route]->RouteCost)
 	//				{
@@ -1229,7 +1229,7 @@ double CNetwork::GetUEGap(double* RouteFlow)
 	//UEGap = sqrt(temp);
 
 	//cout << "UEGap: " << UEGap << endl;
-	//cout << "UEÆ½ºâµÄ¸¨ÖúµÀÂ·Á÷Á¿£º" << endl;
+	//cout << "UEå¹³è¡¡çš„è¾…åŠ©é“è·¯æµé‡ï¼š" << endl;
 	//int ODO = 0;
 	//int coun = 0;
 	//for (int i = 0; i < m_nRoute; ++i)
@@ -1264,7 +1264,7 @@ double CNetwork::GetUEGap(double* RouteFlow)
 	return UEGap;
 }
 
-//¼ÆËãbattery swap frequency
+//è®¡ç®—battery swap frequency
 void CNetwork::battery_swap()
 {
 	double battery_max = 0;
@@ -1287,10 +1287,10 @@ void CNetwork::battery_swap()
 	//cout << "n_swap: " << n_swap << endl;
 }
 
-//¼ÆËãobjective value
+//è®¡ç®—objective value
 double CNetwork::cal_obj(int sol, vector<CSolution*> m_Solution)
 {
-	//////////////////¼ÆËãµ±Ç°µÄobjective value
+	//////////////////è®¡ç®—å½“å‰çš„objective value
 	battery_swap();
 	double UE_cost = 0;
 	double battery_swap_cost = 0;
@@ -1317,7 +1317,7 @@ double CNetwork::cal_obj(int sol, vector<CSolution*> m_Solution)
 			//{
 			//	cout << "RouteFlow[route]: " << RouteFlow[route] << " " << m_Route[route]->RouteCost << endl;
 			//}
-			if (m_Route[route]->DropoffType != 2)//total battery swap cost for parking and non-parking node, ÅÅ³ıÁËartificial routeºÍplug-in charging station
+			if (m_Route[route]->DropoffType != 2)//total battery swap cost for parking and non-parking node, æ’é™¤äº†artificial routeå’Œplug-in charging station
 			{
 				//battery_swap_cost += xita5 * RouteFlow[route] * ceil((days / n_swap));
 				//cout << n_swap << endl;
@@ -1379,11 +1379,11 @@ double CNetwork::cal_obj(int sol, vector<CSolution*> m_Solution)
 		}
 		if (m_Node[node]->Dropoffflow[2] > 0)
 		{
-			penalty_cost += penalty * m_Node[node]->Dropoffflow[2]; //Í£ÔÚnon-parking nodeµÄpenalty cost, ÊÇÔËÓªÕßµÄÊÕÈë
+			penalty_cost += penalty * m_Node[node]->Dropoffflow[2]; //åœåœ¨non-parking nodeçš„penalty cost, æ˜¯è¿è¥è€…çš„æ”¶å…¥
 		}
 		if (m_Node[node]->Dropoffflow[1] > 0)
 		{
-			incentive_cost += incentive * m_Node[node]->Dropoffflow[1]; //Í£ÔÚcharging stationµÄincentive, ÊÇÔËÓªÕßµÄÖ§³ö
+			incentive_cost += incentive * m_Node[node]->Dropoffflow[1]; //åœåœ¨charging stationçš„incentive, æ˜¯è¿è¥è€…çš„æ”¯å‡º
 		}
 	}
 	m_Solution[sol]->UEcost = UE_cost;
@@ -1415,22 +1415,22 @@ double CNetwork::cal_obj(int sol, vector<CSolution*> m_Solution)
 	m_Solution[sol]->Fitness = 1 / Obj_temp;
 	return Obj_temp;
 
-	//////////////////¼ÆËãµ±Ç°µÄobjective value
+	//////////////////è®¡ç®—å½“å‰çš„objective value
 }
 
 //Record the Best solution
 void CNetwork::RecordBest(int sol, vector<CSolution*> m_Solution)
 {
-	////¼ÇÂ¼µ±Ç°solutionµÄobjective_value
+	////è®°å½•å½“å‰solutionçš„objective_value
 	//double obj_temp = 0; //TSTT
 	//for (int route = 0; route < m_nRoute; route++)
 	//{
 	//	obj_temp += RouteFlow[route] * m_Route[route]->RouteCost;
 	//}
-	//m_Solution[sol]->ObjectiveValue = obj_temp; //Ã¿¸ösolutionµÄobj¶¼¼ÇÂ¼
+	//m_Solution[sol]->ObjectiveValue = obj_temp; //æ¯ä¸ªsolutionçš„objéƒ½è®°å½•
 	m_Solution[sol]->Fitness = 1 / m_Solution[sol]->ObjectiveValue;
 	//cout << "temp: " << obj_temp << endl;
-	//¼ÇÂ¼best solution
+	//è®°å½•best solution
 	if (BestSolution->ObjectiveValue > m_Solution[sol]->ObjectiveValue)
 	{
 		//cout << "hello" << endl;
@@ -1458,7 +1458,7 @@ void CNetwork::RecordBest(int sol, vector<CSolution*> m_Solution)
 void CNetwork::PrintUERouteFlow(double UEGap, double* RouteFlow)
 {
 	cout << "UEGap: " << UEGap << endl;
-	cout << "UEÆ½ºâµÄµÀÂ·Á÷Á¿£º" << endl;
+	cout << "UEå¹³è¡¡çš„é“è·¯æµé‡ï¼š" << endl;
 	int ODO = 0;
 	int coun = 0;
 	for (int i = 0; i < m_nRoute; ++i)
@@ -1491,7 +1491,7 @@ void CNetwork::PrintUERouteFlow(double UEGap, double* RouteFlow)
 //Print NodeInf data
 void CNetwork::PrintUENodeFlow()
 {
-	cout << "UEÆ½ºâµÄ¸÷¸önodeµÄpickupºÍdropoffÁ÷Á¿£º" << endl;
+	cout << "UEå¹³è¡¡çš„å„ä¸ªnodeçš„pickupå’Œdropoffæµé‡ï¼š" << endl;
 	for (int node = 0; node < m_nNode; node++)
 	{
 		cout << "Node: " << node << endl;
@@ -1511,7 +1511,7 @@ void CNetwork::PrintUENodeFlow()
 //Print RouteCost data
 void CNetwork::PrintUERouteCost()
 {
-	cout << "UEÆ½ºâµÄ¸÷ÌõrouteµÄcost£º" << endl;
+	cout << "UEå¹³è¡¡çš„å„æ¡routeçš„costï¼š" << endl;
 	for (int i = 0; i < m_nRoute; ++i)
 	{
 		//if (RouteFlow[i] > 0)
@@ -1530,7 +1530,7 @@ void CNetwork::PrintUERouteCost()
 void CNetwork::PrintNodeInf()
 {
 	cout << endl;
-	cout << "¸÷¸öNodeµÄcapacity£º" << endl;
+	cout << "å„ä¸ªNodeçš„capacityï¼š" << endl;
 	for (int node = 0; node < m_nNode; node++)
 	{
 		cout << "m_Node[node]->Capacity: ";
@@ -1543,7 +1543,7 @@ void CNetwork::PrintNodeInf()
 	cout << endl;
 
 	cout << endl;
-	cout << "¸÷¸öNodeµÄWaitingTime£º" << endl;
+	cout << "å„ä¸ªNodeçš„WaitingTimeï¼š" << endl;
 	for (int node = 0; node < m_nNode; node++)
 	{
 		cout << "Node[" << node << "]->PickupWaitingtime: ";
@@ -1605,17 +1605,17 @@ void CNetwork::PrintBestSolution()
 	cout << "BestSolution->RentalFare: " << BestSolution->RentalFare << endl;
 }
 
-//ÔËĞĞÃ¶¾Ù·¨
+//è¿è¡Œæšä¸¾æ³•
 void CNetwork::EnumerationProgram()
 {
 	BestSolution = new CSolution;
 	BestSolution->ObjectiveValue = INF;
 	BestSolution->Fitness = 0;
-	//Ã¶¾Ù³öËùÓĞµÄ¿ÉĞĞsolution, ²¢ÇÒËæ»úÉú³Écapacity
+	//æšä¸¾å‡ºæ‰€æœ‰çš„å¯è¡Œsolution, å¹¶ä¸”éšæœºç”Ÿæˆcapacity
 	EnumerationNodeType();
 	CalNodeDistance();
 
-	//Ã¶¾Ù5nodesÓÃÒ»ÏÂ
+	//æšä¸¾5nodesç”¨ä¸€ä¸‹
 	//m_Solution[40]->node_capacity_upper_level[0][0] = 5;
 	//m_Solution[40]->node_capacity_upper_level[1][0] = 0;
 	//m_Solution[40]->node_capacity_upper_level[2][0] = 0;
@@ -1739,10 +1739,10 @@ void CNetwork::EnumerationProgram()
 	//cout << "Solution: " << m_nSolution << endl;
 	//Lower-level
 	for (int sol = 0; sol < m_nSolution; sol++)
-	//for (int sol = 0; sol < 1; sol++)
+		//for (int sol = 0; sol < 1; sol++)
 	{
 
-		NodeType(sol, m_Solution); //¸ù¾İ³õÊ¼Éú³ÉµÄsolution, ÎªÃ¿¸önode¸³Öµ
+		NodeType(sol, m_Solution); //æ ¹æ®åˆå§‹ç”Ÿæˆçš„solution, ä¸ºæ¯ä¸ªnodeèµ‹å€¼
 
 		//if (m_Solution[sol]->node_type_upper_level[0][0] == -1 &&
 		//	m_Solution[sol]->node_type_upper_level[0][1] == -1 &&
@@ -1765,7 +1765,7 @@ void CNetwork::EnumerationProgram()
 		//	//m_Solution[sol]->node_type_upper_level[4][2] == -1
 		//	)
 		//{
-		//	//¿´ÏÂµ±Ç°µÄsolutionÅäÖÃ
+		//	//çœ‹ä¸‹å½“å‰çš„solutioné…ç½®
 		//	for (int node = 0; node < m_nNode; node++)
 		//	{
 		//		for (int type = 0; type < 3; type++)
@@ -1775,7 +1775,7 @@ void CNetwork::EnumerationProgram()
 		//		cout << endl;
 		//	}
 		//	cout << endl;
-		//	//¿´ÏÂµ±Ç°µÄcapÅäÖÃ
+		//	//çœ‹ä¸‹å½“å‰çš„capé…ç½®
 		//	for (int node = 0; node < m_nNode; node++)
 		//	{
 		//		for (int type = 0; type < 3; type++)
@@ -1787,7 +1787,7 @@ void CNetwork::EnumerationProgram()
 		//	cout << endl;
 		//}
 
-		////¿´ÏÂµ±Ç°µÄsolutionÅäÖÃ
+		////çœ‹ä¸‹å½“å‰çš„solutioné…ç½®
 		//for (int node = 0; node < m_nNode; node++)
 		//{
 		//	for (int type = 0; type < 3; type++)
@@ -1797,7 +1797,7 @@ void CNetwork::EnumerationProgram()
 		//	cout << endl;
 		//}
 		//cout << endl;
-		////¿´ÏÂµ±Ç°µÄcapÅäÖÃ
+		////çœ‹ä¸‹å½“å‰çš„capé…ç½®
 		//for (int node = 0; node < m_Nnode; node++)
 		//{
 		//	for (int type = 0; type < 3; type++)
@@ -1808,8 +1808,8 @@ void CNetwork::EnumerationProgram()
 		//}
 		//cout << endl;
 		cout << "sol: " << sol << endl;
-		temp_do = 1; //±êÊ¶·û, Èç¹ûÃ¿¶ÔODÖÁÉÙ¶¼ÓĞÒ»ÌõRoute, ÄÇÃ´Îª1, Èç¹ûÓĞÈÎºÎÒ»ÌõODÃ»ÓĞRoute, Îª0
-		//ÊÍ·ÅÄÚ´æ
+		temp_do = 1; //æ ‡è¯†ç¬¦, å¦‚æœæ¯å¯¹ODè‡³å°‘éƒ½æœ‰ä¸€æ¡Route, é‚£ä¹ˆä¸º1, å¦‚æœæœ‰ä»»ä½•ä¸€æ¡ODæ²¡æœ‰Route, ä¸º0
+		//é‡Šæ”¾å†…å­˜
 		for (auto it = m_Route.begin(); it != m_Route.end(); it++)
 		{
 			if (*it != NULL)
@@ -1818,14 +1818,14 @@ void CNetwork::EnumerationProgram()
 				*it = NULL;
 			}
 		}
-		GenerateRoute();//ÎªÃ¿Ò»¶ÔODÉú³Éroute
+		GenerateRoute();//ä¸ºæ¯ä¸€å¯¹ODç”Ÿæˆroute
 
 		//cout << m_nRoute << endl;
 		if (temp_do != 0)
 		{
 			////////////////////////////////////////UE////////////////////////////////////////
-			// ³õÊ¼»¯²¿·Ö£º
-			double k = 1; // µü´ú´ÎÊı
+			// åˆå§‹åŒ–éƒ¨åˆ†ï¼š
+			double k = 1; // è¿­ä»£æ¬¡æ•°
 			RouteFlow = new double[m_nRoute];
 			RouteFlow_K1 = new double[m_nRoute];
 			ANRouteFlow = new double[m_nRoute];
@@ -1833,7 +1833,7 @@ void CNetwork::EnumerationProgram()
 			beita = 1;
 			for (int route = 0; route < m_nRoute; route++)
 			{
-				RouteFlow[route] = 0; // ³õÊ¼»¯ËùÓĞrouteÁ÷Á¿Îª0
+				RouteFlow[route] = 0; // åˆå§‹åŒ–æ‰€æœ‰routeæµé‡ä¸º0
 				RouteFlow_K1[route] = 0;
 				ANRouteFlow[route] = 0;
 				ANRouteFlow_K1[route] = 0;
@@ -1842,17 +1842,17 @@ void CNetwork::EnumerationProgram()
 			{
 				for (int type = 0; type < 3; type++)
 				{
-					m_Node[node]->Pickupflow[type] = 0; // ³õÊ¼»¯ËùÓĞnodeµÄÁ÷Á¿Îª0
+					m_Node[node]->Pickupflow[type] = 0; // åˆå§‹åŒ–æ‰€æœ‰nodeçš„æµé‡ä¸º0
 					m_Node[node]->Dropoffflow[type] = 0;
 				}
 			}
-			AllorNothingAssignment(RouteFlow, ANRouteFlow); // ×öÈ«ÓĞÈ«ÎŞ·ÖÅä£¬µÃµ½¸¨ÖúÂ·¶ÎÁ÷Á¿ (zero-flow)
-			// Éú³É¸¨Öúflow
+			AllorNothingAssignment(RouteFlow, ANRouteFlow); // åšå…¨æœ‰å…¨æ— åˆ†é…ï¼Œå¾—åˆ°è¾…åŠ©è·¯æ®µæµé‡ (zero-flow)
+			// ç”Ÿæˆè¾…åŠ©flow
 			double* newRouteFlow = new double[m_nRoute];
-			AllorNothingAssignment(newRouteFlow, ANRouteFlow); //Éú³ÉÁË¸¨Öúflowk
+			AllorNothingAssignment(newRouteFlow, ANRouteFlow); //ç”Ÿæˆäº†è¾…åŠ©flowk
 
 			//PrintUERouteFlow(UEGap, newRouteFlow);
-			//// ¸üĞÂÂ·¶ÎÁ÷Á¿ (MSA)
+			//// æ›´æ–°è·¯æ®µæµé‡ (MSA)
 			//{
 			//	for (int route = 0; route < m_nRoute; route++)
 			//	{
@@ -1862,12 +1862,12 @@ void CNetwork::EnumerationProgram()
 			//	delete newRouteFlow;
 			//}
 
-			// ¸üĞÂÂ·¶ÎÁ÷Á¿ (SRAM)
+			// æ›´æ–°è·¯æ®µæµé‡ (SRAM)
 			{
 				RouteFlow_K1; // k-1
 				ANRouteFlow_K1; // k-1
-				RouteFlow; //µ±Ç°flow k=1
-				newRouteFlow; //ĞÂflow k=1
+				RouteFlow; //å½“å‰flow k=1
+				newRouteFlow; //æ–°flow k=1
 				double GAP_k = 0;
 				double GAP_k1 = 0;
 				for (int route = 0; route < m_nRoute; route++)
@@ -1896,22 +1896,22 @@ void CNetwork::EnumerationProgram()
 				delete newRouteFlow;
 			}
 
-			// ¸üĞÂpicku_UpºÍdrop_offµãµÄflow
+			// æ›´æ–°picku_Upå’Œdrop_offç‚¹çš„flow
 			{
 				for (int node = 0; node < m_nNode; node++)
 				{
 					for (int type = 0; type < 3; type++)
 					{
-						m_Node[node]->Pickupflow[type] = 0; // ³õÊ¼»¯ËùÓĞnodeµÄÁ÷Á¿Îª0
+						m_Node[node]->Pickupflow[type] = 0; // åˆå§‹åŒ–æ‰€æœ‰nodeçš„æµé‡ä¸º0
 						m_Node[node]->Dropoffflow[type] = 0;
 					}
 				}
 				for (int route = 0; route < m_nRoute; route++)
 				{
 					int Pickuptype = m_Route[route]->PickupType; //1, 2
-					//cout << "Pickuptype£º" << Pickuptype << endl;
+					//cout << "Pickuptypeï¼š" << Pickuptype << endl;
 					int Dropofftype = m_Route[route]->DropoffType; //1, 2, 3
-					//cout << "Dropofftype£º" << Dropofftype << endl;
+					//cout << "Dropofftypeï¼š" << Dropofftype << endl;
 					if (Pickuptype != -1 && Dropofftype != -1)
 					{
 						m_Route[route]->PickupNode->Pickupflow[Pickuptype - 1] += RouteFlow[route];
@@ -1936,11 +1936,11 @@ void CNetwork::EnumerationProgram()
 
 			while (UEGap > MaxUEGap)
 			{
-				// Éú³É¸¨Öúflow
+				// ç”Ÿæˆè¾…åŠ©flow
 				double* newRouteFlow = new double[m_nRoute];
-				AllorNothingAssignment(newRouteFlow, ANRouteFlow); //Éú³ÉÁË¸¨Öúflowk
+				AllorNothingAssignment(newRouteFlow, ANRouteFlow); //ç”Ÿæˆäº†è¾…åŠ©flowk
 
-				//// ¸üĞÂÂ·¶ÎÁ÷Á¿ (MSA)
+				//// æ›´æ–°è·¯æ®µæµé‡ (MSA)
 				//{
 				//	for (int route = 0; route < m_nRoute; route++)
 				//	{
@@ -1950,7 +1950,7 @@ void CNetwork::EnumerationProgram()
 				//	delete newRouteFlow;
 				//}
 
-				// ¸üĞÂÂ·¶ÎÁ÷Á¿ (SRAM)
+				// æ›´æ–°è·¯æ®µæµé‡ (SRAM)
 				{
 					double GAP_k = 0;
 					double GAP_k1 = 0;
@@ -1980,22 +1980,22 @@ void CNetwork::EnumerationProgram()
 					delete newRouteFlow;
 				}
 
-				// ¸üĞÂpicku_UpºÍdrop_offµãµÄflow
+				// æ›´æ–°picku_Upå’Œdrop_offç‚¹çš„flow
 				{
 					for (int node = 0; node < m_nNode; node++)
 					{
 						for (int type = 0; type < 3; type++)
 						{
-							m_Node[node]->Pickupflow[type] = 0; // ³õÊ¼»¯ËùÓĞnodeµÄÁ÷Á¿Îª0
+							m_Node[node]->Pickupflow[type] = 0; // åˆå§‹åŒ–æ‰€æœ‰nodeçš„æµé‡ä¸º0
 							m_Node[node]->Dropoffflow[type] = 0;
 						}
 					}
 					for (int route = 0; route < m_nRoute; route++)
 					{
 						int Pickuptype = m_Route[route]->PickupType; //1, 2
-						//cout << "Pickuptype£º" << Pickuptype << endl;
+						//cout << "Pickuptypeï¼š" << Pickuptype << endl;
 						int Dropofftype = m_Route[route]->DropoffType; //1, 2, 3
-						//cout << "Dropofftype£º" << Dropofftype << endl;
+						//cout << "Dropofftypeï¼š" << Dropofftype << endl;
 						if (Pickuptype != -1 && Dropofftype != -1)
 						{
 							m_Route[route]->PickupNode->Pickupflow[Pickuptype - 1] += RouteFlow[route];
@@ -2020,7 +2020,7 @@ void CNetwork::EnumerationProgram()
 			}
 
 			//Calculate the objective value
-			m_Solution[sol]->ObjectiveValue = cal_obj(sol, m_Solution); 
+			m_Solution[sol]->ObjectiveValue = cal_obj(sol, m_Solution);
 
 			//PrintUERouteFlow(UEGap, RouteFlow);
 			//PrintUERouteCost();
@@ -2032,20 +2032,20 @@ void CNetwork::EnumerationProgram()
 			RecordBest(sol, m_Solution);
 			////////////////////////////////////////UE////////////////////////////////////////
 			//cout << "UEGap: " << UEGap << endl;
-			
+
 			//////////////////////////////////////////Update Capacity (armijio method, integer capacity)
 			m_Solution[sol]->node_capacity_upper_level_temp = m_Solution[sol]->node_capacity_upper_level;
 			for (int node = 0; node < m_nNode; node++)
 			{
 				for (int type = 0; type < 2; type++)
 				{
-					//cout << "ÎÒÔÚ¸üĞÂcapacity: " << node << " " << type << endl;
-					if (m_Solution[sol]->node_type_upper_level[node][type] > 0) //Õâ¸önodeµÄtypeÊÇ¿ª·ÅµÄ
+					//cout << "æˆ‘åœ¨æ›´æ–°capacity: " << node << " " << type << endl;
+					if (m_Solution[sol]->node_type_upper_level[node][type] > 0) //è¿™ä¸ªnodeçš„typeæ˜¯å¼€æ”¾çš„
 					{
-						//cout << "ÎÒÔÚ¸üĞÂcapacity2: " << node << " " << type << endl;
-						while (true) //CapacityÔö¼Ó1
+						//cout << "æˆ‘åœ¨æ›´æ–°capacity2: " << node << " " << type << endl;
+						while (true) //Capacityå¢åŠ 1
 						{
-							m_Solution[sol]->node_capacity_upper_level[node][type]++; //Armijio serchÏÈ+1
+							m_Solution[sol]->node_capacity_upper_level[node][type]++; //Armijio serchå…ˆ+1
 							if (m_Solution[sol]->node_capacity_upper_level[node][type] > CapUpper)
 							{
 								m_Solution[sol]->node_capacity_upper_level[node][type]--;
@@ -2058,7 +2058,7 @@ void CNetwork::EnumerationProgram()
 							NodeType(sol, m_Solution);
 
 							////////////////////////////////////////UE////////////////////////////////////////
-							// ³õÊ¼»¯²¿·Ö£º
+							// åˆå§‹åŒ–éƒ¨åˆ†ï¼š
 							RouteFlow = new double[m_nRoute];
 							RouteFlow_K1 = new double[m_nRoute];
 							ANRouteFlow = new double[m_nRoute];
@@ -2066,7 +2066,7 @@ void CNetwork::EnumerationProgram()
 							beita = 1;
 							for (int route = 0; route < m_nRoute; route++)
 							{
-								RouteFlow[route] = 0; // ³õÊ¼»¯ËùÓĞrouteÁ÷Á¿Îª0
+								RouteFlow[route] = 0; // åˆå§‹åŒ–æ‰€æœ‰routeæµé‡ä¸º0
 								RouteFlow_K1[route] = 0;
 								ANRouteFlow[route] = 0;
 								ANRouteFlow_K1[route] = 0;
@@ -2075,17 +2075,17 @@ void CNetwork::EnumerationProgram()
 							{
 								for (int type = 0; type < 3; type++)
 								{
-									m_Node[node]->Pickupflow[type] = 0; // ³õÊ¼»¯ËùÓĞnodeµÄÁ÷Á¿Îª0
+									m_Node[node]->Pickupflow[type] = 0; // åˆå§‹åŒ–æ‰€æœ‰nodeçš„æµé‡ä¸º0
 									m_Node[node]->Dropoffflow[type] = 0;
 								}
 							}
-							AllorNothingAssignment(RouteFlow, ANRouteFlow); // ×öÈ«ÓĞÈ«ÎŞ·ÖÅä£¬µÃµ½¸¨ÖúÂ·¶ÎÁ÷Á¿ (zero-flow)
-							// Éú³É¸¨Öúflow
+							AllorNothingAssignment(RouteFlow, ANRouteFlow); // åšå…¨æœ‰å…¨æ— åˆ†é…ï¼Œå¾—åˆ°è¾…åŠ©è·¯æ®µæµé‡ (zero-flow)
+							// ç”Ÿæˆè¾…åŠ©flow
 							newRouteFlow = new double[m_nRoute];
-							AllorNothingAssignment(newRouteFlow, ANRouteFlow); //Éú³ÉÁË¸¨Öúflowk
+							AllorNothingAssignment(newRouteFlow, ANRouteFlow); //ç”Ÿæˆäº†è¾…åŠ©flowk
 
 							//PrintUERouteFlow(UEGap, newRouteFlow);
-							//// ¸üĞÂÂ·¶ÎÁ÷Á¿ (MSA)
+							//// æ›´æ–°è·¯æ®µæµé‡ (MSA)
 							//{
 							//	for (int route = 0; route < m_nRoute; route++)
 							//	{
@@ -2095,7 +2095,7 @@ void CNetwork::EnumerationProgram()
 							//	delete newRouteFlow;
 							//}
 
-							// ¸üĞÂÂ·¶ÎÁ÷Á¿ (SRAM)
+							// æ›´æ–°è·¯æ®µæµé‡ (SRAM)
 							{
 								double GAP_k = 0;
 								double GAP_k1 = 0;
@@ -2125,22 +2125,22 @@ void CNetwork::EnumerationProgram()
 								delete newRouteFlow;
 							}
 
-							// ¸üĞÂpicku_UpºÍdrop_offµãµÄflow
+							// æ›´æ–°picku_Upå’Œdrop_offç‚¹çš„flow
 							{
 								for (int node = 0; node < m_nNode; node++)
 								{
 									for (int type = 0; type < 3; type++)
 									{
-										m_Node[node]->Pickupflow[type] = 0; // ³õÊ¼»¯ËùÓĞnodeµÄÁ÷Á¿Îª0
+										m_Node[node]->Pickupflow[type] = 0; // åˆå§‹åŒ–æ‰€æœ‰nodeçš„æµé‡ä¸º0
 										m_Node[node]->Dropoffflow[type] = 0;
 									}
 								}
 								for (int route = 0; route < m_nRoute; route++)
 								{
 									int Pickuptype = m_Route[route]->PickupType; //1, 2
-									//cout << "Pickuptype£º" << Pickuptype << endl;
+									//cout << "Pickuptypeï¼š" << Pickuptype << endl;
 									int Dropofftype = m_Route[route]->DropoffType; //1, 2, 3
-									//cout << "Dropofftype£º" << Dropofftype << endl;
+									//cout << "Dropofftypeï¼š" << Dropofftype << endl;
 									if (Pickuptype != -1 && Dropofftype != -1)
 									{
 										m_Route[route]->PickupNode->Pickupflow[Pickuptype - 1] += RouteFlow[route];
@@ -2165,11 +2165,11 @@ void CNetwork::EnumerationProgram()
 
 							while (UEGap > MaxUEGap)
 							{
-								// Éú³É¸¨Öúflow
+								// ç”Ÿæˆè¾…åŠ©flow
 								double* newRouteFlow = new double[m_nRoute];
-								AllorNothingAssignment(newRouteFlow, ANRouteFlow); //Éú³ÉÁË¸¨Öúflowk
+								AllorNothingAssignment(newRouteFlow, ANRouteFlow); //ç”Ÿæˆäº†è¾…åŠ©flowk
 
-								//// ¸üĞÂÂ·¶ÎÁ÷Á¿ (MSA)
+								//// æ›´æ–°è·¯æ®µæµé‡ (MSA)
 								//{
 								//	for (int route = 0; route < m_nRoute; route++)
 								//	{
@@ -2179,7 +2179,7 @@ void CNetwork::EnumerationProgram()
 								//	delete newRouteFlow;
 								//}
 
-								// ¸üĞÂÂ·¶ÎÁ÷Á¿ (SRAM)
+								// æ›´æ–°è·¯æ®µæµé‡ (SRAM)
 								{
 									double GAP_k = 0;
 									double GAP_k1 = 0;
@@ -2209,22 +2209,22 @@ void CNetwork::EnumerationProgram()
 									delete newRouteFlow;
 								}
 
-								// ¸üĞÂpicku_UpºÍdrop_offµãµÄflow
+								// æ›´æ–°picku_Upå’Œdrop_offç‚¹çš„flow
 								{
 									for (int node = 0; node < m_nNode; node++)
 									{
 										for (int type = 0; type < 3; type++)
 										{
-											m_Node[node]->Pickupflow[type] = 0; // ³õÊ¼»¯ËùÓĞnodeµÄÁ÷Á¿Îª0
+											m_Node[node]->Pickupflow[type] = 0; // åˆå§‹åŒ–æ‰€æœ‰nodeçš„æµé‡ä¸º0
 											m_Node[node]->Dropoffflow[type] = 0;
 										}
 									}
 									for (int route = 0; route < m_nRoute; route++)
 									{
 										int Pickuptype = m_Route[route]->PickupType; //1, 2
-										//cout << "Pickuptype£º" << Pickuptype << endl;
+										//cout << "Pickuptypeï¼š" << Pickuptype << endl;
 										int Dropofftype = m_Route[route]->DropoffType; //1, 2, 3
-										//cout << "Dropofftype£º" << Dropofftype << endl;
+										//cout << "Dropofftypeï¼š" << Dropofftype << endl;
 										if (Pickuptype != -1 && Dropofftype != -1)
 										{
 											m_Route[route]->PickupNode->Pickupflow[Pickuptype - 1] += RouteFlow[route];
@@ -2268,9 +2268,9 @@ void CNetwork::EnumerationProgram()
 							delete ANRouteFlow;
 							delete ANRouteFlow_K1;
 						}
-						while (true)//Capacity¼õÉÙ1
+						while (true)//Capacityå‡å°‘1
 						{
-							m_Solution[sol]->node_capacity_upper_level[node][type]--; //Armijio serchÏÈ-1
+							m_Solution[sol]->node_capacity_upper_level[node][type]--; //Armijio serchå…ˆ-1
 							if (m_Solution[sol]->node_capacity_upper_level[node][type] < CapLower)
 							{
 								m_Solution[sol]->node_capacity_upper_level[node][type]++;
@@ -2280,7 +2280,7 @@ void CNetwork::EnumerationProgram()
 							NodeType(sol, m_Solution);
 
 							////////////////////////////////////////UE////////////////////////////////////////
-							// ³õÊ¼»¯²¿·Ö£º
+							// åˆå§‹åŒ–éƒ¨åˆ†ï¼š
 							RouteFlow = new double[m_nRoute];
 							RouteFlow_K1 = new double[m_nRoute];
 							ANRouteFlow = new double[m_nRoute];
@@ -2288,7 +2288,7 @@ void CNetwork::EnumerationProgram()
 							beita = 1;
 							for (int route = 0; route < m_nRoute; route++)
 							{
-								RouteFlow[route] = 0; // ³õÊ¼»¯ËùÓĞrouteÁ÷Á¿Îª0
+								RouteFlow[route] = 0; // åˆå§‹åŒ–æ‰€æœ‰routeæµé‡ä¸º0
 								RouteFlow_K1[route] = 0;
 								ANRouteFlow[route] = 0;
 								ANRouteFlow_K1[route] = 0;
@@ -2297,17 +2297,17 @@ void CNetwork::EnumerationProgram()
 							{
 								for (int type = 0; type < 3; type++)
 								{
-									m_Node[node]->Pickupflow[type] = 0; // ³õÊ¼»¯ËùÓĞnodeµÄÁ÷Á¿Îª0
+									m_Node[node]->Pickupflow[type] = 0; // åˆå§‹åŒ–æ‰€æœ‰nodeçš„æµé‡ä¸º0
 									m_Node[node]->Dropoffflow[type] = 0;
 								}
 							}
-							AllorNothingAssignment(RouteFlow, ANRouteFlow); // ×öÈ«ÓĞÈ«ÎŞ·ÖÅä£¬µÃµ½¸¨ÖúÂ·¶ÎÁ÷Á¿ (zero-flow)
-							// Éú³É¸¨Öúflow
+							AllorNothingAssignment(RouteFlow, ANRouteFlow); // åšå…¨æœ‰å…¨æ— åˆ†é…ï¼Œå¾—åˆ°è¾…åŠ©è·¯æ®µæµé‡ (zero-flow)
+							// ç”Ÿæˆè¾…åŠ©flow
 							newRouteFlow = new double[m_nRoute];
-							AllorNothingAssignment(newRouteFlow, ANRouteFlow); //Éú³ÉÁË¸¨Öúflowk
+							AllorNothingAssignment(newRouteFlow, ANRouteFlow); //ç”Ÿæˆäº†è¾…åŠ©flowk
 
 							//PrintUERouteFlow(UEGap, newRouteFlow);
-							//// ¸üĞÂÂ·¶ÎÁ÷Á¿ (MSA)
+							//// æ›´æ–°è·¯æ®µæµé‡ (MSA)
 							//{
 							//	for (int route = 0; route < m_nRoute; route++)
 							//	{
@@ -2317,7 +2317,7 @@ void CNetwork::EnumerationProgram()
 							//	delete newRouteFlow;
 							//}
 
-							// ¸üĞÂÂ·¶ÎÁ÷Á¿ (SRAM)
+							// æ›´æ–°è·¯æ®µæµé‡ (SRAM)
 							{
 								double GAP_k = 0;
 								double GAP_k1 = 0;
@@ -2347,22 +2347,22 @@ void CNetwork::EnumerationProgram()
 								delete newRouteFlow;
 							}
 
-							// ¸üĞÂpicku_UpºÍdrop_offµãµÄflow
+							// æ›´æ–°picku_Upå’Œdrop_offç‚¹çš„flow
 							{
 								for (int node = 0; node < m_nNode; node++)
 								{
 									for (int type = 0; type < 3; type++)
 									{
-										m_Node[node]->Pickupflow[type] = 0; // ³õÊ¼»¯ËùÓĞnodeµÄÁ÷Á¿Îª0
+										m_Node[node]->Pickupflow[type] = 0; // åˆå§‹åŒ–æ‰€æœ‰nodeçš„æµé‡ä¸º0
 										m_Node[node]->Dropoffflow[type] = 0;
 									}
 								}
 								for (int route = 0; route < m_nRoute; route++)
 								{
 									int Pickuptype = m_Route[route]->PickupType; //1, 2
-									//cout << "Pickuptype£º" << Pickuptype << endl;
+									//cout << "Pickuptypeï¼š" << Pickuptype << endl;
 									int Dropofftype = m_Route[route]->DropoffType; //1, 2, 3
-									//cout << "Dropofftype£º" << Dropofftype << endl;
+									//cout << "Dropofftypeï¼š" << Dropofftype << endl;
 									if (Pickuptype != -1 && Dropofftype != -1)
 									{
 										m_Route[route]->PickupNode->Pickupflow[Pickuptype - 1] += RouteFlow[route];
@@ -2387,11 +2387,11 @@ void CNetwork::EnumerationProgram()
 
 							while (UEGap > MaxUEGap)
 							{
-								// Éú³É¸¨Öúflow
+								// ç”Ÿæˆè¾…åŠ©flow
 								double* newRouteFlow = new double[m_nRoute];
-								AllorNothingAssignment(newRouteFlow, ANRouteFlow); //Éú³ÉÁË¸¨Öúflowk
+								AllorNothingAssignment(newRouteFlow, ANRouteFlow); //ç”Ÿæˆäº†è¾…åŠ©flowk
 
-								//// ¸üĞÂÂ·¶ÎÁ÷Á¿ (MSA)
+								//// æ›´æ–°è·¯æ®µæµé‡ (MSA)
 								//{
 								//	for (int route = 0; route < m_nRoute; route++)
 								//	{
@@ -2401,7 +2401,7 @@ void CNetwork::EnumerationProgram()
 								//	delete newRouteFlow;
 								//}
 
-								// ¸üĞÂÂ·¶ÎÁ÷Á¿ (SRAM)
+								// æ›´æ–°è·¯æ®µæµé‡ (SRAM)
 								{
 									double GAP_k = 0;
 									double GAP_k1 = 0;
@@ -2431,22 +2431,22 @@ void CNetwork::EnumerationProgram()
 									delete newRouteFlow;
 								}
 
-								// ¸üĞÂpicku_UpºÍdrop_offµãµÄflow
+								// æ›´æ–°picku_Upå’Œdrop_offç‚¹çš„flow
 								{
 									for (int node = 0; node < m_nNode; node++)
 									{
 										for (int type = 0; type < 3; type++)
 										{
-											m_Node[node]->Pickupflow[type] = 0; // ³õÊ¼»¯ËùÓĞnodeµÄÁ÷Á¿Îª0
+											m_Node[node]->Pickupflow[type] = 0; // åˆå§‹åŒ–æ‰€æœ‰nodeçš„æµé‡ä¸º0
 											m_Node[node]->Dropoffflow[type] = 0;
 										}
 									}
 									for (int route = 0; route < m_nRoute; route++)
 									{
 										int Pickuptype = m_Route[route]->PickupType; //1, 2
-										//cout << "Pickuptype£º" << Pickuptype << endl;
+										//cout << "Pickuptypeï¼š" << Pickuptype << endl;
 										int Dropofftype = m_Route[route]->DropoffType; //1, 2, 3
-										//cout << "Dropofftype£º" << Dropofftype << endl;
+										//cout << "Dropofftypeï¼š" << Dropofftype << endl;
 										if (Pickuptype != -1 && Dropofftype != -1)
 										{
 											m_Route[route]->PickupNode->Pickupflow[Pickuptype - 1] += RouteFlow[route];
@@ -2496,7 +2496,7 @@ void CNetwork::EnumerationProgram()
 			NodeType(sol, m_Solution);
 
 			////////////////////////////////////////UE////////////////////////////////////////
-			// ³õÊ¼»¯²¿·Ö£º
+			// åˆå§‹åŒ–éƒ¨åˆ†ï¼š
 			RouteFlow = new double[m_nRoute];
 			RouteFlow_K1 = new double[m_nRoute];
 			ANRouteFlow = new double[m_nRoute];
@@ -2504,7 +2504,7 @@ void CNetwork::EnumerationProgram()
 			beita = 1;
 			for (int route = 0; route < m_nRoute; route++)
 			{
-				RouteFlow[route] = 0; // ³õÊ¼»¯ËùÓĞrouteÁ÷Á¿Îª0
+				RouteFlow[route] = 0; // åˆå§‹åŒ–æ‰€æœ‰routeæµé‡ä¸º0
 				RouteFlow_K1[route] = 0;
 				ANRouteFlow[route] = 0;
 				ANRouteFlow_K1[route] = 0;
@@ -2513,17 +2513,17 @@ void CNetwork::EnumerationProgram()
 			{
 				for (int type = 0; type < 3; type++)
 				{
-					m_Node[node]->Pickupflow[type] = 0; // ³õÊ¼»¯ËùÓĞnodeµÄÁ÷Á¿Îª0
+					m_Node[node]->Pickupflow[type] = 0; // åˆå§‹åŒ–æ‰€æœ‰nodeçš„æµé‡ä¸º0
 					m_Node[node]->Dropoffflow[type] = 0;
 				}
 			}
-			AllorNothingAssignment(RouteFlow, ANRouteFlow); // ×öÈ«ÓĞÈ«ÎŞ·ÖÅä£¬µÃµ½¸¨ÖúÂ·¶ÎÁ÷Á¿ (zero-flow)
-			// Éú³É¸¨Öúflow
+			AllorNothingAssignment(RouteFlow, ANRouteFlow); // åšå…¨æœ‰å…¨æ— åˆ†é…ï¼Œå¾—åˆ°è¾…åŠ©è·¯æ®µæµé‡ (zero-flow)
+			// ç”Ÿæˆè¾…åŠ©flow
 			newRouteFlow = new double[m_nRoute];
-			AllorNothingAssignment(newRouteFlow, ANRouteFlow); //Éú³ÉÁË¸¨Öúflowk
+			AllorNothingAssignment(newRouteFlow, ANRouteFlow); //ç”Ÿæˆäº†è¾…åŠ©flowk
 
 			//PrintUERouteFlow(UEGap, newRouteFlow);
-			//// ¸üĞÂÂ·¶ÎÁ÷Á¿ (MSA)
+			//// æ›´æ–°è·¯æ®µæµé‡ (MSA)
 			//{
 			//	for (int route = 0; route < m_nRoute; route++)
 			//	{
@@ -2533,7 +2533,7 @@ void CNetwork::EnumerationProgram()
 			//	delete newRouteFlow;
 			//}
 
-			// ¸üĞÂÂ·¶ÎÁ÷Á¿ (SRAM)
+			// æ›´æ–°è·¯æ®µæµé‡ (SRAM)
 			{
 				double GAP_k = 0;
 				double GAP_k1 = 0;
@@ -2563,22 +2563,22 @@ void CNetwork::EnumerationProgram()
 				delete newRouteFlow;
 			}
 
-			// ¸üĞÂpicku_UpºÍdrop_offµãµÄflow
+			// æ›´æ–°picku_Upå’Œdrop_offç‚¹çš„flow
 			{
 				for (int node = 0; node < m_nNode; node++)
 				{
 					for (int type = 0; type < 3; type++)
 					{
-						m_Node[node]->Pickupflow[type] = 0; // ³õÊ¼»¯ËùÓĞnodeµÄÁ÷Á¿Îª0
+						m_Node[node]->Pickupflow[type] = 0; // åˆå§‹åŒ–æ‰€æœ‰nodeçš„æµé‡ä¸º0
 						m_Node[node]->Dropoffflow[type] = 0;
 					}
 				}
 				for (int route = 0; route < m_nRoute; route++)
 				{
 					int Pickuptype = m_Route[route]->PickupType; //1, 2
-					//cout << "Pickuptype£º" << Pickuptype << endl;
+					//cout << "Pickuptypeï¼š" << Pickuptype << endl;
 					int Dropofftype = m_Route[route]->DropoffType; //1, 2, 3
-					//cout << "Dropofftype£º" << Dropofftype << endl;
+					//cout << "Dropofftypeï¼š" << Dropofftype << endl;
 					if (Pickuptype != -1 && Dropofftype != -1)
 					{
 						m_Route[route]->PickupNode->Pickupflow[Pickuptype - 1] += RouteFlow[route];
@@ -2603,11 +2603,11 @@ void CNetwork::EnumerationProgram()
 
 			while (UEGap > MaxUEGap)
 			{
-				// Éú³É¸¨Öúflow
+				// ç”Ÿæˆè¾…åŠ©flow
 				double* newRouteFlow = new double[m_nRoute];
-				AllorNothingAssignment(newRouteFlow, ANRouteFlow); //Éú³ÉÁË¸¨Öúflowk
+				AllorNothingAssignment(newRouteFlow, ANRouteFlow); //ç”Ÿæˆäº†è¾…åŠ©flowk
 
-				//// ¸üĞÂÂ·¶ÎÁ÷Á¿ (MSA)
+				//// æ›´æ–°è·¯æ®µæµé‡ (MSA)
 				//{
 				//	for (int route = 0; route < m_nRoute; route++)
 				//	{
@@ -2617,7 +2617,7 @@ void CNetwork::EnumerationProgram()
 				//	delete newRouteFlow;
 				//}
 
-				// ¸üĞÂÂ·¶ÎÁ÷Á¿ (SRAM)
+				// æ›´æ–°è·¯æ®µæµé‡ (SRAM)
 				{
 					double GAP_k = 0;
 					double GAP_k1 = 0;
@@ -2647,22 +2647,22 @@ void CNetwork::EnumerationProgram()
 					delete newRouteFlow;
 				}
 
-				// ¸üĞÂpicku_UpºÍdrop_offµãµÄflow
+				// æ›´æ–°picku_Upå’Œdrop_offç‚¹çš„flow
 				{
 					for (int node = 0; node < m_nNode; node++)
 					{
 						for (int type = 0; type < 3; type++)
 						{
-							m_Node[node]->Pickupflow[type] = 0; // ³õÊ¼»¯ËùÓĞnodeµÄÁ÷Á¿Îª0
+							m_Node[node]->Pickupflow[type] = 0; // åˆå§‹åŒ–æ‰€æœ‰nodeçš„æµé‡ä¸º0
 							m_Node[node]->Dropoffflow[type] = 0;
 						}
 					}
 					for (int route = 0; route < m_nRoute; route++)
 					{
 						int Pickuptype = m_Route[route]->PickupType; //1, 2
-						//cout << "Pickuptype£º" << Pickuptype << endl;
+						//cout << "Pickuptypeï¼š" << Pickuptype << endl;
 						int Dropofftype = m_Route[route]->DropoffType; //1, 2, 3
-						//cout << "Dropofftype£º" << Dropofftype << endl;
+						//cout << "Dropofftypeï¼š" << Dropofftype << endl;
 						if (Pickuptype != -1 && Dropofftype != -1)
 						{
 							m_Route[route]->PickupNode->Pickupflow[Pickuptype - 1] += RouteFlow[route];
@@ -2705,40 +2705,40 @@ void CNetwork::EnumerationProgram()
 		}
 	}
 
-	//Êä³öÈ«¾Ö×îÓÅsolution
+	//è¾“å‡ºå…¨å±€æœ€ä¼˜solution
 	PrintBestSolution();
 }
 
 ////////////////////////////////////////////////////GA Program////////////////////////////////////////////////////
-//GAÉú³ÉËæ»ú³õÊ¼½â
+//GAç”Ÿæˆéšæœºåˆå§‹è§£
 void CNetwork::InitialNodeType()
 {
 	m_Solution.clear();
 	m_nSolution = 0;
-	//Éú³Éfood sourceÊıÁ¿µÄinitial solutions (5¸ö)
+	//ç”Ÿæˆfood sourceæ•°é‡çš„initial solutions (5ä¸ª)
 	for (int indx = 0; indx < FoodNumber; indx++)
 	{
 		CSolution* pSolution = new CSolution;
 		pSolution->ID = m_nSolution;
-		for (int node = 0; node < m_nNode; node++)//Ã¿¸önode¶¼ÒªËæ»ú³ötype
+		for (int node = 0; node < m_nNode; node++)//æ¯ä¸ªnodeéƒ½è¦éšæœºå‡ºtype
 		{
 			vector<int> node_type_temp;
 			vector<double> capacity_type_temp;
 			for (int type = 0; type < 3; type++)
 			{
-				int y_k = rand() % 2;//²úÉúµÄËæ»úÊı¶Ô2È¡Óà£¬½á¹ûÖ»ÓĞ0, 1
-				if (y_k == 0) //²»¿ª
+				int y_k = rand() % 2;//äº§ç”Ÿçš„éšæœºæ•°å¯¹2å–ä½™ï¼Œç»“æœåªæœ‰0, 1
+				if (y_k == 0) //ä¸å¼€
 				{
 					node_type_temp.push_back(-1);
 					capacity_type_temp.push_back(0);
 				}
-				if (y_k == 1 && type != 2) //¿ª
+				if (y_k == 1 && type != 2) //å¼€
 				{
 					node_type_temp.push_back(type + 1);
-					int capacity_temp = (rand() % (CapUpper - CapLower + 1)) + CapLower; // capacityËæ»úÉú³É[5, 15]
+					int capacity_temp = (rand() % (CapUpper - CapLower + 1)) + CapLower; // capacityéšæœºç”Ÿæˆ[5, 15]
 					capacity_type_temp.push_back(capacity_temp);
 				}
-				if (y_k == 1 && type == 2) //¿ª
+				if (y_k == 1 && type == 2) //å¼€
 				{
 					node_type_temp.push_back(type + 1);
 					capacity_type_temp.push_back(0);
@@ -2755,13 +2755,13 @@ void CNetwork::InitialNodeType()
 	RepairSolution(m_Solution);
 }
 
-//GAĞŞ¸´½â
+//GAä¿®å¤è§£
 void CNetwork::RepairSolution(vector<CSolution*> m_Solution)
 {
 	//Node detection
 	for (int sol = 0; sol < m_nSolution; sol++)
 	{
-		for (int node = 0; node < m_nNode; node++) //Ò»¸öÒ»¸öµã¼ì²â
+		for (int node = 0; node < m_nNode; node++) //ä¸€ä¸ªä¸€ä¸ªç‚¹æ£€æµ‹
 		{
 			//cout << m_Solution[sol]->node_type_upper_level[node][2] << endl;
 			if (m_Solution[sol]->node_type_upper_level[node][2] == 3)
@@ -2769,9 +2769,9 @@ void CNetwork::RepairSolution(vector<CSolution*> m_Solution)
 				//cout << "heelo" << endl;
 				if (m_Solution[sol]->node_type_upper_level[node][0] == 1 || m_Solution[sol]->node_type_upper_level[node][1] == 2)
 				{
-					int y_k = rand() % 2;//²úÉúµÄËæ»úÊı¶Ô2È¡Óà£¬½á¹ûÖ»ÓĞ0, 1, £¬
+					int y_k = rand() % 2;//äº§ç”Ÿçš„éšæœºæ•°å¯¹2å–ä½™ï¼Œç»“æœåªæœ‰0, 1, ï¼Œ
 					//cout << y_k << endl;
-					if (y_k == 0) //0µÄ»°°ÑÇ°Á½¸ö¹ØÁË
+					if (y_k == 0) //0çš„è¯æŠŠå‰ä¸¤ä¸ªå…³äº†
 					{
 						//cout << y_k << endl;
 						m_Solution[sol]->node_type_upper_level[node][0] = -1;
@@ -2779,7 +2779,7 @@ void CNetwork::RepairSolution(vector<CSolution*> m_Solution)
 						m_Solution[sol]->ObjectiveValue = INF;
 						m_Solution[sol]->Fitness = 0;
 					}
-					if (y_k == 1)// 1µÄ»°°Ñnon - parking node¹ØÁË
+					if (y_k == 1)// 1çš„è¯æŠŠnon - parking nodeå…³äº†
 					{
 						m_Solution[sol]->node_type_upper_level[node][2] = -1;
 						m_Solution[sol]->ObjectiveValue = INF;
@@ -2793,43 +2793,43 @@ void CNetwork::RepairSolution(vector<CSolution*> m_Solution)
 				//cout << "heelo" << endl;
 				if (m_Solution[sol]->node_type_upper_level[node][0] == -1 && m_Solution[sol]->node_type_upper_level[node][1] == -1)
 				{
-					int y_k = rand() % 2;//²úÉúµÄËæ»úÊı¶Ô2È¡Óà£¬½á¹ûÖ»ÓĞ0, 1, £¬
+					int y_k = rand() % 2;//äº§ç”Ÿçš„éšæœºæ•°å¯¹2å–ä½™ï¼Œç»“æœåªæœ‰0, 1, ï¼Œ
 					int y_kkk = rand() % 3;
 					//cout << y_kkk << "y_kk:y_kk:y_kk:y_kk:y_kk:y_kk:y_kk:y_kk:y_kk:y_kk:y_kk:y_kk:y_kk:y_kk:y_kk:y_kk:y_kk:y_kk:y_kk:y_kk:y_kk:y_kk:y_kk:y_kk:y_kk:" << endl;
 					//cout << y_k << endl;
-					if (y_k == 0) //N¹Øµô
+					if (y_k == 0) //Nå…³æ‰
 					{
-						int y_kk = (rand() % (2 - 0 + 1)) + 0;;//²úÉúµÄËæ»úÊı¶Ô2È¡Óà£¬½á¹ûÖ»ÓĞ0, 1, 3
+						int y_kk = (rand() % (2 - 0 + 1)) + 0;;//äº§ç”Ÿçš„éšæœºæ•°å¯¹2å–ä½™ï¼Œç»“æœåªæœ‰0, 1, 3
 
-						if (y_kk == 0) //°ÑPC¿ªÁË
+						if (y_kk == 0) //æŠŠPCå¼€äº†
 						{
 							m_Solution[sol]->node_type_upper_level[node][0] = 1;
 							m_Solution[sol]->node_type_upper_level[node][1] = 2;
-							int capacity_temp = (rand() % (CapUpper - CapLower + 1)) + CapLower; // capacityËæ»úÉú³É[5, 15]
+							int capacity_temp = (rand() % (CapUpper - CapLower + 1)) + CapLower; // capacityéšæœºç”Ÿæˆ[5, 15]
 							m_Solution[sol]->node_capacity_upper_level[node][0] = capacity_temp;
-							capacity_temp = (rand() % (CapUpper - CapLower + 1)) + CapLower; // capacityËæ»úÉú³É[5, 15]
+							capacity_temp = (rand() % (CapUpper - CapLower + 1)) + CapLower; // capacityéšæœºç”Ÿæˆ[5, 15]
 							m_Solution[sol]->node_capacity_upper_level[node][1] = capacity_temp;
 							m_Solution[sol]->ObjectiveValue = INF;
 							m_Solution[sol]->Fitness = 0;
 						}
-						if (y_kk == 1)//°ÑP¿ªÁË
+						if (y_kk == 1)//æŠŠPå¼€äº†
 						{
 							m_Solution[sol]->node_type_upper_level[node][0] = 1;
-							int capacity_temp = (rand() % (CapUpper - CapLower + 1)) + CapLower; // capacityËæ»úÉú³É[5, 15]
+							int capacity_temp = (rand() % (CapUpper - CapLower + 1)) + CapLower; // capacityéšæœºç”Ÿæˆ[5, 15]
 							m_Solution[sol]->node_capacity_upper_level[node][0] = capacity_temp;
 							m_Solution[sol]->ObjectiveValue = INF;
 							m_Solution[sol]->Fitness = 0;
 						}
-						if (y_kk == 2)//°ÑC¿ªÁË
+						if (y_kk == 2)//æŠŠCå¼€äº†
 						{
 							m_Solution[sol]->node_type_upper_level[node][1] = 2;
-							int capacity_temp = (rand() % (CapUpper - CapLower + 1)) + CapLower; // capacityËæ»úÉú³É[5, 15]
+							int capacity_temp = (rand() % (CapUpper - CapLower + 1)) + CapLower; // capacityéšæœºç”Ÿæˆ[5, 15]
 							m_Solution[sol]->node_capacity_upper_level[node][1] = capacity_temp;
 							m_Solution[sol]->ObjectiveValue = INF;
 							m_Solution[sol]->Fitness = 0;
 						}
 					}
-					if (y_k == 1)// N¿ª×Å
+					if (y_k == 1)// Nå¼€ç€
 					{
 						m_Solution[sol]->node_type_upper_level[node][2] = 3;
 						m_Solution[sol]->ObjectiveValue = INF;
@@ -2843,7 +2843,7 @@ void CNetwork::RepairSolution(vector<CSolution*> m_Solution)
 	//Fix capacity
 	for (int sol = 0; sol < m_nSolution; sol++)
 	{
-		for (int node = 0; node < m_nNode; node++) //Ò»¸öÒ»¸öµã¼ì²â
+		for (int node = 0; node < m_nNode; node++) //ä¸€ä¸ªä¸€ä¸ªç‚¹æ£€æµ‹
 		{
 			if (m_Solution[sol]->node_type_upper_level[node][0] == -1)
 			{
@@ -2862,12 +2862,12 @@ void CNetwork::RepairSolution(vector<CSolution*> m_Solution)
 }
 
 //Fitness-based roulette wheel selection method (calculate probability)
-//(For each onlooker,¸ù¾İprobabilityÑ¡ÔñÒ»¸ösolution2)
+//(For each onlooker,æ ¹æ®probabilityé€‰æ‹©ä¸€ä¸ªsolution2)
 void CNetwork::WheelSelect()
 {
 	m_Solution2.clear();
 
-	//¼ÆËãprobability
+	//è®¡ç®—probability
 	double temp_total_fitness = 0;
 	for (int indx = 0; indx < FoodNumber; indx++)
 	{
@@ -2882,19 +2882,19 @@ void CNetwork::WheelSelect()
 	int t = 0;
 	int i = 0;
 	double r = 0;
-	while (t < FoodNumber)//È·±£Ã¿¸öonlooker bee¶¼ÄÜÕÒµ½Ò»¸öfood source, WheelSelect method
+	while (t < FoodNumber)//ç¡®ä¿æ¯ä¸ªonlooker beeéƒ½èƒ½æ‰¾åˆ°ä¸€ä¸ªfood source, WheelSelect method
 	{
 		r = ((double)rand() / ((double)(RAND_MAX)+(double)(1)));//r is a random variable in 0 - 1
 		if (r < m_Solution[i]->Probability) //choose a food source depending on its probability
 		{
 			CSolution* pSolution = new CSolution;
-			pSolution->ID = i; //¼ÇÂ¼Ñ¡ÖĞsolutionµÄindex
+			pSolution->ID = i; //è®°å½•é€‰ä¸­solutionçš„index
 			pSolution->node_type_upper_level = m_Solution[i]->node_type_upper_level;
 			pSolution->node_capacity_upper_level = m_Solution[i]->node_capacity_upper_level;
 			pSolution->ObjectiveValue = m_Solution[i]->ObjectiveValue;
 			pSolution->Fitness = m_Solution[i]->Fitness;
 			m_Solution2.push_back(pSolution);
-			t++;//È·±£Éú³Éfood sourceÊıÁ¿¸öµÄsolution2£¬²¢ÖªµÀÊÇµÚt¸öonlooker bee
+			t++;//ç¡®ä¿ç”Ÿæˆfood sourceæ•°é‡ä¸ªçš„solution2ï¼Œå¹¶çŸ¥é“æ˜¯ç¬¬tä¸ªonlooker bee
 		}
 		i++;
 		if (i == FoodNumber)
@@ -2908,7 +2908,7 @@ void CNetwork::Crossover()
 {
 	//for (int sol = 0; sol < FoodNumber; sol++)
 	//{
-	//	cout << "Solution2Ç°" << sol << ": " << endl;
+	//	cout << "Solution2å‰" << sol << ": " << endl;
 	//	for (int node = 0; node < m_nNode; node++)
 	//	{
 	//		for (int type = 0; type < 3; type++)
@@ -2921,28 +2921,28 @@ void CNetwork::Crossover()
 	//}
 	for (int i = 0; i < FoodNumber / 2; i++)
 	{
-		double r1 = rand() % 10001 / 10000.0; //Ëæ»úÒ»¸ö¸ÅÂÊ,¿´ÊÇ·ñcrossover
-		if (crossover_rate >= r1)//½»²æ¸ÅÂÊ
+		double r1 = rand() % 10001 / 10000.0; //éšæœºä¸€ä¸ªæ¦‚ç‡,çœ‹æ˜¯å¦crossover
+		if (crossover_rate >= r1)//äº¤å‰æ¦‚ç‡
 		{
 
-			//Ëæ»úÁ½¸öÊı,¼´Ëæ»úÑ¡ÖĞÁ½¸ösolutionÀ´½»²æ
-			int m = 0;//Ëæ»ú¸¸
-			int n = 0;//Ëæ»úÄ¸
-			int cut = 0;//Ëæ»ú½»²æÎ»ÖÃ
+			//éšæœºä¸¤ä¸ªæ•°,å³éšæœºé€‰ä¸­ä¸¤ä¸ªsolutionæ¥äº¤å‰
+			int m = 0;//éšæœºçˆ¶
+			int n = 0;//éšæœºæ¯
+			int cut = 0;//éšæœºäº¤å‰ä½ç½®
 			while (m == n)
 			{
 				m = rand() % FoodNumber;//(0 - (FoodNumber - 1))
 				n = rand() % FoodNumber;
 			}
-			cut = rand() % m_nNode;//Ëæ»úÒ»¸ö½»²æÎ»ÖÃ //4¸öµã£¬²úÉú0,1,2,3
+			cut = rand() % m_nNode;//éšæœºä¸€ä¸ªäº¤å‰ä½ç½® //4ä¸ªç‚¹ï¼Œäº§ç”Ÿ0,1,2,3
 			//cout << "m: " << m << endl;
 			//cout << "n: " << n << endl;
 			//cout << "cut: " << cut << endl;
 			vector<CSolution*> m_Solution_temp;
-			for (int sol2 = 0; sol2 < m_nSolution; sol2++)//Éî¿½±´vector
+			for (int sol2 = 0; sol2 < m_nSolution; sol2++)//æ·±æ‹·è´vector
 			{
 				CSolution* pSolution = new CSolution;
-				pSolution->ID = m_Solution2[sol2]->ID; //¼ÇÂ¼Ñ¡ÖĞsolutionµÄindex
+				pSolution->ID = m_Solution2[sol2]->ID; //è®°å½•é€‰ä¸­solutionçš„index
 				pSolution->node_type_upper_level = m_Solution2[sol2]->node_type_upper_level;
 				pSolution->node_capacity_upper_level = m_Solution2[sol2]->node_capacity_upper_level;
 				pSolution->ObjectiveValue = m_Solution2[sol2]->ObjectiveValue;
@@ -2969,7 +2969,7 @@ void CNetwork::Crossover()
 	}
 	//for (int sol = 0; sol < FoodNumber; sol++)
 	//{
-	//	cout << "Solution2ºó" << sol << ": " << endl;
+	//	cout << "Solution2å" << sol << ": " << endl;
 	//	for (int node = 0; node < m_nNode; node++)
 	//	{
 	//		for (int type = 0; type < 3; type++)
@@ -2984,16 +2984,16 @@ void CNetwork::Crossover()
 //Mutation
 void CNetwork::Mutation()
 {
-	/*mutation±äÒì*/
-	for (int index = 0; index < FoodNumber; index++)//ËùÓĞfoodnumber
+	/*mutationå˜å¼‚*/
+	for (int index = 0; index < FoodNumber; index++)//æ‰€æœ‰foodnumber
 	{
-		//Õë¶ÔÃ¿Ò»¸önode
+		//é’ˆå¯¹æ¯ä¸€ä¸ªnode
 		for (int j = 0; j < m_nNode; j++)
 		{
 			double r2 = rand() % 10001 / 10000.0;
 			if (mutation_rate >= r2)
 			{
-				int ram = (rand() % (2 - 0 + 1)) + 0; //Ëæ»úÉú³É[0, 3]
+				int ram = (rand() % (2 - 0 + 1)) + 0; //éšæœºç”Ÿæˆ[0, 3]
 				//cout << ram << endl;
 				for (int type = 0; type < 3; type++)
 				{
@@ -3008,12 +3008,12 @@ void CNetwork::Mutation()
 		{
 			if (m_Solution2[index]->node_type_upper_level[node][0] == 1 && m_Solution2[index]->node_capacity_upper_level[node][0] == 0)
 			{
-				int capacity_temp = (rand() % (CapUpper - CapLower + 1)) + CapLower; // capacityËæ»úÉú³É[5, 15]
+				int capacity_temp = (rand() % (CapUpper - CapLower + 1)) + CapLower; // capacityéšæœºç”Ÿæˆ[5, 15]
 				m_Solution2[index]->node_capacity_upper_level[node][0] = capacity_temp;
 			}
 			if (m_Solution2[index]->node_type_upper_level[node][1] == 2 && m_Solution2[index]->node_capacity_upper_level[node][1] == 0)
 			{
-				int capacity_temp = (rand() % (CapUpper - CapLower + 1)) + CapLower; // capacityËæ»úÉú³É[5, 15]
+				int capacity_temp = (rand() % (CapUpper - CapLower + 1)) + CapLower; // capacityéšæœºç”Ÿæˆ[5, 15]
 				m_Solution2[index]->node_capacity_upper_level[node][1] = capacity_temp;
 			}
 		}
@@ -3024,9 +3024,9 @@ void CNetwork::Mutation()
 	for (int sol = 0; sol < m_nSolution; sol++)
 		//for (int sol = 0; sol < 1; sol++)
 	{
-		NodeType(sol, m_Solution2); //¸ù¾İ³õÊ¼Éú³ÉµÄsolution, ÎªÃ¿¸önode¸³Öµ
+		NodeType(sol, m_Solution2); //æ ¹æ®åˆå§‹ç”Ÿæˆçš„solution, ä¸ºæ¯ä¸ªnodeèµ‹å€¼
 
-		////¿´ÏÂµ±Ç°µÄsolutionÅäÖÃ
+		////çœ‹ä¸‹å½“å‰çš„solutioné…ç½®
 		//for (int node = 0; node < m_nNode; node++)
 		//{
 		//	for (int type = 0; type < 3; type++)
@@ -3036,7 +3036,7 @@ void CNetwork::Mutation()
 		//	cout << endl;
 		//}
 		//cout << endl;
-		////¿´ÏÂµ±Ç°µÄCapÅäÖÃ
+		////çœ‹ä¸‹å½“å‰çš„Capé…ç½®
 		//for (int node = 0; node < m_nNode; node++)
 		//{
 		//	for (int type = 0; type < 3; type++)
@@ -3048,8 +3048,8 @@ void CNetwork::Mutation()
 		//cout << endl;
 
 		//cout << "sol: " << sol << endl;
-		temp_do = 1; //±êÊ¶·û, Èç¹ûÃ¿¶ÔODÖÁÉÙ¶¼ÓĞÒ»ÌõRoute, ÄÇÃ´Îª1, Èç¹ûÓĞÈÎºÎÒ»ÌõODÃ»ÓĞRoute, Îª0
-		//ÊÍ·ÅÄÚ´æ
+		temp_do = 1; //æ ‡è¯†ç¬¦, å¦‚æœæ¯å¯¹ODè‡³å°‘éƒ½æœ‰ä¸€æ¡Route, é‚£ä¹ˆä¸º1, å¦‚æœæœ‰ä»»ä½•ä¸€æ¡ODæ²¡æœ‰Route, ä¸º0
+		//é‡Šæ”¾å†…å­˜
 		for (auto it = m_Route.begin(); it != m_Route.end(); it++)
 		{
 			if (*it != NULL)
@@ -3058,14 +3058,14 @@ void CNetwork::Mutation()
 				*it = NULL;
 			}
 		}
-		GenerateRoute();//ÎªÃ¿Ò»¶ÔODÉú³Éroute
+		GenerateRoute();//ä¸ºæ¯ä¸€å¯¹ODç”Ÿæˆroute
 		//cout << m_nODpair << endl;
 		//cout << m_nRoute << endl;
 		if (temp_do != 0)
 		{
 			////////////////////////////////////////UE////////////////////////////////////////
-			// ³õÊ¼»¯²¿·Ö£º
-			double k = 1; // µü´ú´ÎÊı
+			// åˆå§‹åŒ–éƒ¨åˆ†ï¼š
+			double k = 1; // è¿­ä»£æ¬¡æ•°
 			RouteFlow = new double[m_nRoute];
 			RouteFlow_K1 = new double[m_nRoute];
 			ANRouteFlow = new double[m_nRoute];
@@ -3073,7 +3073,7 @@ void CNetwork::Mutation()
 			beita = 1;
 			for (int route = 0; route < m_nRoute; route++)
 			{
-				RouteFlow[route] = 0; // ³õÊ¼»¯ËùÓĞrouteÁ÷Á¿Îª0
+				RouteFlow[route] = 0; // åˆå§‹åŒ–æ‰€æœ‰routeæµé‡ä¸º0
 				RouteFlow_K1[route] = 0;
 				ANRouteFlow[route] = 0;
 				ANRouteFlow_K1[route] = 0;
@@ -3082,17 +3082,17 @@ void CNetwork::Mutation()
 			{
 				for (int type = 0; type < 3; type++)
 				{
-					m_Node[node]->Pickupflow[type] = 0; // ³õÊ¼»¯ËùÓĞnodeµÄÁ÷Á¿Îª0
+					m_Node[node]->Pickupflow[type] = 0; // åˆå§‹åŒ–æ‰€æœ‰nodeçš„æµé‡ä¸º0
 					m_Node[node]->Dropoffflow[type] = 0;
 				}
 			}
-			AllorNothingAssignment(RouteFlow, ANRouteFlow); // ×öÈ«ÓĞÈ«ÎŞ·ÖÅä£¬µÃµ½¸¨ÖúÂ·¶ÎÁ÷Á¿ (zero-flow)
-			// Éú³É¸¨Öúflow
+			AllorNothingAssignment(RouteFlow, ANRouteFlow); // åšå…¨æœ‰å…¨æ— åˆ†é…ï¼Œå¾—åˆ°è¾…åŠ©è·¯æ®µæµé‡ (zero-flow)
+			// ç”Ÿæˆè¾…åŠ©flow
 			double* newRouteFlow = new double[m_nRoute];
-			AllorNothingAssignment(newRouteFlow, ANRouteFlow); //Éú³ÉÁË¸¨Öúflowk
+			AllorNothingAssignment(newRouteFlow, ANRouteFlow); //ç”Ÿæˆäº†è¾…åŠ©flowk
 
 			//PrintUERouteFlow(UEGap, newRouteFlow);
-			//// ¸üĞÂÂ·¶ÎÁ÷Á¿ (MSA)
+			//// æ›´æ–°è·¯æ®µæµé‡ (MSA)
 			//{
 			//	for (int route = 0; route < m_nRoute; route++)
 			//	{
@@ -3102,12 +3102,12 @@ void CNetwork::Mutation()
 			//	delete newRouteFlow;
 			//}
 
-			// ¸üĞÂÂ·¶ÎÁ÷Á¿ (SRAM)
+			// æ›´æ–°è·¯æ®µæµé‡ (SRAM)
 			{
 				RouteFlow_K1; // k-1
 				ANRouteFlow_K1; // k-1
-				RouteFlow; //µ±Ç°flow k=1
-				newRouteFlow; //ĞÂflow k=1
+				RouteFlow; //å½“å‰flow k=1
+				newRouteFlow; //æ–°flow k=1
 				double GAP_k = 0;
 				double GAP_k1 = 0;
 				for (int route = 0; route < m_nRoute; route++)
@@ -3136,22 +3136,22 @@ void CNetwork::Mutation()
 				delete newRouteFlow;
 			}
 
-			// ¸üĞÂpicku_UpºÍdrop_offµãµÄflow
+			// æ›´æ–°picku_Upå’Œdrop_offç‚¹çš„flow
 			{
 				for (int node = 0; node < m_nNode; node++)
 				{
 					for (int type = 0; type < 3; type++)
 					{
-						m_Node[node]->Pickupflow[type] = 0; // ³õÊ¼»¯ËùÓĞnodeµÄÁ÷Á¿Îª0
+						m_Node[node]->Pickupflow[type] = 0; // åˆå§‹åŒ–æ‰€æœ‰nodeçš„æµé‡ä¸º0
 						m_Node[node]->Dropoffflow[type] = 0;
 					}
 				}
 				for (int route = 0; route < m_nRoute; route++)
 				{
 					int Pickuptype = m_Route[route]->PickupType; //1, 2
-					//cout << "Pickuptype£º" << Pickuptype << endl;
+					//cout << "Pickuptypeï¼š" << Pickuptype << endl;
 					int Dropofftype = m_Route[route]->DropoffType; //1, 2, 3
-					//cout << "Dropofftype£º" << Dropofftype << endl;
+					//cout << "Dropofftypeï¼š" << Dropofftype << endl;
 					if (Pickuptype != -1 && Dropofftype != -1)
 					{
 						m_Route[route]->PickupNode->Pickupflow[Pickuptype - 1] += RouteFlow[route];
@@ -3176,11 +3176,11 @@ void CNetwork::Mutation()
 
 			while (UEGap > MaxUEGap)
 			{
-				// Éú³É¸¨Öúflow
+				// ç”Ÿæˆè¾…åŠ©flow
 				double* newRouteFlow = new double[m_nRoute];
-				AllorNothingAssignment(newRouteFlow, ANRouteFlow); //Éú³ÉÁË¸¨Öúflowk
+				AllorNothingAssignment(newRouteFlow, ANRouteFlow); //ç”Ÿæˆäº†è¾…åŠ©flowk
 
-				//// ¸üĞÂÂ·¶ÎÁ÷Á¿ (MSA)
+				//// æ›´æ–°è·¯æ®µæµé‡ (MSA)
 				//{
 				//	for (int route = 0; route < m_nRoute; route++)
 				//	{
@@ -3190,7 +3190,7 @@ void CNetwork::Mutation()
 				//	delete newRouteFlow;
 				//}
 
-				// ¸üĞÂÂ·¶ÎÁ÷Á¿ (SRAM)
+				// æ›´æ–°è·¯æ®µæµé‡ (SRAM)
 				{
 					double GAP_k = 0;
 					double GAP_k1 = 0;
@@ -3220,22 +3220,22 @@ void CNetwork::Mutation()
 					delete newRouteFlow;
 				}
 
-				// ¸üĞÂpicku_UpºÍdrop_offµãµÄflow
+				// æ›´æ–°picku_Upå’Œdrop_offç‚¹çš„flow
 				{
 					for (int node = 0; node < m_nNode; node++)
 					{
 						for (int type = 0; type < 3; type++)
 						{
-							m_Node[node]->Pickupflow[type] = 0; // ³õÊ¼»¯ËùÓĞnodeµÄÁ÷Á¿Îª0
+							m_Node[node]->Pickupflow[type] = 0; // åˆå§‹åŒ–æ‰€æœ‰nodeçš„æµé‡ä¸º0
 							m_Node[node]->Dropoffflow[type] = 0;
 						}
 					}
 					for (int route = 0; route < m_nRoute; route++)
 					{
 						int Pickuptype = m_Route[route]->PickupType; //1, 2
-						//cout << "Pickuptype£º" << Pickuptype << endl;
+						//cout << "Pickuptypeï¼š" << Pickuptype << endl;
 						int Dropofftype = m_Route[route]->DropoffType; //1, 2, 3
-						//cout << "Dropofftype£º" << Dropofftype << endl;
+						//cout << "Dropofftypeï¼š" << Dropofftype << endl;
 						if (Pickuptype != -1 && Dropofftype != -1)
 						{
 							m_Route[route]->PickupNode->Pickupflow[Pickuptype - 1] += RouteFlow[route];
@@ -3278,14 +3278,14 @@ void CNetwork::Mutation()
 			{
 				for (int type = 0; type < 2; type++)
 				{
-					//cout << "ÎÒÔÚ¸üĞÂcapacity: " << node << " " << type << endl;
-					if (m_Solution2[sol]->node_type_upper_level[node][type] > 0) //Õâ¸önodeµÄtypeÊÇ¿ª·ÅµÄ
+					//cout << "æˆ‘åœ¨æ›´æ–°capacity: " << node << " " << type << endl;
+					if (m_Solution2[sol]->node_type_upper_level[node][type] > 0) //è¿™ä¸ªnodeçš„typeæ˜¯å¼€æ”¾çš„
 					{
-						//cout << "ÎÒÔÚ¸üĞÂcapacity2: " << node << " " << type << endl;
-						while (true) //CapacityÔö¼Ó1
+						//cout << "æˆ‘åœ¨æ›´æ–°capacity2: " << node << " " << type << endl;
+						while (true) //Capacityå¢åŠ 1
 						{
 							//cout << "hh1" << endl;
-							m_Solution2[sol]->node_capacity_upper_level[node][type]++; //Armijio serchÏÈ+1
+							m_Solution2[sol]->node_capacity_upper_level[node][type]++; //Armijio serchå…ˆ+1
 							if (m_Solution2[sol]->node_capacity_upper_level[node][type] > CapUpper)
 							{
 								m_Solution2[sol]->node_capacity_upper_level[node][type]--;
@@ -3298,7 +3298,7 @@ void CNetwork::Mutation()
 							NodeType(sol, m_Solution2);
 
 							////////////////////////////////////////UE////////////////////////////////////////
-							// ³õÊ¼»¯²¿·Ö£º
+							// åˆå§‹åŒ–éƒ¨åˆ†ï¼š
 							RouteFlow = new double[m_nRoute];
 							RouteFlow_K1 = new double[m_nRoute];
 							ANRouteFlow = new double[m_nRoute];
@@ -3306,7 +3306,7 @@ void CNetwork::Mutation()
 							beita = 1;
 							for (int route = 0; route < m_nRoute; route++)
 							{
-								RouteFlow[route] = 0; // ³õÊ¼»¯ËùÓĞrouteÁ÷Á¿Îª0
+								RouteFlow[route] = 0; // åˆå§‹åŒ–æ‰€æœ‰routeæµé‡ä¸º0
 								RouteFlow_K1[route] = 0;
 								ANRouteFlow[route] = 0;
 								ANRouteFlow_K1[route] = 0;
@@ -3315,17 +3315,17 @@ void CNetwork::Mutation()
 							{
 								for (int type = 0; type < 3; type++)
 								{
-									m_Node[node]->Pickupflow[type] = 0; // ³õÊ¼»¯ËùÓĞnodeµÄÁ÷Á¿Îª0
+									m_Node[node]->Pickupflow[type] = 0; // åˆå§‹åŒ–æ‰€æœ‰nodeçš„æµé‡ä¸º0
 									m_Node[node]->Dropoffflow[type] = 0;
 								}
 							}
-							AllorNothingAssignment(RouteFlow, ANRouteFlow); // ×öÈ«ÓĞÈ«ÎŞ·ÖÅä£¬µÃµ½¸¨ÖúÂ·¶ÎÁ÷Á¿ (zero-flow)
-							// Éú³É¸¨Öúflow
+							AllorNothingAssignment(RouteFlow, ANRouteFlow); // åšå…¨æœ‰å…¨æ— åˆ†é…ï¼Œå¾—åˆ°è¾…åŠ©è·¯æ®µæµé‡ (zero-flow)
+							// ç”Ÿæˆè¾…åŠ©flow
 							newRouteFlow = new double[m_nRoute];
-							AllorNothingAssignment(newRouteFlow, ANRouteFlow); //Éú³ÉÁË¸¨Öúflowk
+							AllorNothingAssignment(newRouteFlow, ANRouteFlow); //ç”Ÿæˆäº†è¾…åŠ©flowk
 
 							//PrintUERouteFlow(UEGap, newRouteFlow);
-							//// ¸üĞÂÂ·¶ÎÁ÷Á¿ (MSA)
+							//// æ›´æ–°è·¯æ®µæµé‡ (MSA)
 							//{
 							//	for (int route = 0; route < m_nRoute; route++)
 							//	{
@@ -3335,7 +3335,7 @@ void CNetwork::Mutation()
 							//	delete newRouteFlow;
 							//}
 
-							// ¸üĞÂÂ·¶ÎÁ÷Á¿ (SRAM)
+							// æ›´æ–°è·¯æ®µæµé‡ (SRAM)
 							{
 								double GAP_k = 0;
 								double GAP_k1 = 0;
@@ -3365,22 +3365,22 @@ void CNetwork::Mutation()
 								delete newRouteFlow;
 							}
 
-							// ¸üĞÂpicku_UpºÍdrop_offµãµÄflow
+							// æ›´æ–°picku_Upå’Œdrop_offç‚¹çš„flow
 							{
 								for (int node = 0; node < m_nNode; node++)
 								{
 									for (int type = 0; type < 3; type++)
 									{
-										m_Node[node]->Pickupflow[type] = 0; // ³õÊ¼»¯ËùÓĞnodeµÄÁ÷Á¿Îª0
+										m_Node[node]->Pickupflow[type] = 0; // åˆå§‹åŒ–æ‰€æœ‰nodeçš„æµé‡ä¸º0
 										m_Node[node]->Dropoffflow[type] = 0;
 									}
 								}
 								for (int route = 0; route < m_nRoute; route++)
 								{
 									int Pickuptype = m_Route[route]->PickupType; //1, 2
-									//cout << "Pickuptype£º" << Pickuptype << endl;
+									//cout << "Pickuptypeï¼š" << Pickuptype << endl;
 									int Dropofftype = m_Route[route]->DropoffType; //1, 2, 3
-									//cout << "Dropofftype£º" << Dropofftype << endl;
+									//cout << "Dropofftypeï¼š" << Dropofftype << endl;
 									if (Pickuptype != -1 && Dropofftype != -1)
 									{
 										m_Route[route]->PickupNode->Pickupflow[Pickuptype - 1] += RouteFlow[route];
@@ -3405,11 +3405,11 @@ void CNetwork::Mutation()
 
 							while (UEGap > MaxUEGap)
 							{
-								// Éú³É¸¨Öúflow
+								// ç”Ÿæˆè¾…åŠ©flow
 								double* newRouteFlow = new double[m_nRoute];
-								AllorNothingAssignment(newRouteFlow, ANRouteFlow); //Éú³ÉÁË¸¨Öúflowk
+								AllorNothingAssignment(newRouteFlow, ANRouteFlow); //ç”Ÿæˆäº†è¾…åŠ©flowk
 
-								//// ¸üĞÂÂ·¶ÎÁ÷Á¿ (MSA)
+								//// æ›´æ–°è·¯æ®µæµé‡ (MSA)
 								//{
 								//	for (int route = 0; route < m_nRoute; route++)
 								//	{
@@ -3419,7 +3419,7 @@ void CNetwork::Mutation()
 								//	delete newRouteFlow;
 								//}
 
-								// ¸üĞÂÂ·¶ÎÁ÷Á¿ (SRAM)
+								// æ›´æ–°è·¯æ®µæµé‡ (SRAM)
 								{
 									double GAP_k = 0;
 									double GAP_k1 = 0;
@@ -3449,22 +3449,22 @@ void CNetwork::Mutation()
 									delete newRouteFlow;
 								}
 
-								// ¸üĞÂpicku_UpºÍdrop_offµãµÄflow
+								// æ›´æ–°picku_Upå’Œdrop_offç‚¹çš„flow
 								{
 									for (int node = 0; node < m_nNode; node++)
 									{
 										for (int type = 0; type < 3; type++)
 										{
-											m_Node[node]->Pickupflow[type] = 0; // ³õÊ¼»¯ËùÓĞnodeµÄÁ÷Á¿Îª0
+											m_Node[node]->Pickupflow[type] = 0; // åˆå§‹åŒ–æ‰€æœ‰nodeçš„æµé‡ä¸º0
 											m_Node[node]->Dropoffflow[type] = 0;
 										}
 									}
 									for (int route = 0; route < m_nRoute; route++)
 									{
 										int Pickuptype = m_Route[route]->PickupType; //1, 2
-										//cout << "Pickuptype£º" << Pickuptype << endl;
+										//cout << "Pickuptypeï¼š" << Pickuptype << endl;
 										int Dropofftype = m_Route[route]->DropoffType; //1, 2, 3
-										//cout << "Dropofftype£º" << Dropofftype << endl;
+										//cout << "Dropofftypeï¼š" << Dropofftype << endl;
 										if (Pickuptype != -1 && Dropofftype != -1)
 										{
 											m_Route[route]->PickupNode->Pickupflow[Pickuptype - 1] += RouteFlow[route];
@@ -3521,11 +3521,11 @@ void CNetwork::Mutation()
 							ANRouteFlow = NULL;
 							ANRouteFlow_K1 = NULL;
 						}
-						while (true)//Capacity¼õÉÙ1
+						while (true)//Capacityå‡å°‘1
 						{
 							//cout << "hh2" << endl;
 							//cout << "hello" << endl;
-							m_Solution2[sol]->node_capacity_upper_level[node][type]--; //Armijio serchÏÈ-1
+							m_Solution2[sol]->node_capacity_upper_level[node][type]--; //Armijio serchå…ˆ-1
 							if (m_Solution2[sol]->node_capacity_upper_level[node][type] < CapLower)
 							{
 								m_Solution2[sol]->node_capacity_upper_level[node][type]++;
@@ -3535,7 +3535,7 @@ void CNetwork::Mutation()
 							NodeType(sol, m_Solution2);
 
 							////////////////////////////////////////UE////////////////////////////////////////
-							// ³õÊ¼»¯²¿·Ö£º
+							// åˆå§‹åŒ–éƒ¨åˆ†ï¼š
 							RouteFlow = new double[m_nRoute];
 							RouteFlow_K1 = new double[m_nRoute];
 							ANRouteFlow = new double[m_nRoute];
@@ -3543,7 +3543,7 @@ void CNetwork::Mutation()
 							beita = 1;
 							for (int route = 0; route < m_nRoute; route++)
 							{
-								RouteFlow[route] = 0; // ³õÊ¼»¯ËùÓĞrouteÁ÷Á¿Îª0
+								RouteFlow[route] = 0; // åˆå§‹åŒ–æ‰€æœ‰routeæµé‡ä¸º0
 								RouteFlow_K1[route] = 0;
 								ANRouteFlow[route] = 0;
 								ANRouteFlow_K1[route] = 0;
@@ -3552,17 +3552,17 @@ void CNetwork::Mutation()
 							{
 								for (int type = 0; type < 3; type++)
 								{
-									m_Node[node]->Pickupflow[type] = 0; // ³õÊ¼»¯ËùÓĞnodeµÄÁ÷Á¿Îª0
+									m_Node[node]->Pickupflow[type] = 0; // åˆå§‹åŒ–æ‰€æœ‰nodeçš„æµé‡ä¸º0
 									m_Node[node]->Dropoffflow[type] = 0;
 								}
 							}
-							AllorNothingAssignment(RouteFlow, ANRouteFlow); // ×öÈ«ÓĞÈ«ÎŞ·ÖÅä£¬µÃµ½¸¨ÖúÂ·¶ÎÁ÷Á¿ (zero-flow)
-							// Éú³É¸¨Öúflow
+							AllorNothingAssignment(RouteFlow, ANRouteFlow); // åšå…¨æœ‰å…¨æ— åˆ†é…ï¼Œå¾—åˆ°è¾…åŠ©è·¯æ®µæµé‡ (zero-flow)
+							// ç”Ÿæˆè¾…åŠ©flow
 							newRouteFlow = new double[m_nRoute];
-							AllorNothingAssignment(newRouteFlow, ANRouteFlow); //Éú³ÉÁË¸¨Öúflowk
+							AllorNothingAssignment(newRouteFlow, ANRouteFlow); //ç”Ÿæˆäº†è¾…åŠ©flowk
 
 							//PrintUERouteFlow(UEGap, newRouteFlow);
-							//// ¸üĞÂÂ·¶ÎÁ÷Á¿ (MSA)
+							//// æ›´æ–°è·¯æ®µæµé‡ (MSA)
 							//{
 							//	for (int route = 0; route < m_nRoute; route++)
 							//	{
@@ -3572,7 +3572,7 @@ void CNetwork::Mutation()
 							//	delete newRouteFlow;
 							//}
 
-							// ¸üĞÂÂ·¶ÎÁ÷Á¿ (SRAM)
+							// æ›´æ–°è·¯æ®µæµé‡ (SRAM)
 							{
 								double GAP_k = 0;
 								double GAP_k1 = 0;
@@ -3602,22 +3602,22 @@ void CNetwork::Mutation()
 								delete newRouteFlow;
 							}
 
-							// ¸üĞÂpicku_UpºÍdrop_offµãµÄflow
+							// æ›´æ–°picku_Upå’Œdrop_offç‚¹çš„flow
 							{
 								for (int node = 0; node < m_nNode; node++)
 								{
 									for (int type = 0; type < 3; type++)
 									{
-										m_Node[node]->Pickupflow[type] = 0; // ³õÊ¼»¯ËùÓĞnodeµÄÁ÷Á¿Îª0
+										m_Node[node]->Pickupflow[type] = 0; // åˆå§‹åŒ–æ‰€æœ‰nodeçš„æµé‡ä¸º0
 										m_Node[node]->Dropoffflow[type] = 0;
 									}
 								}
 								for (int route = 0; route < m_nRoute; route++)
 								{
 									int Pickuptype = m_Route[route]->PickupType; //1, 2
-									//cout << "Pickuptype£º" << Pickuptype << endl;
+									//cout << "Pickuptypeï¼š" << Pickuptype << endl;
 									int Dropofftype = m_Route[route]->DropoffType; //1, 2, 3
-									//cout << "Dropofftype£º" << Dropofftype << endl;
+									//cout << "Dropofftypeï¼š" << Dropofftype << endl;
 									if (Pickuptype != -1 && Dropofftype != -1)
 									{
 										m_Route[route]->PickupNode->Pickupflow[Pickuptype - 1] += RouteFlow[route];
@@ -3642,11 +3642,11 @@ void CNetwork::Mutation()
 
 							while (UEGap > MaxUEGap)
 							{
-								// Éú³É¸¨Öúflow
+								// ç”Ÿæˆè¾…åŠ©flow
 								double* newRouteFlow = new double[m_nRoute];
-								AllorNothingAssignment(newRouteFlow, ANRouteFlow); //Éú³ÉÁË¸¨Öúflowk
+								AllorNothingAssignment(newRouteFlow, ANRouteFlow); //ç”Ÿæˆäº†è¾…åŠ©flowk
 
-								//// ¸üĞÂÂ·¶ÎÁ÷Á¿ (MSA)
+								//// æ›´æ–°è·¯æ®µæµé‡ (MSA)
 								//{
 								//	for (int route = 0; route < m_nRoute; route++)
 								//	{
@@ -3656,7 +3656,7 @@ void CNetwork::Mutation()
 								//	delete newRouteFlow;
 								//}
 
-								// ¸üĞÂÂ·¶ÎÁ÷Á¿ (SRAM)
+								// æ›´æ–°è·¯æ®µæµé‡ (SRAM)
 								{
 									double GAP_k = 0;
 									double GAP_k1 = 0;
@@ -3686,22 +3686,22 @@ void CNetwork::Mutation()
 									delete newRouteFlow;
 								}
 
-								// ¸üĞÂpicku_UpºÍdrop_offµãµÄflow
+								// æ›´æ–°picku_Upå’Œdrop_offç‚¹çš„flow
 								{
 									for (int node = 0; node < m_nNode; node++)
 									{
 										for (int type = 0; type < 3; type++)
 										{
-											m_Node[node]->Pickupflow[type] = 0; // ³õÊ¼»¯ËùÓĞnodeµÄÁ÷Á¿Îª0
+											m_Node[node]->Pickupflow[type] = 0; // åˆå§‹åŒ–æ‰€æœ‰nodeçš„æµé‡ä¸º0
 											m_Node[node]->Dropoffflow[type] = 0;
 										}
 									}
 									for (int route = 0; route < m_nRoute; route++)
 									{
 										int Pickuptype = m_Route[route]->PickupType; //1, 2
-										//cout << "Pickuptype£º" << Pickuptype << endl;
+										//cout << "Pickuptypeï¼š" << Pickuptype << endl;
 										int Dropofftype = m_Route[route]->DropoffType; //1, 2, 3
-										//cout << "Dropofftype£º" << Dropofftype << endl;
+										//cout << "Dropofftypeï¼š" << Dropofftype << endl;
 										if (Pickuptype != -1 && Dropofftype != -1)
 										{
 											m_Route[route]->PickupNode->Pickupflow[Pickuptype - 1] += RouteFlow[route];
@@ -3748,7 +3748,7 @@ void CNetwork::Mutation()
 			}
 			//////////////////////////////////////////Update Capacity (armijio method, integer capacity)
 
-			////¿´ÏÂµ±Ç°µÄsolutionÅäÖÃ
+			////çœ‹ä¸‹å½“å‰çš„solutioné…ç½®
 			//for (int node = 0; node < m_nNode; node++)
 			//{
 			//	for (int type = 0; type < 3; type++)
@@ -3758,7 +3758,7 @@ void CNetwork::Mutation()
 			//	cout << endl;
 			//}
 			//cout << endl;
-			////¿´ÏÂµ±Ç°µÄCapÅäÖÃ
+			////çœ‹ä¸‹å½“å‰çš„Capé…ç½®
 			//for (int node = 0; node < m_nNode; node++)
 			//{
 			//	for (int type = 0; type < 3; type++)
@@ -3772,7 +3772,7 @@ void CNetwork::Mutation()
 			NodeType(sol, m_Solution2);
 
 			////////////////////////////////////////UE////////////////////////////////////////
-			// ³õÊ¼»¯²¿·Ö£º
+			// åˆå§‹åŒ–éƒ¨åˆ†ï¼š
 			RouteFlow = new double[m_nRoute];
 			RouteFlow_K1 = new double[m_nRoute];
 			ANRouteFlow = new double[m_nRoute];
@@ -3780,7 +3780,7 @@ void CNetwork::Mutation()
 			beita = 1;
 			for (int route = 0; route < m_nRoute; route++)
 			{
-				RouteFlow[route] = 0; // ³õÊ¼»¯ËùÓĞrouteÁ÷Á¿Îª0
+				RouteFlow[route] = 0; // åˆå§‹åŒ–æ‰€æœ‰routeæµé‡ä¸º0
 				RouteFlow_K1[route] = 0;
 				ANRouteFlow[route] = 0;
 				ANRouteFlow_K1[route] = 0;
@@ -3789,17 +3789,17 @@ void CNetwork::Mutation()
 			{
 				for (int type = 0; type < 3; type++)
 				{
-					m_Node[node]->Pickupflow[type] = 0; // ³õÊ¼»¯ËùÓĞnodeµÄÁ÷Á¿Îª0
+					m_Node[node]->Pickupflow[type] = 0; // åˆå§‹åŒ–æ‰€æœ‰nodeçš„æµé‡ä¸º0
 					m_Node[node]->Dropoffflow[type] = 0;
 				}
 			}
-			AllorNothingAssignment(RouteFlow, ANRouteFlow); // ×öÈ«ÓĞÈ«ÎŞ·ÖÅä£¬µÃµ½¸¨ÖúÂ·¶ÎÁ÷Á¿ (zero-flow)
-			// Éú³É¸¨Öúflow
+			AllorNothingAssignment(RouteFlow, ANRouteFlow); // åšå…¨æœ‰å…¨æ— åˆ†é…ï¼Œå¾—åˆ°è¾…åŠ©è·¯æ®µæµé‡ (zero-flow)
+			// ç”Ÿæˆè¾…åŠ©flow
 			newRouteFlow = new double[m_nRoute];
-			AllorNothingAssignment(newRouteFlow, ANRouteFlow); //Éú³ÉÁË¸¨Öúflowk
+			AllorNothingAssignment(newRouteFlow, ANRouteFlow); //ç”Ÿæˆäº†è¾…åŠ©flowk
 
 			//PrintUERouteFlow(UEGap, newRouteFlow);
-			//// ¸üĞÂÂ·¶ÎÁ÷Á¿ (MSA)
+			//// æ›´æ–°è·¯æ®µæµé‡ (MSA)
 			//{
 			//	for (int route = 0; route < m_nRoute; route++)
 			//	{
@@ -3809,7 +3809,7 @@ void CNetwork::Mutation()
 			//	delete newRouteFlow;
 			//}
 
-			// ¸üĞÂÂ·¶ÎÁ÷Á¿ (SRAM)
+			// æ›´æ–°è·¯æ®µæµé‡ (SRAM)
 			{
 				double GAP_k = 0;
 				double GAP_k1 = 0;
@@ -3839,22 +3839,22 @@ void CNetwork::Mutation()
 				delete newRouteFlow;
 			}
 
-			// ¸üĞÂpicku_UpºÍdrop_offµãµÄflow
+			// æ›´æ–°picku_Upå’Œdrop_offç‚¹çš„flow
 			{
 				for (int node = 0; node < m_nNode; node++)
 				{
 					for (int type = 0; type < 3; type++)
 					{
-						m_Node[node]->Pickupflow[type] = 0; // ³õÊ¼»¯ËùÓĞnodeµÄÁ÷Á¿Îª0
+						m_Node[node]->Pickupflow[type] = 0; // åˆå§‹åŒ–æ‰€æœ‰nodeçš„æµé‡ä¸º0
 						m_Node[node]->Dropoffflow[type] = 0;
 					}
 				}
 				for (int route = 0; route < m_nRoute; route++)
 				{
 					int Pickuptype = m_Route[route]->PickupType; //1, 2
-					//cout << "Pickuptype£º" << Pickuptype << endl;
+					//cout << "Pickuptypeï¼š" << Pickuptype << endl;
 					int Dropofftype = m_Route[route]->DropoffType; //1, 2, 3
-					//cout << "Dropofftype£º" << Dropofftype << endl;
+					//cout << "Dropofftypeï¼š" << Dropofftype << endl;
 					if (Pickuptype != -1 && Dropofftype != -1)
 					{
 						m_Route[route]->PickupNode->Pickupflow[Pickuptype - 1] += RouteFlow[route];
@@ -3879,11 +3879,11 @@ void CNetwork::Mutation()
 
 			while (UEGap > MaxUEGap)
 			{
-				// Éú³É¸¨Öúflow
+				// ç”Ÿæˆè¾…åŠ©flow
 				double* newRouteFlow = new double[m_nRoute];
-				AllorNothingAssignment(newRouteFlow, ANRouteFlow); //Éú³ÉÁË¸¨Öúflowk
+				AllorNothingAssignment(newRouteFlow, ANRouteFlow); //ç”Ÿæˆäº†è¾…åŠ©flowk
 
-				//// ¸üĞÂÂ·¶ÎÁ÷Á¿ (MSA)
+				//// æ›´æ–°è·¯æ®µæµé‡ (MSA)
 				//{
 				//	for (int route = 0; route < m_nRoute; route++)
 				//	{
@@ -3893,7 +3893,7 @@ void CNetwork::Mutation()
 				//	delete newRouteFlow;
 				//}
 
-				// ¸üĞÂÂ·¶ÎÁ÷Á¿ (SRAM)
+				// æ›´æ–°è·¯æ®µæµé‡ (SRAM)
 				{
 					double GAP_k = 0;
 					double GAP_k1 = 0;
@@ -3923,22 +3923,22 @@ void CNetwork::Mutation()
 					delete newRouteFlow;
 				}
 
-				// ¸üĞÂpicku_UpºÍdrop_offµãµÄflow
+				// æ›´æ–°picku_Upå’Œdrop_offç‚¹çš„flow
 				{
 					for (int node = 0; node < m_nNode; node++)
 					{
 						for (int type = 0; type < 3; type++)
 						{
-							m_Node[node]->Pickupflow[type] = 0; // ³õÊ¼»¯ËùÓĞnodeµÄÁ÷Á¿Îª0
+							m_Node[node]->Pickupflow[type] = 0; // åˆå§‹åŒ–æ‰€æœ‰nodeçš„æµé‡ä¸º0
 							m_Node[node]->Dropoffflow[type] = 0;
 						}
 					}
 					for (int route = 0; route < m_nRoute; route++)
 					{
 						int Pickuptype = m_Route[route]->PickupType; //1, 2
-						//cout << "Pickuptype£º" << Pickuptype << endl;
+						//cout << "Pickuptypeï¼š" << Pickuptype << endl;
 						int Dropofftype = m_Route[route]->DropoffType; //1, 2, 3
-						//cout << "Dropofftype£º" << Dropofftype << endl;
+						//cout << "Dropofftypeï¼š" << Dropofftype << endl;
 						if (Pickuptype != -1 && Dropofftype != -1)
 						{
 							m_Route[route]->PickupNode->Pickupflow[Pickuptype - 1] += RouteFlow[route];
@@ -3983,12 +3983,12 @@ void CNetwork::Mutation()
 	}
 }
 //Update solution[foodnumber][nbNodes]
-//ÓĞfoodnumber¸ösolution£¬»¹ÓĞ¾­¹ıcrossoverºÍmutationºóµÄfoodnumber¸öµÄsolution2£¬Ò»ÆğÑ¡³ö×îºÃµÄfoodnumber¸ösolution
+//æœ‰foodnumberä¸ªsolutionï¼Œè¿˜æœ‰ç»è¿‡crossoverå’Œmutationåçš„foodnumberä¸ªçš„solution2ï¼Œä¸€èµ·é€‰å‡ºæœ€å¥½çš„foodnumberä¸ªsolution
 void CNetwork::Selection()
 {
-	//°Ñm_SolutionºÍm_Solution2µÄobjValueºÍfitnessÈ«²¿¼ÇÂ¼
-	double fitness_all[NP]; //FitÔ½´óÔ½ºÃ
-	double objective_all[NP]; //objÔ½Ğ¡Ô½ºÃ
+	//æŠŠm_Solutionå’Œm_Solution2çš„objValueå’Œfitnesså…¨éƒ¨è®°å½•
+	double fitness_all[NP]; //Fitè¶Šå¤§è¶Šå¥½
+	double objective_all[NP]; //objè¶Šå°è¶Šå¥½
 	int index_all[NP];
 	for (int index = 0; index < FoodNumber; index++)
 	{
@@ -4000,7 +4000,7 @@ void CNetwork::Selection()
 		index_all[index + FoodNumber] = index + FoodNumber;
 	}
 
-	//ÕÒ³ö×îºÃµÄfoodnumber¸ösolution£¬´¢´æÔÚm_SolutionÖĞ
+	//æ‰¾å‡ºæœ€å¥½çš„foodnumberä¸ªsolutionï¼Œå‚¨å­˜åœ¨m_Solutionä¸­
 	int end = 1;
 	int i = 0;
 	while (end)
@@ -4051,13 +4051,13 @@ void CNetwork::Selection()
 	}
 }
 
-//ÔËĞĞGAËã·¨
+//è¿è¡ŒGAç®—æ³•
 void CNetwork::GAProgram()
 {
 	BestSolution = new CSolution;
 	BestSolution->ObjectiveValue = INF;
 	BestSolution->Fitness = 0;
-	//GAÉú³É³õÊ¼½â
+	//GAç”Ÿæˆåˆå§‹è§£
 	InitialNodeType();
 	CalNodeDistance();
 
@@ -4115,7 +4115,7 @@ void CNetwork::GAProgram()
 	//m_Solution[0]->node_capacity_upper_level[3][1] = 5;
 	//RepairSolution(m_Solution);
 
-	////¿´ÏÂµ±Ç°µÄsolutionÅäÖÃ
+	////çœ‹ä¸‹å½“å‰çš„solutioné…ç½®
 	//for (int sol = 0; sol < FoodNumber; sol++)
 	//{
 	//	cout << "Solution" << sol + 1 << ": " << endl;
@@ -4129,7 +4129,7 @@ void CNetwork::GAProgram()
 	//	}
 	//	cout << endl;
 	//	//cout << endl;
-	//	////¿´ÏÂµ±Ç°µÄCapÅäÖÃ
+	//	////çœ‹ä¸‹å½“å‰çš„Capé…ç½®
 	//	//for (int node = 0; node < m_nNode; node++)
 	//	//{
 	//	//	for (int type = 0; type < 3; type++)
@@ -4147,9 +4147,9 @@ void CNetwork::GAProgram()
 	for (int sol = 0; sol < m_nSolution; sol++)
 		//for (int sol = 0; sol < 1; sol++)
 	{
-		NodeType(sol, m_Solution); //¸ù¾İ³õÊ¼Éú³ÉµÄsolution, ÎªÃ¿¸önode¸³Öµ
+		NodeType(sol, m_Solution); //æ ¹æ®åˆå§‹ç”Ÿæˆçš„solution, ä¸ºæ¯ä¸ªnodeèµ‹å€¼
 
-		////¿´ÏÂµ±Ç°µÄsolutionÅäÖÃ
+		////çœ‹ä¸‹å½“å‰çš„solutioné…ç½®
 		//for (int node = 0; node < m_nNode; node++)
 		//{
 		//	for (int type = 0; type < 3; type++)
@@ -4159,7 +4159,7 @@ void CNetwork::GAProgram()
 		//	cout << endl;
 		//}
 		//cout << endl;
-		////¿´ÏÂµ±Ç°µÄCapÅäÖÃ
+		////çœ‹ä¸‹å½“å‰çš„Capé…ç½®
 		//for (int node = 0; node < m_nNode; node++)
 		//{
 		//	for (int type = 0; type < 3; type++)
@@ -4171,8 +4171,8 @@ void CNetwork::GAProgram()
 		//cout << endl;
 
 		cout << "sol: " << sol << endl;
-		temp_do = 1; //±êÊ¶·û, Èç¹ûÃ¿¶ÔODÖÁÉÙ¶¼ÓĞÒ»ÌõRoute, ÄÇÃ´Îª1, Èç¹ûÓĞÈÎºÎÒ»ÌõODÃ»ÓĞRoute, Îª0
-		//ÊÍ·ÅÄÚ´æ
+		temp_do = 1; //æ ‡è¯†ç¬¦, å¦‚æœæ¯å¯¹ODè‡³å°‘éƒ½æœ‰ä¸€æ¡Route, é‚£ä¹ˆä¸º1, å¦‚æœæœ‰ä»»ä½•ä¸€æ¡ODæ²¡æœ‰Route, ä¸º0
+		//é‡Šæ”¾å†…å­˜
 		for (auto it = m_Route.begin(); it != m_Route.end(); it++)
 		{
 			if (*it != NULL)
@@ -4181,14 +4181,14 @@ void CNetwork::GAProgram()
 				*it = NULL;
 			}
 		}
-		GenerateRoute();//ÎªÃ¿Ò»¶ÔODÉú³Éroute
+		GenerateRoute();//ä¸ºæ¯ä¸€å¯¹ODç”Ÿæˆroute
 		//cout << m_nODpair << endl;
 		//cout << m_nRoute << endl;
 		if (temp_do != 0)
 		{
 			////////////////////////////////////////UE////////////////////////////////////////
-			// ³õÊ¼»¯²¿·Ö£º
-			double k = 1; // µü´ú´ÎÊı
+			// åˆå§‹åŒ–éƒ¨åˆ†ï¼š
+			double k = 1; // è¿­ä»£æ¬¡æ•°
 			RouteFlow = new double[m_nRoute];
 			RouteFlow_K1 = new double[m_nRoute];
 			ANRouteFlow = new double[m_nRoute];
@@ -4196,7 +4196,7 @@ void CNetwork::GAProgram()
 			beita = 1;
 			for (int route = 0; route < m_nRoute; route++)
 			{
-				RouteFlow[route] = 0; // ³õÊ¼»¯ËùÓĞrouteÁ÷Á¿Îª0
+				RouteFlow[route] = 0; // åˆå§‹åŒ–æ‰€æœ‰routeæµé‡ä¸º0
 				RouteFlow_K1[route] = 0;
 				ANRouteFlow[route] = 0;
 				ANRouteFlow_K1[route] = 0;
@@ -4205,17 +4205,17 @@ void CNetwork::GAProgram()
 			{
 				for (int type = 0; type < 3; type++)
 				{
-					m_Node[node]->Pickupflow[type] = 0; // ³õÊ¼»¯ËùÓĞnodeµÄÁ÷Á¿Îª0
+					m_Node[node]->Pickupflow[type] = 0; // åˆå§‹åŒ–æ‰€æœ‰nodeçš„æµé‡ä¸º0
 					m_Node[node]->Dropoffflow[type] = 0;
 				}
 			}
-			AllorNothingAssignment(RouteFlow, ANRouteFlow); // ×öÈ«ÓĞÈ«ÎŞ·ÖÅä£¬µÃµ½¸¨ÖúÂ·¶ÎÁ÷Á¿ (zero-flow)
-			// Éú³É¸¨Öúflow
+			AllorNothingAssignment(RouteFlow, ANRouteFlow); // åšå…¨æœ‰å…¨æ— åˆ†é…ï¼Œå¾—åˆ°è¾…åŠ©è·¯æ®µæµé‡ (zero-flow)
+			// ç”Ÿæˆè¾…åŠ©flow
 			double* newRouteFlow = new double[m_nRoute];
-			AllorNothingAssignment(newRouteFlow, ANRouteFlow); //Éú³ÉÁË¸¨Öúflowk
+			AllorNothingAssignment(newRouteFlow, ANRouteFlow); //ç”Ÿæˆäº†è¾…åŠ©flowk
 
 			//PrintUERouteFlow(UEGap, newRouteFlow);
-			//// ¸üĞÂÂ·¶ÎÁ÷Á¿ (MSA)
+			//// æ›´æ–°è·¯æ®µæµé‡ (MSA)
 			//{
 			//	for (int route = 0; route < m_nRoute; route++)
 			//	{
@@ -4225,12 +4225,12 @@ void CNetwork::GAProgram()
 			//	delete newRouteFlow;
 			//}
 
-			// ¸üĞÂÂ·¶ÎÁ÷Á¿ (SRAM)
+			// æ›´æ–°è·¯æ®µæµé‡ (SRAM)
 			{
 				RouteFlow_K1; // k-1
 				ANRouteFlow_K1; // k-1
-				RouteFlow; //µ±Ç°flow k=1
-				newRouteFlow; //ĞÂflow k=1
+				RouteFlow; //å½“å‰flow k=1
+				newRouteFlow; //æ–°flow k=1
 				double GAP_k = 0;
 				double GAP_k1 = 0;
 				for (int route = 0; route < m_nRoute; route++)
@@ -4259,22 +4259,22 @@ void CNetwork::GAProgram()
 				delete newRouteFlow;
 			}
 
-			// ¸üĞÂpicku_UpºÍdrop_offµãµÄflow
+			// æ›´æ–°picku_Upå’Œdrop_offç‚¹çš„flow
 			{
 				for (int node = 0; node < m_nNode; node++)
 				{
 					for (int type = 0; type < 3; type++)
 					{
-						m_Node[node]->Pickupflow[type] = 0; // ³õÊ¼»¯ËùÓĞnodeµÄÁ÷Á¿Îª0
+						m_Node[node]->Pickupflow[type] = 0; // åˆå§‹åŒ–æ‰€æœ‰nodeçš„æµé‡ä¸º0
 						m_Node[node]->Dropoffflow[type] = 0;
 					}
 				}
 				for (int route = 0; route < m_nRoute; route++)
 				{
 					int Pickuptype = m_Route[route]->PickupType; //1, 2
-					//cout << "Pickuptype£º" << Pickuptype << endl;
+					//cout << "Pickuptypeï¼š" << Pickuptype << endl;
 					int Dropofftype = m_Route[route]->DropoffType; //1, 2, 3
-					//cout << "Dropofftype£º" << Dropofftype << endl;
+					//cout << "Dropofftypeï¼š" << Dropofftype << endl;
 					if (Pickuptype != -1 && Dropofftype != -1)
 					{
 						m_Route[route]->PickupNode->Pickupflow[Pickuptype - 1] += RouteFlow[route];
@@ -4299,11 +4299,11 @@ void CNetwork::GAProgram()
 
 			while (UEGap > MaxUEGap)
 			{
-				// Éú³É¸¨Öúflow
+				// ç”Ÿæˆè¾…åŠ©flow
 				double* newRouteFlow = new double[m_nRoute];
-				AllorNothingAssignment(newRouteFlow, ANRouteFlow); //Éú³ÉÁË¸¨Öúflowk
+				AllorNothingAssignment(newRouteFlow, ANRouteFlow); //ç”Ÿæˆäº†è¾…åŠ©flowk
 
-				//// ¸üĞÂÂ·¶ÎÁ÷Á¿ (MSA)
+				//// æ›´æ–°è·¯æ®µæµé‡ (MSA)
 				//{
 				//	for (int route = 0; route < m_nRoute; route++)
 				//	{
@@ -4313,7 +4313,7 @@ void CNetwork::GAProgram()
 				//	delete newRouteFlow;
 				//}
 
-				// ¸üĞÂÂ·¶ÎÁ÷Á¿ (SRAM)
+				// æ›´æ–°è·¯æ®µæµé‡ (SRAM)
 				{
 					double GAP_k = 0;
 					double GAP_k1 = 0;
@@ -4343,22 +4343,22 @@ void CNetwork::GAProgram()
 					delete newRouteFlow;
 				}
 
-				// ¸üĞÂpicku_UpºÍdrop_offµãµÄflow
+				// æ›´æ–°picku_Upå’Œdrop_offç‚¹çš„flow
 				{
 					for (int node = 0; node < m_nNode; node++)
 					{
 						for (int type = 0; type < 3; type++)
 						{
-							m_Node[node]->Pickupflow[type] = 0; // ³õÊ¼»¯ËùÓĞnodeµÄÁ÷Á¿Îª0
+							m_Node[node]->Pickupflow[type] = 0; // åˆå§‹åŒ–æ‰€æœ‰nodeçš„æµé‡ä¸º0
 							m_Node[node]->Dropoffflow[type] = 0;
 						}
 					}
 					for (int route = 0; route < m_nRoute; route++)
 					{
 						int Pickuptype = m_Route[route]->PickupType; //1, 2
-						//cout << "Pickuptype£º" << Pickuptype << endl;
+						//cout << "Pickuptypeï¼š" << Pickuptype << endl;
 						int Dropofftype = m_Route[route]->DropoffType; //1, 2, 3
-						//cout << "Dropofftype£º" << Dropofftype << endl;
+						//cout << "Dropofftypeï¼š" << Dropofftype << endl;
 						if (Pickuptype != -1 && Dropofftype != -1)
 						{
 							m_Route[route]->PickupNode->Pickupflow[Pickuptype - 1] += RouteFlow[route];
@@ -4402,13 +4402,13 @@ void CNetwork::GAProgram()
 			{
 				for (int type = 0; type < 2; type++)
 				{
-					//cout << "ÎÒÔÚ¸üĞÂcapacity: " << node << " " << type << endl;
-					if (m_Solution[sol]->node_type_upper_level[node][type] > 0) //Õâ¸önodeµÄtypeÊÇ¿ª·ÅµÄ
+					//cout << "æˆ‘åœ¨æ›´æ–°capacity: " << node << " " << type << endl;
+					if (m_Solution[sol]->node_type_upper_level[node][type] > 0) //è¿™ä¸ªnodeçš„typeæ˜¯å¼€æ”¾çš„
 					{
-						//cout << "ÎÒÔÚ¸üĞÂcapacity2: " << node << " " << type << endl;
-						while (true) //CapacityÔö¼Ó1
+						//cout << "æˆ‘åœ¨æ›´æ–°capacity2: " << node << " " << type << endl;
+						while (true) //Capacityå¢åŠ 1
 						{
-							m_Solution[sol]->node_capacity_upper_level[node][type]++; //Armijio serchÏÈ+1
+							m_Solution[sol]->node_capacity_upper_level[node][type]++; //Armijio serchå…ˆ+1
 							if (m_Solution[sol]->node_capacity_upper_level[node][type] > CapUpper)
 							{
 								m_Solution[sol]->node_capacity_upper_level[node][type]--;
@@ -4421,7 +4421,7 @@ void CNetwork::GAProgram()
 							NodeType(sol, m_Solution);
 
 							////////////////////////////////////////UE////////////////////////////////////////
-							// ³õÊ¼»¯²¿·Ö£º
+							// åˆå§‹åŒ–éƒ¨åˆ†ï¼š
 							RouteFlow = new double[m_nRoute];
 							RouteFlow_K1 = new double[m_nRoute];
 							ANRouteFlow = new double[m_nRoute];
@@ -4429,7 +4429,7 @@ void CNetwork::GAProgram()
 							beita = 1;
 							for (int route = 0; route < m_nRoute; route++)
 							{
-								RouteFlow[route] = 0; // ³õÊ¼»¯ËùÓĞrouteÁ÷Á¿Îª0
+								RouteFlow[route] = 0; // åˆå§‹åŒ–æ‰€æœ‰routeæµé‡ä¸º0
 								RouteFlow_K1[route] = 0;
 								ANRouteFlow[route] = 0;
 								ANRouteFlow_K1[route] = 0;
@@ -4438,17 +4438,17 @@ void CNetwork::GAProgram()
 							{
 								for (int type = 0; type < 3; type++)
 								{
-									m_Node[node]->Pickupflow[type] = 0; // ³õÊ¼»¯ËùÓĞnodeµÄÁ÷Á¿Îª0
+									m_Node[node]->Pickupflow[type] = 0; // åˆå§‹åŒ–æ‰€æœ‰nodeçš„æµé‡ä¸º0
 									m_Node[node]->Dropoffflow[type] = 0;
 								}
 							}
-							AllorNothingAssignment(RouteFlow, ANRouteFlow); // ×öÈ«ÓĞÈ«ÎŞ·ÖÅä£¬µÃµ½¸¨ÖúÂ·¶ÎÁ÷Á¿ (zero-flow)
-							// Éú³É¸¨Öúflow
+							AllorNothingAssignment(RouteFlow, ANRouteFlow); // åšå…¨æœ‰å…¨æ— åˆ†é…ï¼Œå¾—åˆ°è¾…åŠ©è·¯æ®µæµé‡ (zero-flow)
+							// ç”Ÿæˆè¾…åŠ©flow
 							newRouteFlow = new double[m_nRoute];
-							AllorNothingAssignment(newRouteFlow, ANRouteFlow); //Éú³ÉÁË¸¨Öúflowk
+							AllorNothingAssignment(newRouteFlow, ANRouteFlow); //ç”Ÿæˆäº†è¾…åŠ©flowk
 
 							//PrintUERouteFlow(UEGap, newRouteFlow);
-							//// ¸üĞÂÂ·¶ÎÁ÷Á¿ (MSA)
+							//// æ›´æ–°è·¯æ®µæµé‡ (MSA)
 							//{
 							//	for (int route = 0; route < m_nRoute; route++)
 							//	{
@@ -4458,7 +4458,7 @@ void CNetwork::GAProgram()
 							//	delete newRouteFlow;
 							//}
 
-							// ¸üĞÂÂ·¶ÎÁ÷Á¿ (SRAM)
+							// æ›´æ–°è·¯æ®µæµé‡ (SRAM)
 							{
 								double GAP_k = 0;
 								double GAP_k1 = 0;
@@ -4488,22 +4488,22 @@ void CNetwork::GAProgram()
 								delete newRouteFlow;
 							}
 
-							// ¸üĞÂpicku_UpºÍdrop_offµãµÄflow
+							// æ›´æ–°picku_Upå’Œdrop_offç‚¹çš„flow
 							{
 								for (int node = 0; node < m_nNode; node++)
 								{
 									for (int type = 0; type < 3; type++)
 									{
-										m_Node[node]->Pickupflow[type] = 0; // ³õÊ¼»¯ËùÓĞnodeµÄÁ÷Á¿Îª0
+										m_Node[node]->Pickupflow[type] = 0; // åˆå§‹åŒ–æ‰€æœ‰nodeçš„æµé‡ä¸º0
 										m_Node[node]->Dropoffflow[type] = 0;
 									}
 								}
 								for (int route = 0; route < m_nRoute; route++)
 								{
 									int Pickuptype = m_Route[route]->PickupType; //1, 2
-									//cout << "Pickuptype£º" << Pickuptype << endl;
+									//cout << "Pickuptypeï¼š" << Pickuptype << endl;
 									int Dropofftype = m_Route[route]->DropoffType; //1, 2, 3
-									//cout << "Dropofftype£º" << Dropofftype << endl;
+									//cout << "Dropofftypeï¼š" << Dropofftype << endl;
 									if (Pickuptype != -1 && Dropofftype != -1)
 									{
 										m_Route[route]->PickupNode->Pickupflow[Pickuptype - 1] += RouteFlow[route];
@@ -4528,11 +4528,11 @@ void CNetwork::GAProgram()
 
 							while (UEGap > MaxUEGap)
 							{
-								// Éú³É¸¨Öúflow
+								// ç”Ÿæˆè¾…åŠ©flow
 								double* newRouteFlow = new double[m_nRoute];
-								AllorNothingAssignment(newRouteFlow, ANRouteFlow); //Éú³ÉÁË¸¨Öúflowk
+								AllorNothingAssignment(newRouteFlow, ANRouteFlow); //ç”Ÿæˆäº†è¾…åŠ©flowk
 
-								//// ¸üĞÂÂ·¶ÎÁ÷Á¿ (MSA)
+								//// æ›´æ–°è·¯æ®µæµé‡ (MSA)
 								//{
 								//	for (int route = 0; route < m_nRoute; route++)
 								//	{
@@ -4542,7 +4542,7 @@ void CNetwork::GAProgram()
 								//	delete newRouteFlow;
 								//}
 
-								// ¸üĞÂÂ·¶ÎÁ÷Á¿ (SRAM)
+								// æ›´æ–°è·¯æ®µæµé‡ (SRAM)
 								{
 									double GAP_k = 0;
 									double GAP_k1 = 0;
@@ -4572,22 +4572,22 @@ void CNetwork::GAProgram()
 									delete newRouteFlow;
 								}
 
-								// ¸üĞÂpicku_UpºÍdrop_offµãµÄflow
+								// æ›´æ–°picku_Upå’Œdrop_offç‚¹çš„flow
 								{
 									for (int node = 0; node < m_nNode; node++)
 									{
 										for (int type = 0; type < 3; type++)
 										{
-											m_Node[node]->Pickupflow[type] = 0; // ³õÊ¼»¯ËùÓĞnodeµÄÁ÷Á¿Îª0
+											m_Node[node]->Pickupflow[type] = 0; // åˆå§‹åŒ–æ‰€æœ‰nodeçš„æµé‡ä¸º0
 											m_Node[node]->Dropoffflow[type] = 0;
 										}
 									}
 									for (int route = 0; route < m_nRoute; route++)
 									{
 										int Pickuptype = m_Route[route]->PickupType; //1, 2
-										//cout << "Pickuptype£º" << Pickuptype << endl;
+										//cout << "Pickuptypeï¼š" << Pickuptype << endl;
 										int Dropofftype = m_Route[route]->DropoffType; //1, 2, 3
-										//cout << "Dropofftype£º" << Dropofftype << endl;
+										//cout << "Dropofftypeï¼š" << Dropofftype << endl;
 										if (Pickuptype != -1 && Dropofftype != -1)
 										{
 											m_Route[route]->PickupNode->Pickupflow[Pickuptype - 1] += RouteFlow[route];
@@ -4643,9 +4643,9 @@ void CNetwork::GAProgram()
 							ANRouteFlow = NULL;
 							ANRouteFlow_K1 = NULL;
 						}
-						while (true)//Capacity¼õÉÙ1
+						while (true)//Capacityå‡å°‘1
 						{
-							m_Solution[sol]->node_capacity_upper_level[node][type]--; //Armijio serchÏÈ-1
+							m_Solution[sol]->node_capacity_upper_level[node][type]--; //Armijio serchå…ˆ-1
 							if (m_Solution[sol]->node_capacity_upper_level[node][type] < CapLower)
 							{
 								m_Solution[sol]->node_capacity_upper_level[node][type]++;
@@ -4655,7 +4655,7 @@ void CNetwork::GAProgram()
 							NodeType(sol, m_Solution);
 
 							////////////////////////////////////////UE////////////////////////////////////////
-							// ³õÊ¼»¯²¿·Ö£º
+							// åˆå§‹åŒ–éƒ¨åˆ†ï¼š
 							RouteFlow = new double[m_nRoute];
 							RouteFlow_K1 = new double[m_nRoute];
 							ANRouteFlow = new double[m_nRoute];
@@ -4663,7 +4663,7 @@ void CNetwork::GAProgram()
 							beita = 1;
 							for (int route = 0; route < m_nRoute; route++)
 							{
-								RouteFlow[route] = 0; // ³õÊ¼»¯ËùÓĞrouteÁ÷Á¿Îª0
+								RouteFlow[route] = 0; // åˆå§‹åŒ–æ‰€æœ‰routeæµé‡ä¸º0
 								RouteFlow_K1[route] = 0;
 								ANRouteFlow[route] = 0;
 								ANRouteFlow_K1[route] = 0;
@@ -4672,17 +4672,17 @@ void CNetwork::GAProgram()
 							{
 								for (int type = 0; type < 3; type++)
 								{
-									m_Node[node]->Pickupflow[type] = 0; // ³õÊ¼»¯ËùÓĞnodeµÄÁ÷Á¿Îª0
+									m_Node[node]->Pickupflow[type] = 0; // åˆå§‹åŒ–æ‰€æœ‰nodeçš„æµé‡ä¸º0
 									m_Node[node]->Dropoffflow[type] = 0;
 								}
 							}
-							AllorNothingAssignment(RouteFlow, ANRouteFlow); // ×öÈ«ÓĞÈ«ÎŞ·ÖÅä£¬µÃµ½¸¨ÖúÂ·¶ÎÁ÷Á¿ (zero-flow)
-							// Éú³É¸¨Öúflow
+							AllorNothingAssignment(RouteFlow, ANRouteFlow); // åšå…¨æœ‰å…¨æ— åˆ†é…ï¼Œå¾—åˆ°è¾…åŠ©è·¯æ®µæµé‡ (zero-flow)
+							// ç”Ÿæˆè¾…åŠ©flow
 							newRouteFlow = new double[m_nRoute];
-							AllorNothingAssignment(newRouteFlow, ANRouteFlow); //Éú³ÉÁË¸¨Öúflowk
+							AllorNothingAssignment(newRouteFlow, ANRouteFlow); //ç”Ÿæˆäº†è¾…åŠ©flowk
 
 							//PrintUERouteFlow(UEGap, newRouteFlow);
-							//// ¸üĞÂÂ·¶ÎÁ÷Á¿ (MSA)
+							//// æ›´æ–°è·¯æ®µæµé‡ (MSA)
 							//{
 							//	for (int route = 0; route < m_nRoute; route++)
 							//	{
@@ -4692,7 +4692,7 @@ void CNetwork::GAProgram()
 							//	delete newRouteFlow;
 							//}
 
-							// ¸üĞÂÂ·¶ÎÁ÷Á¿ (SRAM)
+							// æ›´æ–°è·¯æ®µæµé‡ (SRAM)
 							{
 								double GAP_k = 0;
 								double GAP_k1 = 0;
@@ -4722,22 +4722,22 @@ void CNetwork::GAProgram()
 								delete newRouteFlow;
 							}
 
-							// ¸üĞÂpicku_UpºÍdrop_offµãµÄflow
+							// æ›´æ–°picku_Upå’Œdrop_offç‚¹çš„flow
 							{
 								for (int node = 0; node < m_nNode; node++)
 								{
 									for (int type = 0; type < 3; type++)
 									{
-										m_Node[node]->Pickupflow[type] = 0; // ³õÊ¼»¯ËùÓĞnodeµÄÁ÷Á¿Îª0
+										m_Node[node]->Pickupflow[type] = 0; // åˆå§‹åŒ–æ‰€æœ‰nodeçš„æµé‡ä¸º0
 										m_Node[node]->Dropoffflow[type] = 0;
 									}
 								}
 								for (int route = 0; route < m_nRoute; route++)
 								{
 									int Pickuptype = m_Route[route]->PickupType; //1, 2
-									//cout << "Pickuptype£º" << Pickuptype << endl;
+									//cout << "Pickuptypeï¼š" << Pickuptype << endl;
 									int Dropofftype = m_Route[route]->DropoffType; //1, 2, 3
-									//cout << "Dropofftype£º" << Dropofftype << endl;
+									//cout << "Dropofftypeï¼š" << Dropofftype << endl;
 									if (Pickuptype != -1 && Dropofftype != -1)
 									{
 										m_Route[route]->PickupNode->Pickupflow[Pickuptype - 1] += RouteFlow[route];
@@ -4762,11 +4762,11 @@ void CNetwork::GAProgram()
 
 							while (UEGap > MaxUEGap)
 							{
-								// Éú³É¸¨Öúflow
+								// ç”Ÿæˆè¾…åŠ©flow
 								double* newRouteFlow = new double[m_nRoute];
-								AllorNothingAssignment(newRouteFlow, ANRouteFlow); //Éú³ÉÁË¸¨Öúflowk
+								AllorNothingAssignment(newRouteFlow, ANRouteFlow); //ç”Ÿæˆäº†è¾…åŠ©flowk
 
-								//// ¸üĞÂÂ·¶ÎÁ÷Á¿ (MSA)
+								//// æ›´æ–°è·¯æ®µæµé‡ (MSA)
 								//{
 								//	for (int route = 0; route < m_nRoute; route++)
 								//	{
@@ -4776,7 +4776,7 @@ void CNetwork::GAProgram()
 								//	delete newRouteFlow;
 								//}
 
-								// ¸üĞÂÂ·¶ÎÁ÷Á¿ (SRAM)
+								// æ›´æ–°è·¯æ®µæµé‡ (SRAM)
 								{
 									double GAP_k = 0;
 									double GAP_k1 = 0;
@@ -4806,22 +4806,22 @@ void CNetwork::GAProgram()
 									delete newRouteFlow;
 								}
 
-								// ¸üĞÂpicku_UpºÍdrop_offµãµÄflow
+								// æ›´æ–°picku_Upå’Œdrop_offç‚¹çš„flow
 								{
 									for (int node = 0; node < m_nNode; node++)
 									{
 										for (int type = 0; type < 3; type++)
 										{
-											m_Node[node]->Pickupflow[type] = 0; // ³õÊ¼»¯ËùÓĞnodeµÄÁ÷Á¿Îª0
+											m_Node[node]->Pickupflow[type] = 0; // åˆå§‹åŒ–æ‰€æœ‰nodeçš„æµé‡ä¸º0
 											m_Node[node]->Dropoffflow[type] = 0;
 										}
 									}
 									for (int route = 0; route < m_nRoute; route++)
 									{
 										int Pickuptype = m_Route[route]->PickupType; //1, 2
-										//cout << "Pickuptype£º" << Pickuptype << endl;
+										//cout << "Pickuptypeï¼š" << Pickuptype << endl;
 										int Dropofftype = m_Route[route]->DropoffType; //1, 2, 3
-										//cout << "Dropofftype£º" << Dropofftype << endl;
+										//cout << "Dropofftypeï¼š" << Dropofftype << endl;
 										if (Pickuptype != -1 && Dropofftype != -1)
 										{
 											m_Route[route]->PickupNode->Pickupflow[Pickuptype - 1] += RouteFlow[route];
@@ -4868,7 +4868,7 @@ void CNetwork::GAProgram()
 			}
 			//////////////////////////////////////////Update Capacity (armijio method, integer capacity)
 
-			////¿´ÏÂµ±Ç°µÄsolutionÅäÖÃ
+			////çœ‹ä¸‹å½“å‰çš„solutioné…ç½®
 			//for (int node = 0; node < m_nNode; node++)
 			//{
 			//	for (int type = 0; type < 3; type++)
@@ -4878,7 +4878,7 @@ void CNetwork::GAProgram()
 			//	cout << endl;
 			//}
 			//cout << endl;
-			////¿´ÏÂµ±Ç°µÄCapÅäÖÃ
+			////çœ‹ä¸‹å½“å‰çš„Capé…ç½®
 			//for (int node = 0; node < m_nNode; node++)
 			//{
 			//	for (int type = 0; type < 3; type++)
@@ -4889,12 +4889,12 @@ void CNetwork::GAProgram()
 			//}
 			//cout << endl;
 
-			// ³õÊ¼»¯²¿·Ö£º
+			// åˆå§‹åŒ–éƒ¨åˆ†ï¼š
 
 			NodeType(sol, m_Solution);
 
 			////////////////////////////////////////UE////////////////////////////////////////
-			// ³õÊ¼»¯²¿·Ö£º
+			// åˆå§‹åŒ–éƒ¨åˆ†ï¼š
 			RouteFlow = new double[m_nRoute];
 			RouteFlow_K1 = new double[m_nRoute];
 			ANRouteFlow = new double[m_nRoute];
@@ -4902,7 +4902,7 @@ void CNetwork::GAProgram()
 			beita = 1;
 			for (int route = 0; route < m_nRoute; route++)
 			{
-				RouteFlow[route] = 0; // ³õÊ¼»¯ËùÓĞrouteÁ÷Á¿Îª0
+				RouteFlow[route] = 0; // åˆå§‹åŒ–æ‰€æœ‰routeæµé‡ä¸º0
 				RouteFlow_K1[route] = 0;
 				ANRouteFlow[route] = 0;
 				ANRouteFlow_K1[route] = 0;
@@ -4911,17 +4911,17 @@ void CNetwork::GAProgram()
 			{
 				for (int type = 0; type < 3; type++)
 				{
-					m_Node[node]->Pickupflow[type] = 0; // ³õÊ¼»¯ËùÓĞnodeµÄÁ÷Á¿Îª0
+					m_Node[node]->Pickupflow[type] = 0; // åˆå§‹åŒ–æ‰€æœ‰nodeçš„æµé‡ä¸º0
 					m_Node[node]->Dropoffflow[type] = 0;
 				}
 			}
-			AllorNothingAssignment(RouteFlow, ANRouteFlow); // ×öÈ«ÓĞÈ«ÎŞ·ÖÅä£¬µÃµ½¸¨ÖúÂ·¶ÎÁ÷Á¿ (zero-flow)
-			// Éú³É¸¨Öúflow
+			AllorNothingAssignment(RouteFlow, ANRouteFlow); // åšå…¨æœ‰å…¨æ— åˆ†é…ï¼Œå¾—åˆ°è¾…åŠ©è·¯æ®µæµé‡ (zero-flow)
+			// ç”Ÿæˆè¾…åŠ©flow
 			newRouteFlow = new double[m_nRoute];
-			AllorNothingAssignment(newRouteFlow, ANRouteFlow); //Éú³ÉÁË¸¨Öúflowk
+			AllorNothingAssignment(newRouteFlow, ANRouteFlow); //ç”Ÿæˆäº†è¾…åŠ©flowk
 
 			//PrintUERouteFlow(UEGap, newRouteFlow);
-			//// ¸üĞÂÂ·¶ÎÁ÷Á¿ (MSA)
+			//// æ›´æ–°è·¯æ®µæµé‡ (MSA)
 			//{
 			//	for (int route = 0; route < m_nRoute; route++)
 			//	{
@@ -4931,7 +4931,7 @@ void CNetwork::GAProgram()
 			//	delete newRouteFlow;
 			//}
 
-			// ¸üĞÂÂ·¶ÎÁ÷Á¿ (SRAM)
+			// æ›´æ–°è·¯æ®µæµé‡ (SRAM)
 			{
 				double GAP_k = 0;
 				double GAP_k1 = 0;
@@ -4961,22 +4961,22 @@ void CNetwork::GAProgram()
 				delete newRouteFlow;
 			}
 
-			// ¸üĞÂpicku_UpºÍdrop_offµãµÄflow
+			// æ›´æ–°picku_Upå’Œdrop_offç‚¹çš„flow
 			{
 				for (int node = 0; node < m_nNode; node++)
 				{
 					for (int type = 0; type < 3; type++)
 					{
-						m_Node[node]->Pickupflow[type] = 0; // ³õÊ¼»¯ËùÓĞnodeµÄÁ÷Á¿Îª0
+						m_Node[node]->Pickupflow[type] = 0; // åˆå§‹åŒ–æ‰€æœ‰nodeçš„æµé‡ä¸º0
 						m_Node[node]->Dropoffflow[type] = 0;
 					}
 				}
 				for (int route = 0; route < m_nRoute; route++)
 				{
 					int Pickuptype = m_Route[route]->PickupType; //1, 2
-					//cout << "Pickuptype£º" << Pickuptype << endl;
+					//cout << "Pickuptypeï¼š" << Pickuptype << endl;
 					int Dropofftype = m_Route[route]->DropoffType; //1, 2, 3
-					//cout << "Dropofftype£º" << Dropofftype << endl;
+					//cout << "Dropofftypeï¼š" << Dropofftype << endl;
 					if (Pickuptype != -1 && Dropofftype != -1)
 					{
 						m_Route[route]->PickupNode->Pickupflow[Pickuptype - 1] += RouteFlow[route];
@@ -5001,11 +5001,11 @@ void CNetwork::GAProgram()
 
 			while (UEGap > MaxUEGap)
 			{
-				// Éú³É¸¨Öúflow
+				// ç”Ÿæˆè¾…åŠ©flow
 				double* newRouteFlow = new double[m_nRoute];
-				AllorNothingAssignment(newRouteFlow, ANRouteFlow); //Éú³ÉÁË¸¨Öúflowk
+				AllorNothingAssignment(newRouteFlow, ANRouteFlow); //ç”Ÿæˆäº†è¾…åŠ©flowk
 
-				//// ¸üĞÂÂ·¶ÎÁ÷Á¿ (MSA)
+				//// æ›´æ–°è·¯æ®µæµé‡ (MSA)
 				//{
 				//	for (int route = 0; route < m_nRoute; route++)
 				//	{
@@ -5015,7 +5015,7 @@ void CNetwork::GAProgram()
 				//	delete newRouteFlow;
 				//}
 
-				// ¸üĞÂÂ·¶ÎÁ÷Á¿ (SRAM)
+				// æ›´æ–°è·¯æ®µæµé‡ (SRAM)
 				{
 					double GAP_k = 0;
 					double GAP_k1 = 0;
@@ -5045,22 +5045,22 @@ void CNetwork::GAProgram()
 					delete newRouteFlow;
 				}
 
-				// ¸üĞÂpicku_UpºÍdrop_offµãµÄflow
+				// æ›´æ–°picku_Upå’Œdrop_offç‚¹çš„flow
 				{
 					for (int node = 0; node < m_nNode; node++)
 					{
 						for (int type = 0; type < 3; type++)
 						{
-							m_Node[node]->Pickupflow[type] = 0; // ³õÊ¼»¯ËùÓĞnodeµÄÁ÷Á¿Îª0
+							m_Node[node]->Pickupflow[type] = 0; // åˆå§‹åŒ–æ‰€æœ‰nodeçš„æµé‡ä¸º0
 							m_Node[node]->Dropoffflow[type] = 0;
 						}
 					}
 					for (int route = 0; route < m_nRoute; route++)
 					{
 						int Pickuptype = m_Route[route]->PickupType; //1, 2
-						//cout << "Pickuptype£º" << Pickuptype << endl;
+						//cout << "Pickuptypeï¼š" << Pickuptype << endl;
 						int Dropofftype = m_Route[route]->DropoffType; //1, 2, 3
-						//cout << "Dropofftype£º" << Dropofftype << endl;
+						//cout << "Dropofftypeï¼š" << Dropofftype << endl;
 						if (Pickuptype != -1 && Dropofftype != -1)
 						{
 							m_Route[route]->PickupNode->Pickupflow[Pickuptype - 1] += RouteFlow[route];
@@ -5108,7 +5108,7 @@ void CNetwork::GAProgram()
 	for (int iter = 0; iter < 45; iter++) //165 for 4-node network 200  for 5-node network 300 for 6-node network
 	{
 		cout << "iter: " << iter << endl;
-		WheelSelect(); //¸ù¾İfoodnumber¸ö¸¸´ú, Ñ¡³öfoodnumber¸ö×Ó´ú
+		WheelSelect(); //æ ¹æ®foodnumberä¸ªçˆ¶ä»£, é€‰å‡ºfoodnumberä¸ªå­ä»£
 		Crossover(); //Single-point crossover
 		Mutation(); //Mutation
 		Selection();//Select the best foodnumber solutions, and update solution[foodnumber][nbNodes].
@@ -5117,7 +5117,7 @@ void CNetwork::GAProgram()
 		//cout << "m_nSolution: " << m_nSolution << endl;
 		//cout << "m_nOrigin: " << m_nOrigin << endl;
 		//cout << "m_nODpair: " << m_nODpair << endl;
-		//µ±Ç°¸¸´ú
+		//å½“å‰çˆ¶ä»£
 		//cout << endl;
 		for (int sol = 0; sol < FoodNumber; sol++)
 		{
@@ -5134,7 +5134,7 @@ void CNetwork::GAProgram()
 		}
 	}
 
-	//Êä³öÈ«¾Ö×îÓÅsolution
+	//è¾“å‡ºå…¨å±€æœ€ä¼˜solution
 	PrintBestSolution();
 }
 ////////////////////////////////////////////////////GA Program////////////////////////////////////////////////////
