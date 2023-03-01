@@ -1807,7 +1807,7 @@ void CNetwork::EnumerationProgram()
 		//	cout << endl;
 		//}
 		//cout << endl;
-		//cout << "sol: " << sol << endl;
+		cout << "sol: " << sol << endl;
 		temp_do = 1; //标识符, 如果每对OD至少都有一条Route, 那么为1, 如果有任何一条OD没有Route, 为0
 		//释放内存
 		for (auto it = m_Route.begin(); it != m_Route.end(); it++)
@@ -1823,7 +1823,6 @@ void CNetwork::EnumerationProgram()
 		//cout << m_nRoute << endl;
 		if (temp_do != 0)
 		{
-
 			////////////////////////////////////////UE////////////////////////////////////////
 			// 初始化部分：
 			double k = 1; // 迭代次数
@@ -2033,7 +2032,8 @@ void CNetwork::EnumerationProgram()
 			RecordBest(sol, m_Solution);
 			////////////////////////////////////////UE////////////////////////////////////////
 			//cout << "UEGap: " << UEGap << endl;
-			//Update Capacity (armijio method, integer capacity)
+			
+			//////////////////////////////////////////Update Capacity (armijio method, integer capacity)
 			m_Solution[sol]->node_capacity_upper_level_temp = m_Solution[sol]->node_capacity_upper_level;
 			for (int node = 0; node < m_nNode; node++)
 			{
@@ -2491,6 +2491,7 @@ void CNetwork::EnumerationProgram()
 					}
 				}
 			}
+			//////////////////////////////////////////Update Capacity (armijio method, integer capacity)
 
 			NodeType(sol, m_Solution);
 
@@ -3062,14 +3063,14 @@ void CNetwork::Mutation()
 		//cout << m_nRoute << endl;
 		if (temp_do != 0)
 		{
+			////////////////////////////////////////UE////////////////////////////////////////
 			// 初始化部分：
 			double k = 1; // 迭代次数
-			//cout << "hello" << endl;
 			RouteFlow = new double[m_nRoute];
 			RouteFlow_K1 = new double[m_nRoute];
 			ANRouteFlow = new double[m_nRoute];
 			ANRouteFlow_K1 = new double[m_nRoute];
-			beita = 0;
+			beita = 1;
 			for (int route = 0; route < m_nRoute; route++)
 			{
 				RouteFlow[route] = 0; // 初始化所有route流量为0
@@ -3086,30 +3087,27 @@ void CNetwork::Mutation()
 				}
 			}
 			AllorNothingAssignment(RouteFlow, ANRouteFlow); // 做全有全无分配，得到辅助路段流量 (zero-flow)
-			//cout << "hello1" << endl;
-			UEGap = GetUEGap(RouteFlow);// 计算初始gap (根据当前routeflow)
-			//cout << "hello2" << endl;
-			//cout << "UEGap1: " << UEGap << endl;
-			//PrintUERouteCost();
-			//cout << "hello" << endl;
-			while (UEGap > MaxUEGap)
-			//while (true)
+			// 生成辅助flow
+			double* newRouteFlow = new double[m_nRoute];
+			AllorNothingAssignment(newRouteFlow, ANRouteFlow); //生成了辅助flowk
+
+			//PrintUERouteFlow(UEGap, newRouteFlow);
+			//// 更新路段流量 (MSA)
+			//{
+			//	for (int route = 0; route < m_nRoute; route++)
+			//	{
+			//		//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
+			//		RouteFlow[route] = RouteFlow[route] + (1 / k) * (newRouteFlow[route] - RouteFlow[route]);
+			//	}
+			//	delete newRouteFlow;
+			//}
+
+			// 更新路段流量 (SRAM)
 			{
-				// 生成辅助flow
-				//cout << "e" << endl;
-				double* newRouteFlow = new double[m_nRoute];
-				AllorNothingAssignment(newRouteFlow, ANRouteFlow); //生成了辅助flowk
-
-				//// 更新路段流量 (MSA)
-				//for (int route = 0; route < m_nRoute; route++)
-				//{
-				//	//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
-				//	RouteFlow[route] = RouteFlow[route] + (1 / k) * (newRouteFlow[route] - RouteFlow[route]);
-				//}
-				//delete[] newRouteFlow;
-				//newRouteFlow = NULL;
-
-				// 更新路段流量 (SRAM)
+				RouteFlow_K1; // k-1
+				ANRouteFlow_K1; // k-1
+				RouteFlow; //当前flow k=1
+				newRouteFlow; //新flow k=1
 				double GAP_k = 0;
 				double GAP_k1 = 0;
 				for (int route = 0; route < m_nRoute; route++)
@@ -3134,10 +3132,12 @@ void CNetwork::Mutation()
 					ANRouteFlow_K1[route] = newRouteFlow[route];
 					RouteFlow[route] = RouteFlow[route] + (1 / beita) * (newRouteFlow[route] - RouteFlow[route]);
 				}
-				delete[] newRouteFlow;
-				newRouteFlow = NULL;
+				//cout << "beita: " << beita << endl;
+				delete newRouteFlow;
+			}
 
-				// 更新picku_Up和drop_off点的flow
+			// 更新picku_Up和drop_off点的flow
+			{
 				for (int node = 0; node < m_nNode; node++)
 				{
 					for (int type = 0; type < 3; type++)
@@ -3159,34 +3159,121 @@ void CNetwork::Mutation()
 					}
 				}
 				k += 1;
-				UEGap = GetUEGap(RouteFlow);// 计算初始gap
-				//cout << "UEGap2: " << UEGap << endl;
-				//PrintUERouteFlow(UEGap, RouteFlow);
-				//cout << "UEGap!!!!: " << UEGap << endl;
-				//PrintUERouteCost();
-				//cout << "UEGap!!!!: " << UEGap << endl;
-				if (UEGap <= MaxUEGap)
+			}
+
+			// Calculate UEGap
+			{
+				UEGap = 0;
+				double temp1 = 0;
+				double temp2 = 0;
+				for (int route = 0; route < m_nRoute; route++)
 				{
-					//cout << "k: " << k << endl;
+					temp1 += (RouteFlow[route] - RouteFlow_K1[route]) * (RouteFlow[route] - RouteFlow_K1[route]);
+					temp2 += RouteFlow_K1[route];
+				}
+				UEGap = sqrt(temp1) / temp2;
+			}
+
+			while (UEGap > MaxUEGap)
+			{
+				// 生成辅助flow
+				double* newRouteFlow = new double[m_nRoute];
+				AllorNothingAssignment(newRouteFlow, ANRouteFlow); //生成了辅助flowk
+
+				//// 更新路段流量 (MSA)
+				//{
+				//	for (int route = 0; route < m_nRoute; route++)
+				//	{
+				//		//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
+				//		RouteFlow[route] = RouteFlow[route] + (1 / k) * (newRouteFlow[route] - RouteFlow[route]);
+				//	}
+				//	delete newRouteFlow;
+				//}
+
+				// 更新路段流量 (SRAM)
+				{
+					double GAP_k = 0;
+					double GAP_k1 = 0;
+					for (int route = 0; route < m_nRoute; route++)
+					{
+						GAP_k += abs(RouteFlow[route] - newRouteFlow[route]);
+						GAP_k1 += abs(RouteFlow_K1[route] - ANRouteFlow_K1[route]);
+					}
+					if (GAP_k >= GAP_k1)
+					{
+						beita += Tao;
+						//beita = k;
+					}
+					else
+					{
+						beita += gama;
+						//beita = k;
+					}
+					for (int route = 0; route < m_nRoute; route++)
+					{
+						//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
+						RouteFlow_K1[route] = RouteFlow[route];
+						ANRouteFlow_K1[route] = newRouteFlow[route];
+						RouteFlow[route] = RouteFlow[route] + (1 / beita) * (newRouteFlow[route] - RouteFlow[route]);
+					}
+					//cout << "beita: " << beita << endl;
+					delete newRouteFlow;
+				}
+
+				// 更新picku_Up和drop_off点的flow
+				{
+					for (int node = 0; node < m_nNode; node++)
+					{
+						for (int type = 0; type < 3; type++)
+						{
+							m_Node[node]->Pickupflow[type] = 0; // 初始化所有node的流量为0
+							m_Node[node]->Dropoffflow[type] = 0;
+						}
+					}
+					for (int route = 0; route < m_nRoute; route++)
+					{
+						int Pickuptype = m_Route[route]->PickupType; //1, 2
+						//cout << "Pickuptype：" << Pickuptype << endl;
+						int Dropofftype = m_Route[route]->DropoffType; //1, 2, 3
+						//cout << "Dropofftype：" << Dropofftype << endl;
+						if (Pickuptype != -1 && Dropofftype != -1)
+						{
+							m_Route[route]->PickupNode->Pickupflow[Pickuptype - 1] += RouteFlow[route];
+							m_Route[route]->DropoffNode->Dropoffflow[Dropofftype - 1] += RouteFlow[route];
+						}
+					}
+					k += 1;
+				}
+
+				// Calculate UEGap
+				{
+					UEGap = 0;
+					double temp1 = 0;
+					double temp2 = 0;
+					for (int route = 0; route < m_nRoute; route++)
+					{
+						temp1 += (RouteFlow[route] - RouteFlow_K1[route]) * (RouteFlow[route] - RouteFlow_K1[route]);
+						temp2 += RouteFlow_K1[route];
+					}
+					UEGap = sqrt(temp1) / temp2;
 				}
 			}
-			m_Solution2[sol]->ObjectiveValue = cal_obj(sol, m_Solution2); //计算目标函数值
-			//cout << m_Solution2[sol]->ObjectiveValue << " 第一次" << endl;
+
+			//Calculate the objective value
+			m_Solution2[sol]->ObjectiveValue = cal_obj(sol, m_Solution2);
+
 			//PrintUERouteFlow(UEGap, RouteFlow);
 			//PrintUERouteCost();
-			delete[] RouteFlow;
-			delete[] RouteFlow_K1;
-			delete[] ANRouteFlow;
-			delete[] ANRouteFlow_K1;
-			RouteFlow = NULL;
-			RouteFlow_K1 = NULL;
-			ANRouteFlow = NULL;
-			ANRouteFlow_K1 = NULL;
+
+			delete RouteFlow;
+			delete RouteFlow_K1;
+			delete ANRouteFlow;
+			delete ANRouteFlow_K1;
 			RecordBest(sol, m_Solution2);
+			////////////////////////////////////////UE////////////////////////////////////////
 
+			//////////////////////////////////////////Update Capacity (armijio method, integer capacity)
 			m_Solution2[sol]->node_capacity_upper_level_temp = m_Solution2[sol]->node_capacity_upper_level;
-
-			//Update Capacity (armijio method, integer capacity)
 			for (int node = 0; node < m_nNode; node++)
 			{
 				for (int type = 0; type < 2; type++)
@@ -3210,13 +3297,13 @@ void CNetwork::Mutation()
 							}
 							NodeType(sol, m_Solution2);
 
-							////////////////////////////////////////////////////////////// 解UE
-							double k = 1; // 迭代次数
+							////////////////////////////////////////UE////////////////////////////////////////
+							// 初始化部分：
 							RouteFlow = new double[m_nRoute];
 							RouteFlow_K1 = new double[m_nRoute];
 							ANRouteFlow = new double[m_nRoute];
 							ANRouteFlow_K1 = new double[m_nRoute];
-							beita = 0;
+							beita = 1;
 							for (int route = 0; route < m_nRoute; route++)
 							{
 								RouteFlow[route] = 0; // 初始化所有route流量为0
@@ -3233,23 +3320,23 @@ void CNetwork::Mutation()
 								}
 							}
 							AllorNothingAssignment(RouteFlow, ANRouteFlow); // 做全有全无分配，得到辅助路段流量 (zero-flow)
-							UEGap = GetUEGap(RouteFlow);// 计算初始gap (根据当前routeflow)
-							while (UEGap > MaxUEGap)
+							// 生成辅助flow
+							newRouteFlow = new double[m_nRoute];
+							AllorNothingAssignment(newRouteFlow, ANRouteFlow); //生成了辅助flowk
+
+							//PrintUERouteFlow(UEGap, newRouteFlow);
+							//// 更新路段流量 (MSA)
+							//{
+							//	for (int route = 0; route < m_nRoute; route++)
+							//	{
+							//		//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
+							//		RouteFlow[route] = RouteFlow[route] + (1 / k) * (newRouteFlow[route] - RouteFlow[route]);
+							//	}
+							//	delete newRouteFlow;
+							//}
+
+							// 更新路段流量 (SRAM)
 							{
-								// 生成辅助flow
-								double* newRouteFlow = new double[m_nRoute];
-								AllorNothingAssignment(newRouteFlow, ANRouteFlow); //生成了辅助flowk
-
-								//// 更新路段流量 (MSA)
-								//for (int route = 0; route < m_nRoute; route++)
-								//{
-								//	//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
-								//	RouteFlow[route] = RouteFlow[route] + (1 / k) * (newRouteFlow[route] - RouteFlow[route]);
-								//}
-								//delete[] newRouteFlow;
-								//newRouteFlow = NULL;
-
-								// 更新路段流量 (SRAM)
 								double GAP_k = 0;
 								double GAP_k1 = 0;
 								for (int route = 0; route < m_nRoute; route++)
@@ -3274,10 +3361,12 @@ void CNetwork::Mutation()
 									ANRouteFlow_K1[route] = newRouteFlow[route];
 									RouteFlow[route] = RouteFlow[route] + (1 / beita) * (newRouteFlow[route] - RouteFlow[route]);
 								}
-								delete[] newRouteFlow;
-								newRouteFlow = NULL;
+								//cout << "beita: " << beita << endl;
+								delete newRouteFlow;
+							}
 
-								// 更新picku_Up和drop_off点的flow
+							// 更新picku_Up和drop_off点的flow
+							{
 								for (int node = 0; node < m_nNode; node++)
 								{
 									for (int type = 0; type < 3; type++)
@@ -3299,13 +3388,106 @@ void CNetwork::Mutation()
 									}
 								}
 								k += 1;
-								UEGap = GetUEGap(RouteFlow);// 计算初始gap
-								if (UEGap <= MaxUEGap)
+							}
+
+							// Calculate UEGap
+							{
+								UEGap = 0;
+								double temp1 = 0;
+								double temp2 = 0;
+								for (int route = 0; route < m_nRoute; route++)
 								{
-									//cout << "k: " << k << endl;
+									temp1 += (RouteFlow[route] - RouteFlow_K1[route]) * (RouteFlow[route] - RouteFlow_K1[route]);
+									temp2 += RouteFlow_K1[route];
+								}
+								UEGap = sqrt(temp1) / temp2;
+							}
+
+							while (UEGap > MaxUEGap)
+							{
+								// 生成辅助flow
+								double* newRouteFlow = new double[m_nRoute];
+								AllorNothingAssignment(newRouteFlow, ANRouteFlow); //生成了辅助flowk
+
+								//// 更新路段流量 (MSA)
+								//{
+								//	for (int route = 0; route < m_nRoute; route++)
+								//	{
+								//		//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
+								//		RouteFlow[route] = RouteFlow[route] + (1 / k) * (newRouteFlow[route] - RouteFlow[route]);
+								//	}
+								//	delete newRouteFlow;
+								//}
+
+								// 更新路段流量 (SRAM)
+								{
+									double GAP_k = 0;
+									double GAP_k1 = 0;
+									for (int route = 0; route < m_nRoute; route++)
+									{
+										GAP_k += abs(RouteFlow[route] - newRouteFlow[route]);
+										GAP_k1 += abs(RouteFlow_K1[route] - ANRouteFlow_K1[route]);
+									}
+									if (GAP_k >= GAP_k1)
+									{
+										beita += Tao;
+										//beita = k;
+									}
+									else
+									{
+										beita += gama;
+										//beita = k;
+									}
+									for (int route = 0; route < m_nRoute; route++)
+									{
+										//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
+										RouteFlow_K1[route] = RouteFlow[route];
+										ANRouteFlow_K1[route] = newRouteFlow[route];
+										RouteFlow[route] = RouteFlow[route] + (1 / beita) * (newRouteFlow[route] - RouteFlow[route]);
+									}
+									//cout << "beita: " << beita << endl;
+									delete newRouteFlow;
+								}
+
+								// 更新picku_Up和drop_off点的flow
+								{
+									for (int node = 0; node < m_nNode; node++)
+									{
+										for (int type = 0; type < 3; type++)
+										{
+											m_Node[node]->Pickupflow[type] = 0; // 初始化所有node的流量为0
+											m_Node[node]->Dropoffflow[type] = 0;
+										}
+									}
+									for (int route = 0; route < m_nRoute; route++)
+									{
+										int Pickuptype = m_Route[route]->PickupType; //1, 2
+										//cout << "Pickuptype：" << Pickuptype << endl;
+										int Dropofftype = m_Route[route]->DropoffType; //1, 2, 3
+										//cout << "Dropofftype：" << Dropofftype << endl;
+										if (Pickuptype != -1 && Dropofftype != -1)
+										{
+											m_Route[route]->PickupNode->Pickupflow[Pickuptype - 1] += RouteFlow[route];
+											m_Route[route]->DropoffNode->Dropoffflow[Dropofftype - 1] += RouteFlow[route];
+										}
+									}
+									k += 1;
+								}
+
+								// Calculate UEGap
+								{
+									UEGap = 0;
+									double temp1 = 0;
+									double temp2 = 0;
+									for (int route = 0; route < m_nRoute; route++)
+									{
+										temp1 += (RouteFlow[route] - RouteFlow_K1[route]) * (RouteFlow[route] - RouteFlow_K1[route]);
+										temp2 += RouteFlow_K1[route];
+									}
+									UEGap = sqrt(temp1) / temp2;
 								}
 							}
-							//////////////////////////////////////////////////////////// 解UE
+							////////////////////////////////////////UE////////////////////////////////////////
 
 							m_Solution2[sol]->ObjectiveValue_temp = cal_obj(sol, m_Solution2);
 
@@ -3352,13 +3534,13 @@ void CNetwork::Mutation()
 							}
 							NodeType(sol, m_Solution2);
 
-							//////////////////////////////////////////////////////////// 解UE
-							double k = 1; // 迭代次数
+							////////////////////////////////////////UE////////////////////////////////////////
+							// 初始化部分：
 							RouteFlow = new double[m_nRoute];
 							RouteFlow_K1 = new double[m_nRoute];
 							ANRouteFlow = new double[m_nRoute];
 							ANRouteFlow_K1 = new double[m_nRoute];
-							beita = 0;
+							beita = 1;
 							for (int route = 0; route < m_nRoute; route++)
 							{
 								RouteFlow[route] = 0; // 初始化所有route流量为0
@@ -3375,23 +3557,23 @@ void CNetwork::Mutation()
 								}
 							}
 							AllorNothingAssignment(RouteFlow, ANRouteFlow); // 做全有全无分配，得到辅助路段流量 (zero-flow)
-							UEGap = GetUEGap(RouteFlow);// 计算初始gap (根据当前routeflow)
-							while (UEGap > MaxUEGap)
+							// 生成辅助flow
+							newRouteFlow = new double[m_nRoute];
+							AllorNothingAssignment(newRouteFlow, ANRouteFlow); //生成了辅助flowk
+
+							//PrintUERouteFlow(UEGap, newRouteFlow);
+							//// 更新路段流量 (MSA)
+							//{
+							//	for (int route = 0; route < m_nRoute; route++)
+							//	{
+							//		//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
+							//		RouteFlow[route] = RouteFlow[route] + (1 / k) * (newRouteFlow[route] - RouteFlow[route]);
+							//	}
+							//	delete newRouteFlow;
+							//}
+
+							// 更新路段流量 (SRAM)
 							{
-								// 生成辅助flow
-								double* newRouteFlow = new double[m_nRoute];
-								AllorNothingAssignment(newRouteFlow, ANRouteFlow); //生成了辅助flowk
-
-								//// 更新路段流量 (MSA)
-								//for (int route = 0; route < m_nRoute; route++)
-								//{
-								//	//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
-								//	RouteFlow[route] = RouteFlow[route] + (1 / k) * (newRouteFlow[route] - RouteFlow[route]);
-								//}
-								//delete[] newRouteFlow;
-								//newRouteFlow = NULL;
-
-												// 更新路段流量 (SRAM)
 								double GAP_k = 0;
 								double GAP_k1 = 0;
 								for (int route = 0; route < m_nRoute; route++)
@@ -3416,10 +3598,12 @@ void CNetwork::Mutation()
 									ANRouteFlow_K1[route] = newRouteFlow[route];
 									RouteFlow[route] = RouteFlow[route] + (1 / beita) * (newRouteFlow[route] - RouteFlow[route]);
 								}
-								delete[] newRouteFlow;
-								newRouteFlow = NULL;
+								//cout << "beita: " << beita << endl;
+								delete newRouteFlow;
+							}
 
-								// 更新picku_Up和drop_off点的flow
+							// 更新picku_Up和drop_off点的flow
+							{
 								for (int node = 0; node < m_nNode; node++)
 								{
 									for (int type = 0; type < 3; type++)
@@ -3441,26 +3625,111 @@ void CNetwork::Mutation()
 									}
 								}
 								k += 1;
-								UEGap = GetUEGap(RouteFlow);// 计算初始gap
-								if (UEGap <= MaxUEGap)
+							}
+
+							// Calculate UEGap
+							{
+								UEGap = 0;
+								double temp1 = 0;
+								double temp2 = 0;
+								for (int route = 0; route < m_nRoute; route++)
 								{
-									//cout << "k: " << k << endl;
+									temp1 += (RouteFlow[route] - RouteFlow_K1[route]) * (RouteFlow[route] - RouteFlow_K1[route]);
+									temp2 += RouteFlow_K1[route];
+								}
+								UEGap = sqrt(temp1) / temp2;
+							}
+
+							while (UEGap > MaxUEGap)
+							{
+								// 生成辅助flow
+								double* newRouteFlow = new double[m_nRoute];
+								AllorNothingAssignment(newRouteFlow, ANRouteFlow); //生成了辅助flowk
+
+								//// 更新路段流量 (MSA)
+								//{
+								//	for (int route = 0; route < m_nRoute; route++)
+								//	{
+								//		//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
+								//		RouteFlow[route] = RouteFlow[route] + (1 / k) * (newRouteFlow[route] - RouteFlow[route]);
+								//	}
+								//	delete newRouteFlow;
+								//}
+
+								// 更新路段流量 (SRAM)
+								{
+									double GAP_k = 0;
+									double GAP_k1 = 0;
+									for (int route = 0; route < m_nRoute; route++)
+									{
+										GAP_k += abs(RouteFlow[route] - newRouteFlow[route]);
+										GAP_k1 += abs(RouteFlow_K1[route] - ANRouteFlow_K1[route]);
+									}
+									if (GAP_k >= GAP_k1)
+									{
+										beita += Tao;
+										//beita = k;
+									}
+									else
+									{
+										beita += gama;
+										//beita = k;
+									}
+									for (int route = 0; route < m_nRoute; route++)
+									{
+										//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
+										RouteFlow_K1[route] = RouteFlow[route];
+										ANRouteFlow_K1[route] = newRouteFlow[route];
+										RouteFlow[route] = RouteFlow[route] + (1 / beita) * (newRouteFlow[route] - RouteFlow[route]);
+									}
+									//cout << "beita: " << beita << endl;
+									delete newRouteFlow;
+								}
+
+								// 更新picku_Up和drop_off点的flow
+								{
+									for (int node = 0; node < m_nNode; node++)
+									{
+										for (int type = 0; type < 3; type++)
+										{
+											m_Node[node]->Pickupflow[type] = 0; // 初始化所有node的流量为0
+											m_Node[node]->Dropoffflow[type] = 0;
+										}
+									}
+									for (int route = 0; route < m_nRoute; route++)
+									{
+										int Pickuptype = m_Route[route]->PickupType; //1, 2
+										//cout << "Pickuptype：" << Pickuptype << endl;
+										int Dropofftype = m_Route[route]->DropoffType; //1, 2, 3
+										//cout << "Dropofftype：" << Dropofftype << endl;
+										if (Pickuptype != -1 && Dropofftype != -1)
+										{
+											m_Route[route]->PickupNode->Pickupflow[Pickuptype - 1] += RouteFlow[route];
+											m_Route[route]->DropoffNode->Dropoffflow[Dropofftype - 1] += RouteFlow[route];
+										}
+									}
+									k += 1;
+								}
+
+								// Calculate UEGap
+								{
+									UEGap = 0;
+									double temp1 = 0;
+									double temp2 = 0;
+									for (int route = 0; route < m_nRoute; route++)
+									{
+										temp1 += (RouteFlow[route] - RouteFlow_K1[route]) * (RouteFlow[route] - RouteFlow_K1[route]);
+										temp2 += RouteFlow_K1[route];
+									}
+									UEGap = sqrt(temp1) / temp2;
 								}
 							}
-							//////////////////////////////////////////////////////////// 解UE
+							////////////////////////////////////////UE////////////////////////////////////////
 
 							m_Solution2[sol]->ObjectiveValue_temp = cal_obj(sol, m_Solution2);
 							if (m_Solution2[sol]->ObjectiveValue_temp >= m_Solution2[sol]->ObjectiveValue)
 							{
 								m_Solution2[sol]->node_capacity_upper_level[node][type] = m_Solution2[sol]->node_capacity_upper_level_temp[node][type];
-								delete[] RouteFlow;
-								delete[] RouteFlow_K1;
-								delete[] ANRouteFlow;
-								delete[] ANRouteFlow_K1;
-								RouteFlow = NULL;
-								RouteFlow_K1 = NULL;
-								ANRouteFlow = NULL;
-								ANRouteFlow_K1 = NULL;
 								break;
 							}
 							if (m_Solution2[sol]->ObjectiveValue_temp < m_Solution2[sol]->ObjectiveValue)
@@ -3468,19 +3737,16 @@ void CNetwork::Mutation()
 								m_Solution2[sol]->ObjectiveValue = m_Solution2[sol]->ObjectiveValue_temp;
 								m_Solution2[sol]->node_capacity_upper_level_temp[node][type] = m_Solution2[sol]->node_capacity_upper_level[node][type];
 							}
-							delete[] RouteFlow;
-							delete[] RouteFlow_K1;
-							delete[] ANRouteFlow;
-							delete[] ANRouteFlow_K1;
-							RouteFlow = NULL;
-							RouteFlow_K1 = NULL;
-							ANRouteFlow = NULL;
-							ANRouteFlow_K1 = NULL;
+							delete RouteFlow;
+							delete RouteFlow_K1;
+							delete ANRouteFlow;
+							delete ANRouteFlow_K1;
 							//cout << m_Solution2[sol]->ObjectiveValue << endl;
 						}
 					}
 				}
 			}
+			//////////////////////////////////////////Update Capacity (armijio method, integer capacity)
 
 			////看下当前的solution配置
 			//for (int node = 0; node < m_nNode; node++)
@@ -3503,14 +3769,15 @@ void CNetwork::Mutation()
 			//}
 			//cout << endl;
 
-			// 初始化部分：
 			NodeType(sol, m_Solution2);
-			k = 1; // 迭代次数
+
+			////////////////////////////////////////UE////////////////////////////////////////
+			// 初始化部分：
 			RouteFlow = new double[m_nRoute];
 			RouteFlow_K1 = new double[m_nRoute];
 			ANRouteFlow = new double[m_nRoute];
 			ANRouteFlow_K1 = new double[m_nRoute];
-			beita = 0;
+			beita = 1;
 			for (int route = 0; route < m_nRoute; route++)
 			{
 				RouteFlow[route] = 0; // 初始化所有route流量为0
@@ -3527,23 +3794,23 @@ void CNetwork::Mutation()
 				}
 			}
 			AllorNothingAssignment(RouteFlow, ANRouteFlow); // 做全有全无分配，得到辅助路段流量 (zero-flow)
-			UEGap = GetUEGap(RouteFlow);// 计算初始gap (根据当前routeflow)
-			while (UEGap > MaxUEGap)
+			// 生成辅助flow
+			newRouteFlow = new double[m_nRoute];
+			AllorNothingAssignment(newRouteFlow, ANRouteFlow); //生成了辅助flowk
+
+			//PrintUERouteFlow(UEGap, newRouteFlow);
+			//// 更新路段流量 (MSA)
+			//{
+			//	for (int route = 0; route < m_nRoute; route++)
+			//	{
+			//		//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
+			//		RouteFlow[route] = RouteFlow[route] + (1 / k) * (newRouteFlow[route] - RouteFlow[route]);
+			//	}
+			//	delete newRouteFlow;
+			//}
+
+			// 更新路段流量 (SRAM)
 			{
-				// 生成辅助flow
-				double* newRouteFlow = new double[m_nRoute];
-				AllorNothingAssignment(newRouteFlow, ANRouteFlow); //生成了辅助flowk
-
-				//// 更新路段流量 (MSA)
-				//for (int route = 0; route < m_nRoute; route++)
-				//{
-				//	//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
-				//	RouteFlow[route] = RouteFlow[route] + (1 / k) * (newRouteFlow[route] - RouteFlow[route]);
-				//}
-				//delete[] newRouteFlow;
-				//newRouteFlow = NULL;
-
-				// 更新路段流量 (SRAM)
 				double GAP_k = 0;
 				double GAP_k1 = 0;
 				for (int route = 0; route < m_nRoute; route++)
@@ -3568,10 +3835,12 @@ void CNetwork::Mutation()
 					ANRouteFlow_K1[route] = newRouteFlow[route];
 					RouteFlow[route] = RouteFlow[route] + (1 / beita) * (newRouteFlow[route] - RouteFlow[route]);
 				}
-				delete[] newRouteFlow;
-				newRouteFlow = NULL;
+				//cout << "beita: " << beita << endl;
+				delete newRouteFlow;
+			}
 
-				// 更新picku_Up和drop_off点的flow
+			// 更新picku_Up和drop_off点的flow
+			{
 				for (int node = 0; node < m_nNode; node++)
 				{
 					for (int type = 0; type < 3; type++)
@@ -3593,28 +3862,118 @@ void CNetwork::Mutation()
 					}
 				}
 				k += 1;
-				UEGap = GetUEGap(RouteFlow);// 计算初始gap
-				//cout << "UEGap: " << UEGap << endl;
-				if (UEGap <= MaxUEGap)
+			}
+
+			// Calculate UEGap
+			{
+				UEGap = 0;
+				double temp1 = 0;
+				double temp2 = 0;
+				for (int route = 0; route < m_nRoute; route++)
 				{
-					//cout << "k: " << k << endl;
+					temp1 += (RouteFlow[route] - RouteFlow_K1[route]) * (RouteFlow[route] - RouteFlow_K1[route]);
+					temp2 += RouteFlow_K1[route];
+				}
+				UEGap = sqrt(temp1) / temp2;
+			}
+
+			while (UEGap > MaxUEGap)
+			{
+				// 生成辅助flow
+				double* newRouteFlow = new double[m_nRoute];
+				AllorNothingAssignment(newRouteFlow, ANRouteFlow); //生成了辅助flowk
+
+				//// 更新路段流量 (MSA)
+				//{
+				//	for (int route = 0; route < m_nRoute; route++)
+				//	{
+				//		//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
+				//		RouteFlow[route] = RouteFlow[route] + (1 / k) * (newRouteFlow[route] - RouteFlow[route]);
+				//	}
+				//	delete newRouteFlow;
+				//}
+
+				// 更新路段流量 (SRAM)
+				{
+					double GAP_k = 0;
+					double GAP_k1 = 0;
+					for (int route = 0; route < m_nRoute; route++)
+					{
+						GAP_k += abs(RouteFlow[route] - newRouteFlow[route]);
+						GAP_k1 += abs(RouteFlow_K1[route] - ANRouteFlow_K1[route]);
+					}
+					if (GAP_k >= GAP_k1)
+					{
+						beita += Tao;
+						//beita = k;
+					}
+					else
+					{
+						beita += gama;
+						//beita = k;
+					}
+					for (int route = 0; route < m_nRoute; route++)
+					{
+						//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
+						RouteFlow_K1[route] = RouteFlow[route];
+						ANRouteFlow_K1[route] = newRouteFlow[route];
+						RouteFlow[route] = RouteFlow[route] + (1 / beita) * (newRouteFlow[route] - RouteFlow[route]);
+					}
+					//cout << "beita: " << beita << endl;
+					delete newRouteFlow;
+				}
+
+				// 更新picku_Up和drop_off点的flow
+				{
+					for (int node = 0; node < m_nNode; node++)
+					{
+						for (int type = 0; type < 3; type++)
+						{
+							m_Node[node]->Pickupflow[type] = 0; // 初始化所有node的流量为0
+							m_Node[node]->Dropoffflow[type] = 0;
+						}
+					}
+					for (int route = 0; route < m_nRoute; route++)
+					{
+						int Pickuptype = m_Route[route]->PickupType; //1, 2
+						//cout << "Pickuptype：" << Pickuptype << endl;
+						int Dropofftype = m_Route[route]->DropoffType; //1, 2, 3
+						//cout << "Dropofftype：" << Dropofftype << endl;
+						if (Pickuptype != -1 && Dropofftype != -1)
+						{
+							m_Route[route]->PickupNode->Pickupflow[Pickuptype - 1] += RouteFlow[route];
+							m_Route[route]->DropoffNode->Dropoffflow[Dropofftype - 1] += RouteFlow[route];
+						}
+					}
+					k += 1;
+				}
+
+				// Calculate UEGap
+				{
+					UEGap = 0;
+					double temp1 = 0;
+					double temp2 = 0;
+					for (int route = 0; route < m_nRoute; route++)
+					{
+						temp1 += (RouteFlow[route] - RouteFlow_K1[route]) * (RouteFlow[route] - RouteFlow_K1[route]);
+						temp2 += RouteFlow_K1[route];
+					}
+					UEGap = sqrt(temp1) / temp2;
 				}
 			}
 
+			//Calculate the objective value
 			m_Solution2[sol]->ObjectiveValue = cal_obj(sol, m_Solution2);
-			//cout << m_Solution2[sol]->ObjectiveValue << " Objective" << endl;
+
 			//PrintUERouteFlow(UEGap, RouteFlow);
 			//PrintUERouteCost();
-			delete[] RouteFlow;
-			delete[] RouteFlow_K1;
-			delete[] ANRouteFlow;
-			delete[] ANRouteFlow_K1;
-			RouteFlow = NULL;
-			RouteFlow_K1 = NULL;
-			ANRouteFlow = NULL;
-			ANRouteFlow_K1 = NULL;
 
+			delete RouteFlow;
+			delete RouteFlow_K1;
+			delete ANRouteFlow;
+			delete ANRouteFlow_K1;
 			RecordBest(sol, m_Solution2);
+			////////////////////////////////////////UE////////////////////////////////////////
 		}
 		if (temp_do == 0)
 		{
@@ -3783,6 +4142,7 @@ void CNetwork::GAProgram()
 	//}
 	//cout << endl;
 
+	RepairSolution(m_Solution);
 	//Lower-level
 	for (int sol = 0; sol < m_nSolution; sol++)
 		//for (int sol = 0; sol < 1; sol++)
@@ -3826,14 +4186,14 @@ void CNetwork::GAProgram()
 		//cout << m_nRoute << endl;
 		if (temp_do != 0)
 		{
+			////////////////////////////////////////UE////////////////////////////////////////
 			// 初始化部分：
 			double k = 1; // 迭代次数
-			//cout << "hello" << endl;
 			RouteFlow = new double[m_nRoute];
 			RouteFlow_K1 = new double[m_nRoute];
 			ANRouteFlow = new double[m_nRoute];
 			ANRouteFlow_K1 = new double[m_nRoute];
-			beita = 0;
+			beita = 1;
 			for (int route = 0; route < m_nRoute; route++)
 			{
 				RouteFlow[route] = 0; // 初始化所有route流量为0
@@ -3850,29 +4210,27 @@ void CNetwork::GAProgram()
 				}
 			}
 			AllorNothingAssignment(RouteFlow, ANRouteFlow); // 做全有全无分配，得到辅助路段流量 (zero-flow)
-			//cout << "hello1" << endl;
-			UEGap = GetUEGap(RouteFlow);// 计算初始gap (根据当前routeflow)
-			//cout << "hello2" << endl;
-			//cout << "UEGap1: " << UEGap << endl;
-			//PrintUERouteCost();
-			//cout << "hello" << endl;
-			while (UEGap > MaxUEGap)
-				//while (true)
+			// 生成辅助flow
+			double* newRouteFlow = new double[m_nRoute];
+			AllorNothingAssignment(newRouteFlow, ANRouteFlow); //生成了辅助flowk
+
+			//PrintUERouteFlow(UEGap, newRouteFlow);
+			//// 更新路段流量 (MSA)
+			//{
+			//	for (int route = 0; route < m_nRoute; route++)
+			//	{
+			//		//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
+			//		RouteFlow[route] = RouteFlow[route] + (1 / k) * (newRouteFlow[route] - RouteFlow[route]);
+			//	}
+			//	delete newRouteFlow;
+			//}
+
+			// 更新路段流量 (SRAM)
 			{
-				// 生成辅助flow
-				double* newRouteFlow = new double[m_nRoute];
-				AllorNothingAssignment(newRouteFlow, ANRouteFlow); //生成了辅助flowk
-
-				//// 更新路段流量 (MSA)
-				//for (int route = 0; route < m_nRoute; route++)
-				//{
-				//	//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
-				//	RouteFlow[route] = RouteFlow[route] + (1 / k) * (newRouteFlow[route] - RouteFlow[route]);
-				//}
-				//delete[] newRouteFlow;
-				//newRouteFlow = NULL;
-
-				// 更新路段流量 (SRAM)
+				RouteFlow_K1; // k-1
+				ANRouteFlow_K1; // k-1
+				RouteFlow; //当前flow k=1
+				newRouteFlow; //新flow k=1
 				double GAP_k = 0;
 				double GAP_k1 = 0;
 				for (int route = 0; route < m_nRoute; route++)
@@ -3897,10 +4255,12 @@ void CNetwork::GAProgram()
 					ANRouteFlow_K1[route] = newRouteFlow[route];
 					RouteFlow[route] = RouteFlow[route] + (1 / beita) * (newRouteFlow[route] - RouteFlow[route]);
 				}
-				delete[] newRouteFlow;
-				newRouteFlow = NULL;
+				//cout << "beita: " << beita << endl;
+				delete newRouteFlow;
+			}
 
-				// 更新picku_Up和drop_off点的flow
+			// 更新picku_Up和drop_off点的flow
+			{
 				for (int node = 0; node < m_nNode; node++)
 				{
 					for (int type = 0; type < 3; type++)
@@ -3922,34 +4282,122 @@ void CNetwork::GAProgram()
 					}
 				}
 				k += 1;
-				UEGap = GetUEGap(RouteFlow);// 计算初始gap
-				//cout << "UEGap2: " << UEGap << endl;
-				//PrintUERouteFlow(UEGap, RouteFlow);
-				//cout << "UEGap!!!!: " << UEGap << endl;
-				//PrintUERouteCost();
-				//cout << "UEGap!!!!: " << UEGap << endl;
-				if (UEGap <= MaxUEGap)
+			}
+
+			// Calculate UEGap
+			{
+				UEGap = 0;
+				double temp1 = 0;
+				double temp2 = 0;
+				for (int route = 0; route < m_nRoute; route++)
 				{
-					//cout << "k: " << k << endl;
+					temp1 += (RouteFlow[route] - RouteFlow_K1[route]) * (RouteFlow[route] - RouteFlow_K1[route]);
+					temp2 += RouteFlow_K1[route];
+				}
+				UEGap = sqrt(temp1) / temp2;
+			}
+
+			while (UEGap > MaxUEGap)
+			{
+				// 生成辅助flow
+				double* newRouteFlow = new double[m_nRoute];
+				AllorNothingAssignment(newRouteFlow, ANRouteFlow); //生成了辅助flowk
+
+				//// 更新路段流量 (MSA)
+				//{
+				//	for (int route = 0; route < m_nRoute; route++)
+				//	{
+				//		//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
+				//		RouteFlow[route] = RouteFlow[route] + (1 / k) * (newRouteFlow[route] - RouteFlow[route]);
+				//	}
+				//	delete newRouteFlow;
+				//}
+
+				// 更新路段流量 (SRAM)
+				{
+					double GAP_k = 0;
+					double GAP_k1 = 0;
+					for (int route = 0; route < m_nRoute; route++)
+					{
+						GAP_k += abs(RouteFlow[route] - newRouteFlow[route]);
+						GAP_k1 += abs(RouteFlow_K1[route] - ANRouteFlow_K1[route]);
+					}
+					if (GAP_k >= GAP_k1)
+					{
+						beita += Tao;
+						//beita = k;
+					}
+					else
+					{
+						beita += gama;
+						//beita = k;
+					}
+					for (int route = 0; route < m_nRoute; route++)
+					{
+						//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
+						RouteFlow_K1[route] = RouteFlow[route];
+						ANRouteFlow_K1[route] = newRouteFlow[route];
+						RouteFlow[route] = RouteFlow[route] + (1 / beita) * (newRouteFlow[route] - RouteFlow[route]);
+					}
+					//cout << "beita: " << beita << endl;
+					delete newRouteFlow;
+				}
+
+				// 更新picku_Up和drop_off点的flow
+				{
+					for (int node = 0; node < m_nNode; node++)
+					{
+						for (int type = 0; type < 3; type++)
+						{
+							m_Node[node]->Pickupflow[type] = 0; // 初始化所有node的流量为0
+							m_Node[node]->Dropoffflow[type] = 0;
+						}
+					}
+					for (int route = 0; route < m_nRoute; route++)
+					{
+						int Pickuptype = m_Route[route]->PickupType; //1, 2
+						//cout << "Pickuptype：" << Pickuptype << endl;
+						int Dropofftype = m_Route[route]->DropoffType; //1, 2, 3
+						//cout << "Dropofftype：" << Dropofftype << endl;
+						if (Pickuptype != -1 && Dropofftype != -1)
+						{
+							m_Route[route]->PickupNode->Pickupflow[Pickuptype - 1] += RouteFlow[route];
+							m_Route[route]->DropoffNode->Dropoffflow[Dropofftype - 1] += RouteFlow[route];
+						}
+					}
+					k += 1;
+				}
+
+				// Calculate UEGap
+				{
+					UEGap = 0;
+					double temp1 = 0;
+					double temp2 = 0;
+					for (int route = 0; route < m_nRoute; route++)
+					{
+						temp1 += (RouteFlow[route] - RouteFlow_K1[route]) * (RouteFlow[route] - RouteFlow_K1[route]);
+						temp2 += RouteFlow_K1[route];
+					}
+					UEGap = sqrt(temp1) / temp2;
 				}
 			}
-			m_Solution[sol]->ObjectiveValue = cal_obj(sol, m_Solution); //计算目标函数值
-			//cout << m_Solution[sol]->ObjectiveValue << " 第一次" << endl;
+
+			//Calculate the objective value
+			m_Solution[sol]->ObjectiveValue = cal_obj(sol, m_Solution);
+
 			//PrintUERouteFlow(UEGap, RouteFlow);
 			//PrintUERouteCost();
-			delete[] RouteFlow;
-			delete[] RouteFlow_K1;
-			delete[] ANRouteFlow;
-			delete[] ANRouteFlow_K1;
-			RouteFlow = NULL;
-			RouteFlow_K1 = NULL;
-			ANRouteFlow = NULL;
-			ANRouteFlow_K1 = NULL;
+
+			delete RouteFlow;
+			delete RouteFlow_K1;
+			delete ANRouteFlow;
+			delete ANRouteFlow_K1;
 			RecordBest(sol, m_Solution);
+			////////////////////////////////////////UE////////////////////////////////////////
 
 			m_Solution[sol]->node_capacity_upper_level_temp = m_Solution[sol]->node_capacity_upper_level;
 
-			//Update Capacity (armijio method, integer capacity)
+			//////////////////////////////////////////Update Capacity (armijio method, integer capacity)
 			for (int node = 0; node < m_nNode; node++)
 			{
 				for (int type = 0; type < 2; type++)
@@ -3972,13 +4420,13 @@ void CNetwork::GAProgram()
 							}
 							NodeType(sol, m_Solution);
 
-							//////////////////////////////////////////////////////////// 解UE
-							double k = 1; // 迭代次数
+							////////////////////////////////////////UE////////////////////////////////////////
+							// 初始化部分：
 							RouteFlow = new double[m_nRoute];
 							RouteFlow_K1 = new double[m_nRoute];
 							ANRouteFlow = new double[m_nRoute];
 							ANRouteFlow_K1 = new double[m_nRoute];
-							beita = 0;
+							beita = 1;
 							for (int route = 0; route < m_nRoute; route++)
 							{
 								RouteFlow[route] = 0; // 初始化所有route流量为0
@@ -3995,24 +4443,23 @@ void CNetwork::GAProgram()
 								}
 							}
 							AllorNothingAssignment(RouteFlow, ANRouteFlow); // 做全有全无分配，得到辅助路段流量 (zero-flow)
-							UEGap = GetUEGap(RouteFlow);// 计算初始gap (根据当前routeflow)
+							// 生成辅助flow
+							newRouteFlow = new double[m_nRoute];
+							AllorNothingAssignment(newRouteFlow, ANRouteFlow); //生成了辅助flowk
 
-							while (UEGap > MaxUEGap)
+							//PrintUERouteFlow(UEGap, newRouteFlow);
+							//// 更新路段流量 (MSA)
+							//{
+							//	for (int route = 0; route < m_nRoute; route++)
+							//	{
+							//		//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
+							//		RouteFlow[route] = RouteFlow[route] + (1 / k) * (newRouteFlow[route] - RouteFlow[route]);
+							//	}
+							//	delete newRouteFlow;
+							//}
+
+							// 更新路段流量 (SRAM)
 							{
-								// 生成辅助flow
-								double* newRouteFlow = new double[m_nRoute];
-								AllorNothingAssignment(newRouteFlow, ANRouteFlow); //生成了辅助flowk
-
-								//// 更新路段流量 (MSA)
-								//for (int route = 0; route < m_nRoute; route++)
-								//{
-								//	//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
-								//	RouteFlow[route] = RouteFlow[route] + (1 / k) * (newRouteFlow[route] - RouteFlow[route]);
-								//}
-								//delete[] newRouteFlow;
-								//newRouteFlow = NULL;
-
-								// 更新路段流量 (SRAM)
 								double GAP_k = 0;
 								double GAP_k1 = 0;
 								for (int route = 0; route < m_nRoute; route++)
@@ -4037,10 +4484,12 @@ void CNetwork::GAProgram()
 									ANRouteFlow_K1[route] = newRouteFlow[route];
 									RouteFlow[route] = RouteFlow[route] + (1 / beita) * (newRouteFlow[route] - RouteFlow[route]);
 								}
-								delete[] newRouteFlow;
-								newRouteFlow = NULL;
+								//cout << "beita: " << beita << endl;
+								delete newRouteFlow;
+							}
 
-								// 更新picku_Up和drop_off点的flow
+							// 更新picku_Up和drop_off点的flow
+							{
 								for (int node = 0; node < m_nNode; node++)
 								{
 									for (int type = 0; type < 3; type++)
@@ -4062,13 +4511,106 @@ void CNetwork::GAProgram()
 									}
 								}
 								k += 1;
-								UEGap = GetUEGap(RouteFlow);// 计算初始gap
-								if (UEGap <= MaxUEGap)
+							}
+
+							// Calculate UEGap
+							{
+								UEGap = 0;
+								double temp1 = 0;
+								double temp2 = 0;
+								for (int route = 0; route < m_nRoute; route++)
 								{
-									//cout << "k: " << k << endl;
+									temp1 += (RouteFlow[route] - RouteFlow_K1[route]) * (RouteFlow[route] - RouteFlow_K1[route]);
+									temp2 += RouteFlow_K1[route];
+								}
+								UEGap = sqrt(temp1) / temp2;
+							}
+
+							while (UEGap > MaxUEGap)
+							{
+								// 生成辅助flow
+								double* newRouteFlow = new double[m_nRoute];
+								AllorNothingAssignment(newRouteFlow, ANRouteFlow); //生成了辅助flowk
+
+								//// 更新路段流量 (MSA)
+								//{
+								//	for (int route = 0; route < m_nRoute; route++)
+								//	{
+								//		//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
+								//		RouteFlow[route] = RouteFlow[route] + (1 / k) * (newRouteFlow[route] - RouteFlow[route]);
+								//	}
+								//	delete newRouteFlow;
+								//}
+
+								// 更新路段流量 (SRAM)
+								{
+									double GAP_k = 0;
+									double GAP_k1 = 0;
+									for (int route = 0; route < m_nRoute; route++)
+									{
+										GAP_k += abs(RouteFlow[route] - newRouteFlow[route]);
+										GAP_k1 += abs(RouteFlow_K1[route] - ANRouteFlow_K1[route]);
+									}
+									if (GAP_k >= GAP_k1)
+									{
+										beita += Tao;
+										//beita = k;
+									}
+									else
+									{
+										beita += gama;
+										//beita = k;
+									}
+									for (int route = 0; route < m_nRoute; route++)
+									{
+										//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
+										RouteFlow_K1[route] = RouteFlow[route];
+										ANRouteFlow_K1[route] = newRouteFlow[route];
+										RouteFlow[route] = RouteFlow[route] + (1 / beita) * (newRouteFlow[route] - RouteFlow[route]);
+									}
+									//cout << "beita: " << beita << endl;
+									delete newRouteFlow;
+								}
+
+								// 更新picku_Up和drop_off点的flow
+								{
+									for (int node = 0; node < m_nNode; node++)
+									{
+										for (int type = 0; type < 3; type++)
+										{
+											m_Node[node]->Pickupflow[type] = 0; // 初始化所有node的流量为0
+											m_Node[node]->Dropoffflow[type] = 0;
+										}
+									}
+									for (int route = 0; route < m_nRoute; route++)
+									{
+										int Pickuptype = m_Route[route]->PickupType; //1, 2
+										//cout << "Pickuptype：" << Pickuptype << endl;
+										int Dropofftype = m_Route[route]->DropoffType; //1, 2, 3
+										//cout << "Dropofftype：" << Dropofftype << endl;
+										if (Pickuptype != -1 && Dropofftype != -1)
+										{
+											m_Route[route]->PickupNode->Pickupflow[Pickuptype - 1] += RouteFlow[route];
+											m_Route[route]->DropoffNode->Dropoffflow[Dropofftype - 1] += RouteFlow[route];
+										}
+									}
+									k += 1;
+								}
+
+								// Calculate UEGap
+								{
+									UEGap = 0;
+									double temp1 = 0;
+									double temp2 = 0;
+									for (int route = 0; route < m_nRoute; route++)
+									{
+										temp1 += (RouteFlow[route] - RouteFlow_K1[route]) * (RouteFlow[route] - RouteFlow_K1[route]);
+										temp2 += RouteFlow_K1[route];
+									}
+									UEGap = sqrt(temp1) / temp2;
 								}
 							}
-							//////////////////////////////////////////////////////////// 解UE
+							////////////////////////////////////////UE////////////////////////////////////////
 
 							m_Solution[sol]->ObjectiveValue_temp = cal_obj(sol, m_Solution);
 							if (m_Solution[sol]->ObjectiveValue_temp >= m_Solution[sol]->ObjectiveValue)
@@ -4112,13 +4654,13 @@ void CNetwork::GAProgram()
 							}
 							NodeType(sol, m_Solution);
 
-							//////////////////////////////////////////////////////////// 解UE
-							double k = 1; // 迭代次数
+							////////////////////////////////////////UE////////////////////////////////////////
+							// 初始化部分：
 							RouteFlow = new double[m_nRoute];
 							RouteFlow_K1 = new double[m_nRoute];
 							ANRouteFlow = new double[m_nRoute];
 							ANRouteFlow_K1 = new double[m_nRoute];
-							beita = 0;
+							beita = 1;
 							for (int route = 0; route < m_nRoute; route++)
 							{
 								RouteFlow[route] = 0; // 初始化所有route流量为0
@@ -4135,23 +4677,23 @@ void CNetwork::GAProgram()
 								}
 							}
 							AllorNothingAssignment(RouteFlow, ANRouteFlow); // 做全有全无分配，得到辅助路段流量 (zero-flow)
-							UEGap = GetUEGap(RouteFlow);// 计算初始gap (根据当前routeflow)
-							while (UEGap > MaxUEGap)
+							// 生成辅助flow
+							newRouteFlow = new double[m_nRoute];
+							AllorNothingAssignment(newRouteFlow, ANRouteFlow); //生成了辅助flowk
+
+							//PrintUERouteFlow(UEGap, newRouteFlow);
+							//// 更新路段流量 (MSA)
+							//{
+							//	for (int route = 0; route < m_nRoute; route++)
+							//	{
+							//		//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
+							//		RouteFlow[route] = RouteFlow[route] + (1 / k) * (newRouteFlow[route] - RouteFlow[route]);
+							//	}
+							//	delete newRouteFlow;
+							//}
+
+							// 更新路段流量 (SRAM)
 							{
-								// 生成辅助flow
-								double* newRouteFlow = new double[m_nRoute];
-								AllorNothingAssignment(newRouteFlow, ANRouteFlow); //生成了辅助flowk
-
-								//// 更新路段流量 (MSA)
-								//for (int route = 0; route < m_nRoute; route++)
-								//{
-								//	//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
-								//	RouteFlow[route] = RouteFlow[route] + (1 / k) * (newRouteFlow[route] - RouteFlow[route]);
-								//}
-								//delete[] newRouteFlow;
-								//newRouteFlow = NULL;
-
-								// 更新路段流量 (SRAM)
 								double GAP_k = 0;
 								double GAP_k1 = 0;
 								for (int route = 0; route < m_nRoute; route++)
@@ -4176,10 +4718,12 @@ void CNetwork::GAProgram()
 									ANRouteFlow_K1[route] = newRouteFlow[route];
 									RouteFlow[route] = RouteFlow[route] + (1 / beita) * (newRouteFlow[route] - RouteFlow[route]);
 								}
-								delete[] newRouteFlow;
-								newRouteFlow = NULL;
+								//cout << "beita: " << beita << endl;
+								delete newRouteFlow;
+							}
 
-								// 更新picku_Up和drop_off点的flow
+							// 更新picku_Up和drop_off点的flow
+							{
 								for (int node = 0; node < m_nNode; node++)
 								{
 									for (int type = 0; type < 3; type++)
@@ -4201,26 +4745,111 @@ void CNetwork::GAProgram()
 									}
 								}
 								k += 1;
-								UEGap = GetUEGap(RouteFlow);// 计算初始gap
-								if (UEGap <= MaxUEGap)
+							}
+
+							// Calculate UEGap
+							{
+								UEGap = 0;
+								double temp1 = 0;
+								double temp2 = 0;
+								for (int route = 0; route < m_nRoute; route++)
 								{
-									//cout << "k: " << k << endl;
+									temp1 += (RouteFlow[route] - RouteFlow_K1[route]) * (RouteFlow[route] - RouteFlow_K1[route]);
+									temp2 += RouteFlow_K1[route];
+								}
+								UEGap = sqrt(temp1) / temp2;
+							}
+
+							while (UEGap > MaxUEGap)
+							{
+								// 生成辅助flow
+								double* newRouteFlow = new double[m_nRoute];
+								AllorNothingAssignment(newRouteFlow, ANRouteFlow); //生成了辅助flowk
+
+								//// 更新路段流量 (MSA)
+								//{
+								//	for (int route = 0; route < m_nRoute; route++)
+								//	{
+								//		//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
+								//		RouteFlow[route] = RouteFlow[route] + (1 / k) * (newRouteFlow[route] - RouteFlow[route]);
+								//	}
+								//	delete newRouteFlow;
+								//}
+
+								// 更新路段流量 (SRAM)
+								{
+									double GAP_k = 0;
+									double GAP_k1 = 0;
+									for (int route = 0; route < m_nRoute; route++)
+									{
+										GAP_k += abs(RouteFlow[route] - newRouteFlow[route]);
+										GAP_k1 += abs(RouteFlow_K1[route] - ANRouteFlow_K1[route]);
+									}
+									if (GAP_k >= GAP_k1)
+									{
+										beita += Tao;
+										//beita = k;
+									}
+									else
+									{
+										beita += gama;
+										//beita = k;
+									}
+									for (int route = 0; route < m_nRoute; route++)
+									{
+										//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
+										RouteFlow_K1[route] = RouteFlow[route];
+										ANRouteFlow_K1[route] = newRouteFlow[route];
+										RouteFlow[route] = RouteFlow[route] + (1 / beita) * (newRouteFlow[route] - RouteFlow[route]);
+									}
+									//cout << "beita: " << beita << endl;
+									delete newRouteFlow;
+								}
+
+								// 更新picku_Up和drop_off点的flow
+								{
+									for (int node = 0; node < m_nNode; node++)
+									{
+										for (int type = 0; type < 3; type++)
+										{
+											m_Node[node]->Pickupflow[type] = 0; // 初始化所有node的流量为0
+											m_Node[node]->Dropoffflow[type] = 0;
+										}
+									}
+									for (int route = 0; route < m_nRoute; route++)
+									{
+										int Pickuptype = m_Route[route]->PickupType; //1, 2
+										//cout << "Pickuptype：" << Pickuptype << endl;
+										int Dropofftype = m_Route[route]->DropoffType; //1, 2, 3
+										//cout << "Dropofftype：" << Dropofftype << endl;
+										if (Pickuptype != -1 && Dropofftype != -1)
+										{
+											m_Route[route]->PickupNode->Pickupflow[Pickuptype - 1] += RouteFlow[route];
+											m_Route[route]->DropoffNode->Dropoffflow[Dropofftype - 1] += RouteFlow[route];
+										}
+									}
+									k += 1;
+								}
+
+								// Calculate UEGap
+								{
+									UEGap = 0;
+									double temp1 = 0;
+									double temp2 = 0;
+									for (int route = 0; route < m_nRoute; route++)
+									{
+										temp1 += (RouteFlow[route] - RouteFlow_K1[route]) * (RouteFlow[route] - RouteFlow_K1[route]);
+										temp2 += RouteFlow_K1[route];
+									}
+									UEGap = sqrt(temp1) / temp2;
 								}
 							}
-							//////////////////////////////////////////////////////////// 解UE
+							////////////////////////////////////////UE////////////////////////////////////////
 
 							m_Solution[sol]->ObjectiveValue_temp = cal_obj(sol, m_Solution);
 							if (m_Solution[sol]->ObjectiveValue_temp >= m_Solution[sol]->ObjectiveValue)
 							{
 								m_Solution[sol]->node_capacity_upper_level[node][type] = m_Solution[sol]->node_capacity_upper_level_temp[node][type];
-								delete[] RouteFlow;
-								delete[] RouteFlow_K1;
-								delete[] ANRouteFlow;
-								delete[] ANRouteFlow_K1;
-								RouteFlow = NULL;
-								RouteFlow_K1 = NULL;
-								ANRouteFlow = NULL;
-								ANRouteFlow_K1 = NULL;
 								break;
 							}
 							if (m_Solution[sol]->ObjectiveValue_temp < m_Solution[sol]->ObjectiveValue)
@@ -4228,19 +4857,16 @@ void CNetwork::GAProgram()
 								m_Solution[sol]->ObjectiveValue = m_Solution[sol]->ObjectiveValue_temp;
 								m_Solution[sol]->node_capacity_upper_level_temp[node][type] = m_Solution[sol]->node_capacity_upper_level[node][type];
 							}
-							delete[] RouteFlow;
-							delete[] RouteFlow_K1;
-							delete[] ANRouteFlow;
-							delete[] ANRouteFlow_K1;
-							RouteFlow = NULL;
-							RouteFlow_K1 = NULL;
-							ANRouteFlow = NULL;
-							ANRouteFlow_K1 = NULL;
+							delete RouteFlow;
+							delete RouteFlow_K1;
+							delete ANRouteFlow;
+							delete ANRouteFlow_K1;
 							//cout << m_Solution[sol]->ObjectiveValue << endl;
 						}
 					}
 				}
 			}
+			//////////////////////////////////////////Update Capacity (armijio method, integer capacity)
 
 			////看下当前的solution配置
 			//for (int node = 0; node < m_nNode; node++)
@@ -4264,13 +4890,16 @@ void CNetwork::GAProgram()
 			//cout << endl;
 
 			// 初始化部分：
+
 			NodeType(sol, m_Solution);
-			k = 1; // 迭代次数
+
+			////////////////////////////////////////UE////////////////////////////////////////
+			// 初始化部分：
 			RouteFlow = new double[m_nRoute];
 			RouteFlow_K1 = new double[m_nRoute];
 			ANRouteFlow = new double[m_nRoute];
 			ANRouteFlow_K1 = new double[m_nRoute];
-			beita = 0;
+			beita = 1;
 			for (int route = 0; route < m_nRoute; route++)
 			{
 				RouteFlow[route] = 0; // 初始化所有route流量为0
@@ -4287,23 +4916,23 @@ void CNetwork::GAProgram()
 				}
 			}
 			AllorNothingAssignment(RouteFlow, ANRouteFlow); // 做全有全无分配，得到辅助路段流量 (zero-flow)
-			UEGap = GetUEGap(RouteFlow);// 计算初始gap (根据当前routeflow)
-			while (UEGap > MaxUEGap)
+			// 生成辅助flow
+			newRouteFlow = new double[m_nRoute];
+			AllorNothingAssignment(newRouteFlow, ANRouteFlow); //生成了辅助flowk
+
+			//PrintUERouteFlow(UEGap, newRouteFlow);
+			//// 更新路段流量 (MSA)
+			//{
+			//	for (int route = 0; route < m_nRoute; route++)
+			//	{
+			//		//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
+			//		RouteFlow[route] = RouteFlow[route] + (1 / k) * (newRouteFlow[route] - RouteFlow[route]);
+			//	}
+			//	delete newRouteFlow;
+			//}
+
+			// 更新路段流量 (SRAM)
 			{
-				// 生成辅助flow
-				double* newRouteFlow = new double[m_nRoute];
-				AllorNothingAssignment(newRouteFlow, ANRouteFlow); //生成了辅助flowk
-
-				//// 更新路段流量 (MSA)
-				//for (int route = 0; route < m_nRoute; route++)
-				//{
-				//	//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
-				//	RouteFlow[route] = RouteFlow[route] + (1 / k) * (newRouteFlow[route] - RouteFlow[route]);
-				//}
-				//delete[] newRouteFlow;
-				//newRouteFlow = NULL;
-
-				// 更新路段流量 (SRAM)
 				double GAP_k = 0;
 				double GAP_k1 = 0;
 				for (int route = 0; route < m_nRoute; route++)
@@ -4328,10 +4957,12 @@ void CNetwork::GAProgram()
 					ANRouteFlow_K1[route] = newRouteFlow[route];
 					RouteFlow[route] = RouteFlow[route] + (1 / beita) * (newRouteFlow[route] - RouteFlow[route]);
 				}
-				delete[] newRouteFlow;
-				newRouteFlow = NULL;
+				//cout << "beita: " << beita << endl;
+				delete newRouteFlow;
+			}
 
-				// 更新picku_Up和drop_off点的flow
+			// 更新picku_Up和drop_off点的flow
+			{
 				for (int node = 0; node < m_nNode; node++)
 				{
 					for (int type = 0; type < 3; type++)
@@ -4353,28 +4984,118 @@ void CNetwork::GAProgram()
 					}
 				}
 				k += 1;
-				UEGap = GetUEGap(RouteFlow);// 计算初始gap
-				//cout << "UEGap: " << UEGap << endl;
-				if (UEGap <= MaxUEGap)
+			}
+
+			// Calculate UEGap
+			{
+				UEGap = 0;
+				double temp1 = 0;
+				double temp2 = 0;
+				for (int route = 0; route < m_nRoute; route++)
 				{
-					//cout << "k: " << k << endl;
+					temp1 += (RouteFlow[route] - RouteFlow_K1[route]) * (RouteFlow[route] - RouteFlow_K1[route]);
+					temp2 += RouteFlow_K1[route];
+				}
+				UEGap = sqrt(temp1) / temp2;
+			}
+
+			while (UEGap > MaxUEGap)
+			{
+				// 生成辅助flow
+				double* newRouteFlow = new double[m_nRoute];
+				AllorNothingAssignment(newRouteFlow, ANRouteFlow); //生成了辅助flowk
+
+				//// 更新路段流量 (MSA)
+				//{
+				//	for (int route = 0; route < m_nRoute; route++)
+				//	{
+				//		//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
+				//		RouteFlow[route] = RouteFlow[route] + (1 / k) * (newRouteFlow[route] - RouteFlow[route]);
+				//	}
+				//	delete newRouteFlow;
+				//}
+
+				// 更新路段流量 (SRAM)
+				{
+					double GAP_k = 0;
+					double GAP_k1 = 0;
+					for (int route = 0; route < m_nRoute; route++)
+					{
+						GAP_k += abs(RouteFlow[route] - newRouteFlow[route]);
+						GAP_k1 += abs(RouteFlow_K1[route] - ANRouteFlow_K1[route]);
+					}
+					if (GAP_k >= GAP_k1)
+					{
+						beita += Tao;
+						//beita = k;
+					}
+					else
+					{
+						beita += gama;
+						//beita = k;
+					}
+					for (int route = 0; route < m_nRoute; route++)
+					{
+						//RouteFlow[route] = (k / (k + 1)) * RouteFlow[route] + (1 / (k + 1)) * newRouteFlow[route];
+						RouteFlow_K1[route] = RouteFlow[route];
+						ANRouteFlow_K1[route] = newRouteFlow[route];
+						RouteFlow[route] = RouteFlow[route] + (1 / beita) * (newRouteFlow[route] - RouteFlow[route]);
+					}
+					//cout << "beita: " << beita << endl;
+					delete newRouteFlow;
+				}
+
+				// 更新picku_Up和drop_off点的flow
+				{
+					for (int node = 0; node < m_nNode; node++)
+					{
+						for (int type = 0; type < 3; type++)
+						{
+							m_Node[node]->Pickupflow[type] = 0; // 初始化所有node的流量为0
+							m_Node[node]->Dropoffflow[type] = 0;
+						}
+					}
+					for (int route = 0; route < m_nRoute; route++)
+					{
+						int Pickuptype = m_Route[route]->PickupType; //1, 2
+						//cout << "Pickuptype：" << Pickuptype << endl;
+						int Dropofftype = m_Route[route]->DropoffType; //1, 2, 3
+						//cout << "Dropofftype：" << Dropofftype << endl;
+						if (Pickuptype != -1 && Dropofftype != -1)
+						{
+							m_Route[route]->PickupNode->Pickupflow[Pickuptype - 1] += RouteFlow[route];
+							m_Route[route]->DropoffNode->Dropoffflow[Dropofftype - 1] += RouteFlow[route];
+						}
+					}
+					k += 1;
+				}
+
+				// Calculate UEGap
+				{
+					UEGap = 0;
+					double temp1 = 0;
+					double temp2 = 0;
+					for (int route = 0; route < m_nRoute; route++)
+					{
+						temp1 += (RouteFlow[route] - RouteFlow_K1[route]) * (RouteFlow[route] - RouteFlow_K1[route]);
+						temp2 += RouteFlow_K1[route];
+					}
+					UEGap = sqrt(temp1) / temp2;
 				}
 			}
 
+			//Calculate the objective value
 			m_Solution[sol]->ObjectiveValue = cal_obj(sol, m_Solution);
-			cout << m_Solution[sol]->ObjectiveValue << " Objective" << endl;
+
 			//PrintUERouteFlow(UEGap, RouteFlow);
 			//PrintUERouteCost();
-			delete[] RouteFlow;
-			delete[] RouteFlow_K1;
-			delete[] ANRouteFlow;
-			delete[] ANRouteFlow_K1;
-			RouteFlow = NULL;
-			RouteFlow_K1 = NULL;
-			ANRouteFlow = NULL;
-			ANRouteFlow_K1 = NULL;
 
+			delete RouteFlow;
+			delete RouteFlow_K1;
+			delete ANRouteFlow;
+			delete ANRouteFlow_K1;
 			RecordBest(sol, m_Solution);
+			////////////////////////////////////////UE////////////////////////////////////////
 		}
 		if (temp_do == 0)
 		{
@@ -4384,7 +5105,7 @@ void CNetwork::GAProgram()
 	}
 
 	//GA Program
-	for (int iter = 0; iter < 600; iter++) //165 for 4-node network 200  for 5-node network 300 for 6-node network
+	for (int iter = 0; iter < 45; iter++) //165 for 4-node network 200  for 5-node network 300 for 6-node network
 	{
 		cout << "iter: " << iter << endl;
 		WheelSelect(); //根据foodnumber个父代, 选出foodnumber个子代
